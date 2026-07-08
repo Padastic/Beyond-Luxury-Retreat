@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Locations — Το Πρωτόκολλο της Παλαιόχωρας</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --taupe: #b89c8a; --taupe-dark: #9a7e6e; --taupe-light: #d4c5b9;
+  --taupe-bg: #e8ddd4; --sand: #f5ede4; --white: #ffffff; --black: #1a1a1a;
+  --text: #2d2d2d; --text-light: #6b6b6b; --border: #d9cec4; --gold: #c4a35a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.04rem; font-weight: 300;
+  color: var(--text); background: var(--sand);
+  line-height: 1.6;
+}
+h1,h2,h3 { font-family: 'Outfit','Inter',sans-serif; }
+
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,237,228,0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex; align-items: center; gap: 16px;
+  overflow-x: auto;
+}
+.topbar a {
+  text-decoration: none; font-size: 0.95rem; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 8px 16px; border-radius: 22px;
+  white-space: nowrap; transition: all 0.2s; color: var(--text-light);
+}
+.topbar a:hover, .topbar a.active { color: var(--taupe-dark); background: var(--taupe-bg); }
+.topbar .home { font-weight: 600; color: var(--black); }
+
+.section { max-width: 1200px; margin: 0 auto; padding: 56px 24px; }
+.section-title { font-size: 2.1rem; font-weight: 300; color: var(--black); margin-bottom: 8px; }
+.section-subtitle { font-size: 1.1rem; color: var(--text-light); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 40px; }
+
+.loc-group { margin-bottom: 56px; }
+.loc-group-title {
+  font-size: 1.4rem; font-weight: 500; color: var(--black); margin-bottom: 6px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.loc-group-scene {
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+  color: var(--taupe-dark); background: var(--taupe-bg); padding: 3px 12px; border-radius: 14px;
+}
+.loc-group-desc { font-size: 1.0rem; color: var(--text-light); margin-bottom: 20px; }
+
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.photo-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden; transition: all 0.25s;
+}
+.photo-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+.photo-card img { width: 100%; height: 200px; object-fit: cover; display: block; background: var(--taupe-bg); }
+.photo-card .info { padding: 14px 16px; }
+.photo-card .info .label { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--taupe-dark); margin-bottom: 4px; }
+.photo-card .info .desc { font-size: 0.88rem; color: var(--text); line-height: 1.45; }
+
+.lightbox { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; cursor: pointer; }
+.lightbox:target { display: flex; }
+.lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 4px; }
+.lightbox .close { position: absolute; top: 20px; right: 28px; color: #fff; font-size: 2rem; text-decoration: none; opacity: 0.7; }
+.lightbox .close:hover { opacity: 1; }
+.lightbox .caption { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+
+.footer { background: var(--taupe); padding: 56px 24px; text-align: center; color: var(--white); }
+.footer img { width: 48px; margin-bottom: 20px; opacity: 0.85; filter: brightness(10); }
+.footer p { font-size: 1.0rem; opacity: 0.8; }
+
+@media (max-width: 768px) {
+  .section { padding: 32px 14px; }
+  .section-title { font-size: 1.5rem; }
+  .topbar { padding: 10px 14px; gap: 6px; }
+  .topbar a { font-size: 0.78rem; padding: 6px 10px; }
+  .photo-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="home">Πρωτόκολλο Παλαιόχωρας</a>
+  <a href="script.html">Σενάριο</a>
+  <a href="breakdown.html">Breakdown</a>
+  <a href="shotlist.html">Shot List</a>
+  <a href="locations.html" class="active">Locations</a>
+</div>
+
+<section class="section">
+  <h2 class="section-title">Location Scouting</h2>
+  <p class="section-subtitle">Παλαιόχωρα, Κρήτη · 27 φωτογραφίες · Beyond Reperage / S5</p>
+  <p style="color:var(--text-light); margin-bottom: 48px; font-size: 1.05rem;">Φωτογραφίες από το location scouting. Αντιστοιχισμένες ανά σκηνή του σεναρίου.</p>
+
+  <!-- Σκηνή 1α -->
+  <div class="loc-group">
+    <div class="loc-group-title">Σκηνή 1α · Άφιξη, Transfer <span class="loc-group-scene">Λιμάνι & Παραλιακή</span></div>
+    <p class="loc-group-desc">Το λιμάνι και ο παραλιακός δρόμος — το σημείο άφιξης της Σοφίας.</p>
+    <div class="photo-grid">
+      <div class="photo-card"><a href="#lb-1747"><img src="assets/locations/P1101747.jpeg" alt="Λιμάνι" loading="lazy"></a><div class="info"><div class="label">Λιμάνι</div><div class="desc">Είσοδος λιμανιού με λιμενοβραχίονες και φάρους. Σκάφος «ANNA».</div></div></div>
+      <div class="photo-card"><a href="#lb-1752"><img src="assets/locations/P1101752.jpeg" alt="Λιμάνι" loading="lazy"></a><div class="info"><div class="label">Λιμάνι</div><div class="desc">Αλιευτικό «ΑΓ. ΝΙΚΟΛΑΟΣ», κίτρινα δίχτυα, προβλήτα.</div></div></div>
+      <div class="photo-card"><a href="#lb-1855"><img src="assets/locations/P1101855.jpeg" alt="Καφέ Βότσαλο" loading="lazy"></a><div class="info"><div class="label">Καφέ «Βότσαλο»</div><div class="desc">Παραλιακό καφέ, κόκκινη πόρτα, πινακίδα «ΚΑΛΩΣ ΟΡΙΣΑΤΕ».</div></div></div>
+      <div class="photo-card"><a href="#lb-1770"><img src="assets/locations/P1101770.jpeg" alt="Δρόμος" loading="lazy"></a><div class="info"><div class="label">Παραλιακός δρόμος</div><div class="desc">Βάρκα σε τρέιλερ, βραχώδες φόντο, πινακίδα XNT 6983.</div></div></div>
+      <div class="photo-card"><a href="#lb-1771"><img src="assets/locations/P1101771.jpeg" alt="Παραλιακή" loading="lazy"></a><div class="info"><div class="label">Παραλιακή οδός</div><div class="desc">Van, STOP πινακίδα, θέα στη θάλασσα και μακρινά βουνά.</div></div></div>
+    </div>
+  </div>
+
+  <!-- Σκηνή 2 -->
+  <div class="loc-group">
+    <div class="loc-group-title">Σκηνή 2 · Καφενείο «Νίκος» <span class="loc-group-scene">Ταβέρνες & Καφενεία</span></div>
+    <p class="loc-group-desc">Παραδοσιακοί χώροι εστίασης — η ατμόσφαιρα του καφενείου.</p>
+    <div class="photo-grid">
+      <div class="photo-card"><a href="#lb-1739"><img src="assets/locations/P1101739.jpeg" alt="Snack Bar" loading="lazy"></a><div class="info"><div class="label">Snack Bar</div><div class="desc">Εσωτερικό με καλαμωτή οροφή, chalkboard, ψυγείο Vetalo.</div></div></div>
+      <div class="photo-card"><a href="#lb-1734"><img src="assets/locations/P1101734.jpeg" alt="Ταβέρνα" loading="lazy"></a><div class="info"><div class="label">Ταβέρνα</div><div class="desc">Ρολόι-ψηφιδωτό, μπλε/κίτρινοι τοίχοι, ψάθινες καρέκλες.</div></div></div>
+      <div class="photo-card"><a href="#lb-1728"><img src="assets/locations/P1101728.jpeg" alt="Αυλή" loading="lazy"></a><div class="info"><div class="label">Αυλή καφέ</div><div class="desc">Πέργκολα με μουριά, μπλε γλάστρες, κίτρινος αμφορέας.</div></div></div>
+    </div>
+  </div>
+
+  <!-- Σκηνή 6 -->
+  <div class="loc-group">
+    <div class="loc-group-title">Σκηνή 6 · Σοκάκια Παλαιόχωρας <span class="loc-group-scene">Γειτονιά, Αυλές, Ταβέρνες</span></div>
+    <p class="loc-group-desc">Τα γραφικά σοκάκια και οι αυλές — η καρδιά της Παλαιόχωρας.</p>
+    <div class="photo-grid">
+      <div class="photo-card"><a href="#lb-1764"><img src="assets/locations/P1101764.jpeg" alt="Σοκάκι" loading="lazy"></a><div class="info"><div class="label">Σοκάκι</div><div class="desc">Στενό δρομάκι, μπλε παράθυρα, σκούτερ, γλάστρες.</div></div></div>
+      <div class="photo-card"><a href="#lb-1792"><img src="assets/locations/P1101792.jpeg" alt="Σοκάκι" loading="lazy"></a><div class="info"><div class="label">Σοκάκι</div><div class="desc">Γραφικό δρομάκι με αναρριχώμενα, μπλε πόρτα.</div></div></div>
+      <div class="photo-card"><a href="#lb-1757"><img src="assets/locations/P1101757.jpeg" alt="Σπίτι" loading="lazy"></a><div class="info"><div class="label">Κατοικία</div><div class="desc">Λευκό σπίτι, Piaggio σκούτερ, ηλιακός, βουνό.</div></div></div>
+      <div class="photo-card"><a href="#lb-1758"><img src="assets/locations/P1101758.jpeg" alt="Δρόμος" loading="lazy"></a><div class="info"><div class="label">Δρόμος</div><div class="desc">Συνοικιακός δρόμος με δέντρα, σκούτερ SYM.</div></div></div>
+      <div class="photo-card"><a href="#lb-1738"><img src="assets/locations/P1101738.jpeg" alt="Ταβέρνα" loading="lazy"></a><div class="info"><div class="label">Ταβέρνα</div><div class="desc">Εξωτερική ταβέρνα, κίτρινα κάγκελα, κόκκινα σκαλιά.</div></div></div>
+      <div class="photo-card"><a href="#lb-1778"><img src="assets/locations/P1101778.jpeg" alt="Κήπος" loading="lazy"></a><div class="info"><div class="label">Κήπος / Αυλή</div><div class="desc">Γιασεμί, γλάστρες, στοά με μπλε πόρτα.</div></div></div>
+      <div class="photo-card"><a href="#lb-1788"><img src="assets/locations/P1101788.jpeg" alt="Αυλή" loading="lazy"></a><div class="info"><div class="label">Αυλή</div><div class="desc">Καλαμωτή, γεράνια, βασιλικός, λευκά σπίτια.</div></div></div>
+      <div class="photo-card"><a href="#lb-1790"><img src="assets/locations/P1101790.jpeg" alt="Σοκάκι" loading="lazy"></a><div class="info"><div class="label">Σοκάκι</div><div class="desc">Ξύλινο μπαλκόνι, βουκαμβίλια, λευκά κτίρια.</div></div></div>
+      <div class="photo-card"><a href="#lb-1775"><img src="assets/locations/P1101775.jpeg" alt="Κτίριο" loading="lazy"></a><div class="info"><div class="label">Παλιό κτίριο</div><div class="desc">Φθαρμένη μπλε πόρτα, παλιά αυτοκίνητα.</div></div></div>
+    </div>
+  </div>
+
+  <!-- Σκηνή 5 / 5α -->
+  <div class="loc-group">
+    <div class="loc-group-title">Σκηνή 5 / 5α · Θάλασσα & Παραλίες <span class="loc-group-scene">Λιβυκό Πέλαγος</span></div>
+    <p class="loc-group-desc">Ακτογραμμή νότια της Παλαιόχωρας — βράχια, τυρκουάζ νερά, απόμερες παραλίες.</p>
+    <div class="photo-grid">
+      <div class="photo-card"><a href="#lb-1811"><img src="assets/locations/P1101811.jpeg" alt="Βράχια" loading="lazy"></a><div class="info"><div class="label">Βραχώδης ακτή</div><div class="desc">Βράχια, τυρκουάζ νερά, Λιβυκό, μακρινά βουνά.</div></div></div>
+      <div class="photo-card"><a href="#lb-1805"><img src="assets/locations/P1101805.jpeg" alt="Βράχος" loading="lazy"></a><div class="info"><div class="label">Θαλάσσιος βράχος</div><div class="desc">Εντυπωσιακός σχηματισμός, κόκκινα πετρώματα.</div></div></div>
+      <div class="photo-card"><a href="#lb-1828"><img src="assets/locations/P1101828.jpeg" alt="Παραλία" loading="lazy"></a><div class="info"><div class="label">Παραλία</div><div class="desc">Αμμουδιά με ομπρέλες, ξαπλώστρες, διάδρομος.</div></div></div>
+      <div class="photo-card"><a href="#lb-1767"><img src="assets/locations/P1101767.jpeg" alt="Βράχια" loading="lazy"></a><div class="info"><div class="label">Βραχώδες τοπίο</div><div class="desc">Ασβεστολιθικοί σχηματισμοί, αραιή βλάστηση.</div></div></div>
+      <div class="photo-card"><a href="#lb-1813"><img src="assets/locations/P1101813.jpeg" alt="Παραλία" loading="lazy"></a><div class="info"><div class="label">Παραλία</div><div class="desc">Ακτή με βράχια και γαλάζια νερά.</div></div></div>
+      <div class="photo-card"><a href="#lb-1815"><img src="assets/locations/P1101815.jpeg" alt="Ακτή" loading="lazy"></a><div class="info"><div class="label">Ακτογραμμή</div><div class="desc">Πανοραμική θέα της ακτής προς τα δυτικά.</div></div></div>
+    </div>
+  </div>
+
+  <!-- Σκηνή 8 -->
+  <div class="loc-group">
+    <div class="loc-group-title">Σκηνή 8 · Δρόμος προς Ανύδρους <span class="loc-group-scene">Ενδοχώρα, Λόφοι, Ελαιώνες</span></div>
+    <p class="loc-group-desc">Το ορεινό τοπίο της ενδοχώρας — λόφοι, γκρίζα βράχια, χαμηλή βλάστηση.</p>
+    <div class="photo-grid">
+      <div class="photo-card"><a href="#lb-1829"><img src="assets/locations/P1101829.jpeg" alt="Λόφοι" loading="lazy"></a><div class="info"><div class="label">Λόφοι / Ελαιώνες</div><div class="desc">Πανοραμική θέα, ελαιώνες, σπίτια με κεραμίδια.</div></div></div>
+      <div class="photo-card"><a href="#lb-1832"><img src="assets/locations/P1101832.jpeg" alt="Δρόμος" loading="lazy"></a><div class="info"><div class="label">Επαρχιακός δρόμος</div><div class="desc">Φιγούρα σε δρόμο με φόντο λόφους.</div></div></div>
+      <div class="photo-card"><a href="#lb-1830"><img src="assets/locations/P1101830.jpeg" alt="Λόφοι" loading="lazy"></a><div class="info"><div class="label">Λόφοι</div><div class="desc">Κατάφυτοι λόφοι, μεσογειακή βλάστηση.</div></div></div>
+    </div>
+  </div>
+
+  <!-- B-Roll -->
+  <div class="loc-group">
+    <div class="loc-group-title">B-Roll · Γενικά Πλάνα <span class="loc-group-scene">Καφενείο Σχολείο & Λοιπά</span></div>
+    <p class="loc-group-desc">Γενικές λήψεις, λεπτομέρειες, και το ιστορικό Καφενείο «Στο Σχολείο».</p>
+    <div class="photo-grid">
+      <div class="photo-card"><a href="#lb-1848"><img src="assets/locations/P1101848.jpeg" alt="Καφέ" loading="lazy"></a><div class="info"><div class="label">Καφέ με θέα</div><div class="desc">Τραπέζια κάτω από ελιά, κόκκινο κάγκελο, πανοραμική θέα.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOXES -->
+<div class="lightbox" id="lb-1747"><a href="#" class="close">&times;</a><img src="assets/locations/P1101747.jpeg" alt=""><div class="caption">Λιμάνι Παλαιόχωρας</div></div>
+<div class="lightbox" id="lb-1752"><a href="#" class="close">&times;</a><img src="assets/locations/P1101752.jpeg" alt=""><div class="caption">Αλιευτικό «ΑΓ. ΝΙΚΟΛΑΟΣ»</div></div>
+<div class="lightbox" id="lb-1855"><a href="#" class="close">&times;</a><img src="assets/locations/P1101855.jpeg" alt=""><div class="caption">Καφέ «Βότσαλο»</div></div>
+<div class="lightbox" id="lb-1770"><a href="#" class="close">&times;</a><img src="assets/locations/P1101770.jpeg" alt=""><div class="caption">Παραλιακός δρόμος</div></div>
+<div class="lightbox" id="lb-1771"><a href="#" class="close">&times;</a><img src="assets/locations/P1101771.jpeg" alt=""><div class="caption">Παραλιακή οδός με θέα</div></div>
+<div class="lightbox" id="lb-1739"><a href="#" class="close">&times;</a><img src="assets/locations/P1101739.jpeg" alt=""><div class="caption">Snack Bar — Εσωτερικό</div></div>
+<div class="lightbox" id="lb-1734"><a href="#" class="close">&times;</a><img src="assets/locations/P1101734.jpeg" alt=""><div class="caption">Ταβέρνα — Ρολόι-ψηφιδωτό</div></div>
+<div class="lightbox" id="lb-1728"><a href="#" class="close">&times;</a><img src="assets/locations/P1101728.jpeg" alt=""><div class="caption">Αυλή καφέ με πέργκολα</div></div>
+<div class="lightbox" id="lb-1764"><a href="#" class="close">&times;</a><img src="assets/locations/P1101764.jpeg" alt=""><div class="caption">Σοκάκι Παλαιόχωρας</div></div>
+<div class="lightbox" id="lb-1792"><a href="#" class="close">&times;</a><img src="assets/locations/P1101792.jpeg" alt=""><div class="caption">Γραφικό δρομάκι</div></div>
+<div class="lightbox" id="lb-1757"><a href="#" class="close">&times;</a><img src="assets/locations/P1101757.jpeg" alt=""><div class="caption">Λευκό σπίτι</div></div>
+<div class="lightbox" id="lb-1758"><a href="#" class="close">&times;</a><img src="assets/locations/P1101758.jpeg" alt=""><div class="caption">Συνοικιακός δρόμος</div></div>
+<div class="lightbox" id="lb-1738"><a href="#" class="close">&times;</a><img src="assets/locations/P1101738.jpeg" alt=""><div class="caption">Ταβέρνα με κίτρινα κάγκελα</div></div>
+<div class="lightbox" id="lb-1778"><a href="#" class="close">&times;</a><img src="assets/locations/P1101778.jpeg" alt=""><div class="caption">Κήπος με γιασεμί</div></div>
+<div class="lightbox" id="lb-1788"><a href="#" class="close">&times;</a><img src="assets/locations/P1101788.jpeg" alt=""><div class="caption">Αυλή με καλαμωτή</div></div>
+<div class="lightbox" id="lb-1790"><a href="#" class="close">&times;</a><img src="assets/locations/P1101790.jpeg" alt=""><div class="caption">Σοκάκι με μπαλκόνι</div></div>
+<div class="lightbox" id="lb-1775"><a href="#" class="close">&times;</a><img src="assets/locations/P1101775.jpeg" alt=""><div class="caption">Παλιό κτίριο</div></div>
+<div class="lightbox" id="lb-1811"><a href="#" class="close">&times;</a><img src="assets/locations/P1101811.jpeg" alt=""><div class="caption">Βραχώδης ακτή</div></div>
+<div class="lightbox" id="lb-1805"><a href="#" class="close">&times;</a><img src="assets/locations/P1101805.jpeg" alt=""><div class="caption">Θαλάσσιος βράχος</div></div>
+<div class="lightbox" id="lb-1828"><a href="#" class="close">&times;</a><img src="assets/locations/P1101828.jpeg" alt=""><div class="caption">Οργανωμένη παραλία</div></div>
+<div class="lightbox" id="lb-1767"><a href="#" class="close">&times;</a><img src="assets/locations/P1101767.jpeg" alt=""><div class="caption">Βραχώδες τοπίο</div></div>
+<div class="lightbox" id="lb-1813"><a href="#" class="close">&times;</a><img src="assets/locations/P1101813.jpeg" alt=""><div class="caption">Ακτή με βράχια</div></div>
+<div class="lightbox" id="lb-1815"><a href="#" class="close">&times;</a><img src="assets/locations/P1101815.jpeg" alt=""><div class="caption">Πανοραμική ακτογραμμή</div></div>
+<div class="lightbox" id="lb-1829"><a href="#" class="close">&times;</a><img src="assets/locations/P1101829.jpeg" alt=""><div class="caption">Λόφοι με ελαιώνες</div></div>
+<div class="lightbox" id="lb-1832"><a href="#" class="close">&times;</a><img src="assets/locations/P1101832.jpeg" alt=""><div class="caption">Επαρχιακός δρόμος</div></div>
+<div class="lightbox" id="lb-1830"><a href="#" class="close">&times;</a><img src="assets/locations/P1101830.jpeg" alt=""><div class="caption">Κατάφυτοι λόφοι</div></div>
+<div class="lightbox" id="lb-1848"><a href="#" class="close">&times;</a><img src="assets/locations/P1101848.jpeg" alt=""><div class="caption">Καφέ με θέα</div></div>
+
+<footer class="footer">
+  <img src="assets/beyond-logo.svg" alt="Beyond Luxury Retreat">
+  <p>Location Scouting · «Το Πρωτόκολλο της Παλαιόχωρας»<br>
+  Φωτογραφίες: Beyond Reperage / S5 · &copy; 2026 Beyond Luxury Retreat &amp; Atheaton Media</p>
+</footer>
+
+</body>
+</html>
