@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storyboard — Το Πρωτόκολλο της Παλαιόχωρας</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root { --taupe:#b89c8a; --taupe-dark:#9a7e6e; --taupe-bg:#e8ddd4; --sand:#f5ede4; --white:#fff; --black:#1a1a1a; --text:#2d2d2d; --text-light:#6b6b6b; --border:#d9cec4; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;font-size:1.04rem;font-weight:300;color:var(--text);background:var(--sand);line-height:1.6}
+h1,h2,h3{font-family:'Outfit','Inter',sans-serif}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(245,237,228,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:16px;overflow-x:auto}
+.topbar a{text-decoration:none;font-size:0.95rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;padding:8px 16px;border-radius:22px;white-space:nowrap;transition:all 0.2s;color:var(--text-light)}
+.topbar a:hover,.topbar a.active{color:var(--taupe-dark);background:var(--taupe-bg)}
+.topbar .home{font-weight:600;color:var(--black)}
+.section{max-width:1200px;margin:0 auto;padding:56px 24px}
+.scene-group{margin-bottom:48px}
+.scene-title{font-size:1.25rem;font-weight:500;color:var(--black);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.scene-count{font-size:0.78rem;color:var(--taupe-dark);background:var(--taupe-bg);padding:2px 10px;border-radius:12px;font-weight:400}
+.shot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.shot-card{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all 0.2s}
+.shot-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.shot-card img{width:100%;height:220px;object-fit:cover;background:var(--taupe-bg);display:block}
+.shot-card .info{padding:12px 14px}
+.shot-card .label{font-size:0.75rem;font-weight:600;color:var(--taupe-dark);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:4px}
+.shot-card .specs{font-size:0.72rem;color:var(--text-light);margin-bottom:4px}
+.shot-card .desc{font-size:0.82rem;color:var(--text);line-height:1.4}
+.placeholder{width:100%;height:220px;background:var(--taupe-bg);display:flex;align-items:center;justify-content:center;color:var(--text-light);font-size:0.8rem;font-style:italic}
+.footer{background:var(--taupe);padding:56px 24px;text-align:center;color:var(--white)}
+.footer img{width:48px;margin-bottom:20px;opacity:0.85;filter:brightness(10)}
+.footer p{font-size:1.0rem;opacity:0.8}
+@media(max-width:768px){.section{padding:32px 14px}.topbar{padding:10px 14px;gap:6px}.topbar a{font-size:0.78rem;padding:6px 10px}.shot-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" class="home">Πρωτόκολλο Παλαιόχωρας</a>
+  <a href="script.html">Σενάριο</a>
+  <a href="breakdown.html">Breakdown</a>
+  <a href="shotlist.html">Shot List</a>
+  <a href="locations.html">Locations</a>
+  <a href="storyboard.html" class="active">Storyboard</a>
+</div>
+<section class="section">
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 1 — Υπνοδωμάτιο Σοφίας, Αγγλία <span class="scene-count">4 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/1A.png" alt="1A" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">1A</div>
+      <div class="info">
+        <div class="label">1A</div>
+        <div class="specs">CU · 50mm · Static</div>
+        <div class="desc">Ανοιχτή βαλίτσα, χέρια Σοφίας τακτοποιούν ρούχα</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/1B.png" alt="1B" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">1B</div>
+      <div class="info">
+        <div class="label">1B</div>
+        <div class="specs">MCU · 35mm · Static</div>
+        <div class="desc">Σοφία, μονόλογος — «Το σχέδιο ήταν Ibiza»</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/1C.png" alt="1C" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">1C</div>
+      <div class="info">
+        <div class="label">1C</div>
+        <div class="specs">ECU · 85mm · Static</div>
+        <div class="desc">Οθόνη κινητού, group chat Ibiza</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/1D.png" alt="1D" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">1D</div>
+      <div class="info">
+        <div class="label">1D</div>
+        <div class="specs">MCU · 35mm · Static</div>
+        <div class="desc">Σοφία, ειρωνικό χαμόγελο, κρατά κινητό</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 1α — Άφιξη, Transfer <span class="scene-count">4 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/1aA.png" alt="1αA" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">1αA</div>
+      <div class="info">
+        <div class="label">1αA</div>
+        <div class="specs">WS · 24mm · Static</div>
+        <div class="desc">Φτερό αεροπλάνου, σύννεφα</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/1aB.png" alt="1αB" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">1αB</div>
+      <div class="info">
+        <div class="label">1αB</div>
+        <div class="specs">WS · 24mm · Drone</div>
+        <div class="desc">Aerial δρόμου στην Κρήτη, ελαιώνες</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/1aC.png" alt="1αC" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">1αC</div>
+      <div class="info">
+        <div class="label">1αC</div>
+        <div class="specs">WS · 35mm · Pan</div>
+        <div class="desc">Transfer van φτάνει στην Παλαιόχωρα</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/1aD.png" alt="1αD" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">1αD</div>
+      <div class="info">
+        <div class="label">1αD</div>
+        <div class="specs">ECU · 85mm · Static</div>
+        <div class="desc">Οθόνη κινητού, εισερχόμενο μήνυμα</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 2 — Καφενείο «Νίκος» <span class="scene-count">8 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/2A.png" alt="2A" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">2A</div>
+      <div class="info">
+        <div class="label">2A</div>
+        <div class="specs">WS · 24mm · Static</div>
+        <div class="desc">Establishing παραδοσιακό καφενείο</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/2B.png" alt="2B" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">2B</div>
+      <div class="info">
+        <div class="label">2B</div>
+        <div class="specs">MS · 35mm · Handheld</div>
+        <div class="desc">Σοφία κάθεται μόνη, κοιτά γύρω</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/2C.png" alt="2C" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">2C</div>
+      <div class="info">
+        <div class="label">2C</div>
+        <div class="specs">ECU · 85mm · Static</div>
+        <div class="desc">Χέρια με κατάλογο καφέ</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/2D.png" alt="2D" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">2D</div>
+      <div class="info">
+        <div class="label">2D</div>
+        <div class="specs">MCU · 35mm · Handheld</div>
+        <div class="desc">Νίκος πλησιάζει με δίσκο</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/2E.png" alt="2E" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">2E</div>
+      <div class="info">
+        <div class="label">2E</div>
+        <div class="specs">CU · 50mm · High</div>
+        <div class="desc">Δίσκος με ελληνικό καφέ &amp; μπισκότα</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/2F.png" alt="2F" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">2F</div>
+      <div class="info">
+        <div class="label">2F</div>
+        <div class="specs">MS · 35mm · Handheld</div>
+        <div class="desc">Σοφία &amp; Νίκος, διάλογος</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/2G.png" alt="2G" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">2G</div>
+      <div class="info">
+        <div class="label">2G</div>
+        <div class="specs">WS · 35mm · Pan</div>
+        <div class="desc">Transfer van έξω από καφενείο</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/2H.png" alt="2H" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">2H</div>
+      <div class="info">
+        <div class="label">2H</div>
+        <div class="specs">MS · 35mm · Handheld</div>
+        <div class="desc">Σοφία μπαίνει βιαστικά στο transfer</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 3 — Beyond Luxury Retreat, Βεράντα <span class="scene-count">3 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/3A.png" alt="3A" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">3A</div>
+      <div class="info">
+        <div class="label">3A</div>
+        <div class="specs">EWS · 24mm · Drone</div>
+        <div class="desc">Aerial του Beyond στον βράχο</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/3B.png" alt="3B" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">3B</div>
+      <div class="info">
+        <div class="label">3B</div>
+        <div class="specs">WS · 24mm · Dolly</div>
+        <div class="desc">Lobby με παράθυρα στη θάλασσα</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/3D.png" alt="3D" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">3D</div>
+      <div class="info">
+        <div class="label">3D</div>
+        <div class="specs">MCU · 50mm · Static</div>
+        <div class="desc">Σοφία με latte, χρυσαφένιο φως</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 3α — Ξύπνημα, Πρωί <span class="scene-count">3 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/3aA.png" alt="3αA" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">3αA</div>
+      <div class="info">
+        <div class="label">3αA</div>
+        <div class="specs">ECU · 85mm · Slow Pan</div>
+        <div class="desc">Χέρι σε λευκά σεντόνια</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/3aB.png" alt="3αB" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">3αB</div>
+      <div class="info">
+        <div class="label">3αB</div>
+        <div class="specs">CU · 50mm · Low</div>
+        <div class="desc">Νερά infinity pool, αντανακλάσεις</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/3aC.png" alt="3αC" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">3αC</div>
+      <div class="info">
+        <div class="label">3αC</div>
+        <div class="specs">MCU · 50mm · Dolly</div>
+        <div class="desc">Σοφία, μάτια κλειστά, ήλιος στο πρόσωπο</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 4 — Είσοδος, Γνωριμία <span class="scene-count">3 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/4A.png" alt="4A" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">4A</div>
+      <div class="info">
+        <div class="label">4A</div>
+        <div class="specs">WS · 35mm · Static</div>
+        <div class="desc">Μάρκος στην είσοδο του Beyond</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/4C.png" alt="4C" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">4C</div>
+      <div class="info">
+        <div class="label">4C</div>
+        <div class="specs">MS · 35mm · Static</div>
+        <div class="desc">Σοφία &amp; Μάρκος, πρώτη γνωριμία</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/4D.png" alt="4D" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">4D</div>
+      <div class="info">
+        <div class="label">4D</div>
+        <div class="specs">CU · 50mm · Static</div>
+        <div class="desc">Μάρκος, σίγουρο χαμόγελο</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 5 — Θάλασσα, Σπηλιές, Παραλίες <span class="scene-count">4 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/5A.png" alt="5A" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">5A</div>
+      <div class="info">
+        <div class="label">5A</div>
+        <div class="specs">WS · 24mm · Drone</div>
+        <div class="desc">Speedboat σε τυρκουάζ νερά</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/5C.png" alt="5C" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">5C</div>
+      <div class="info">
+        <div class="label">5C</div>
+        <div class="specs">WS · 24mm · Pan</div>
+        <div class="desc">Σπηλιά με ηλεκτρίκ μπλε νερά</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/5E.png" alt="5E" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">5E</div>
+      <div class="info">
+        <div class="label">5E</div>
+        <div class="specs">EWS · 24mm · Drone</div>
+        <div class="desc">Απόμερη παραλία με κόκκινη άμμο</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/5G.png" alt="5G" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">5G</div>
+      <div class="info">
+        <div class="label">5G</div>
+        <div class="specs">MCU · 50mm · Static</div>
+        <div class="desc">Σοφία — «Καλύτερα από Ibiza»</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 5α — B-Roll Θάλασσα <span class="scene-count">2 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/5aA.png" alt="5αA" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">5αA</div>
+      <div class="info">
+        <div class="label">5αA</div>
+        <div class="specs">CU-WS · 24mm · GoPro</div>
+        <div class="desc">Υποβρύχια χρώματα, ακτίνες ήλιου</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/5aB.png" alt="5αB" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">5αB</div>
+      <div class="info">
+        <div class="label">5αB</div>
+        <div class="specs">EWS · 24mm · Drone</div>
+        <div class="desc">Aerial παραλίες κατά μήκος της ακτής</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 6 — Σοκάκια, Γειτονιά <span class="scene-count">4 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/6A.png" alt="6A" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">6A</div>
+      <div class="info">
+        <div class="label">6A</div>
+        <div class="specs">MS · 35mm · Steadicam</div>
+        <div class="desc">Σοκάκι, ασβεστωμένοι τοίχοι, βουκαμβίλια</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/6E.png" alt="6E" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">6E</div>
+      <div class="info">
+        <div class="label">6E</div>
+        <div class="specs">MCU · 35mm · Static</div>
+        <div class="desc">Μάρκος &amp; δύο Κυρίες σε ψάθινες καρέκλες</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/6F.png" alt="6F" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">6F</div>
+      <div class="info">
+        <div class="label">6F</div>
+        <div class="specs">MCU · 50mm · Static</div>
+        <div class="desc">Μιχάλης, μουστάκι, βασιλικός</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/6H.png" alt="6H" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">6H</div>
+      <div class="info">
+        <div class="label">6H</div>
+        <div class="specs">MCU · 50mm · Static</div>
+        <div class="desc">Σοφία πίνει τσικουδιά, κωμική αντίδραση</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 7 — Πρωινό, Επιλογή <span class="scene-count">3 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/7A.png" alt="7A" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">7A</div>
+      <div class="info">
+        <div class="label">7A</div>
+        <div class="specs">MS · 35mm · Static</div>
+        <div class="desc">Σοφία σε τραπέζι πρωινού, κινητό δονείται</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/7B.png" alt="7B" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">7B</div>
+      <div class="info">
+        <div class="label">7B</div>
+        <div class="specs">ECU · 85mm · Static</div>
+        <div class="desc">Οθόνη κινητού, ειδοποίηση μηνύματος</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/7E.png" alt="7E" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">7E</div>
+      <div class="info">
+        <div class="label">7E</div>
+        <div class="specs">MCU · 50mm · Static</div>
+        <div class="desc">Σοφία παραγγέλνει ελληνικό καφέ</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 8 — Δρόμος προς Ανύδρους <span class="scene-count">3 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/8A.png" alt="8A" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">8A</div>
+      <div class="info">
+        <div class="label">8A</div>
+        <div class="specs">WS · 24mm · Drone</div>
+        <div class="desc">Δύο ποδηλάτες σε ορεινό δρόμο</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/8C.png" alt="8C" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">8C</div>
+      <div class="info">
+        <div class="label">8C</div>
+        <div class="specs">WS · 50mm · Pan</div>
+        <div class="desc">Κοπάδι αγριοκάτσικα διασχίζει δρόμο</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/8F.png" alt="8F" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">8F</div>
+      <div class="info">
+        <div class="label">8F</div>
+        <div class="specs">CU · 85mm · Static</div>
+        <div class="desc">Σοφία μυρίζει θυμάρι &amp; δίκταμο</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 8α — Άλογα, Σούρουπο <span class="scene-count">2 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/8aB.png" alt="8αB" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">8αB</div>
+      <div class="info">
+        <div class="label">8αB</div>
+        <div class="specs">CU · 85mm · Slow-Mo</div>
+        <div class="desc">Χέρια Μάρκου δένουν χαλινάρι αλόγου</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/8aC.png" alt="8αC" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">8αC</div>
+      <div class="info">
+        <div class="label">8αC</div>
+        <div class="specs">CU · 85mm · Slow-Mo</div>
+        <div class="desc">Σοφία χαϊδεύει άλογο</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 9 — Ιππασία, Δύση <span class="scene-count">4 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/9A.png" alt="9A" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">9A</div>
+      <div class="info">
+        <div class="label">9A</div>
+        <div class="specs">EWS · 24mm · Drone</div>
+        <div class="desc">Άλογα σε παραλία, δύση</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/9F.png" alt="9F" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">9F</div>
+      <div class="info">
+        <div class="label">9F</div>
+        <div class="specs">CU · 50mm · Static</div>
+        <div class="desc">Πρόσωπο Σοφίας φωτίζεται από οθόνη</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/9G.png" alt="9G" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">9G</div>
+      <div class="info">
+        <div class="label">9G</div>
+        <div class="specs">ECU · 85mm · Static</div>
+        <div class="desc">Δάχτυλο πατά power off σε κινητό</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/9H.png" alt="9H" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">9H</div>
+      <div class="info">
+        <div class="label">9H</div>
+        <div class="specs">MCU · 50mm · Static</div>
+        <div class="desc">Σοφία — «Ευχαριστώ» — συγκινημένη</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scene-group">
+  <div class="scene-title">Σκηνή 10 — Δείπνο, Λιμάνι <span class="scene-count">5 πλάνα</span></div>
+  <div class="shot-grid">
+    <div class="shot-card">
+      <img src="assets/storyboard/10A.png" alt="10A" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">10A</div>
+      <div class="info">
+        <div class="label">10A</div>
+        <div class="specs">WS · 24mm · Dolly</div>
+        <div class="desc">Εστιατόριο με κεριά, νύχτα</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/10E.png" alt="10E" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">10E</div>
+      <div class="info">
+        <div class="label">10E</div>
+        <div class="specs">MCU · 35mm · Static</div>
+        <div class="desc">Σοφία &amp; Μάρκος, δείπνο, κεριά</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/10F.png" alt="10F" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">10F</div>
+      <div class="info">
+        <div class="label">10F</div>
+        <div class="specs">CU · 85mm · High</div>
+        <div class="desc">Χέρι ακουμπά χέρι, κεριά</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/10G.png" alt="10G" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">10G</div>
+      <div class="info">
+        <div class="label">10G</div>
+        <div class="specs">MCU · 50mm · Static</div>
+        <div class="desc">Σοφία — ζεστό βλέμμα, επίγνωση</div>
+      </div>
+    </div>
+    <div class="shot-card">
+      <img src="assets/storyboard/10H.png" alt="10H" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">      <div class="placeholder" style="display:none">10H</div>
+      <div class="info">
+        <div class="label">10H</div>
+        <div class="specs">EWS · 24mm · Drone</div>
+        <div class="desc">Beyond σαν κάστρο τη νύχτα</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<footer class="footer">
+  <img src="assets/beyond-logo.svg" alt="Beyond Luxury Retreat">
+  <p>Storyboard · «Το Πρωτόκολλο της Παλαιόχωρας»<br>Nano Banana 2 Image Edit · &copy; 2026 Beyond Luxury Retreat &amp; Atheaton Media</p>
+</footer>
+</body></html>
