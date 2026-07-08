@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Script Breakdown — Το Πρωτόκολλο της Παλαιόχωρας</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --taupe: #b89c8a;
+  --taupe-dark: #9a7e6e;
+  --taupe-light: #d4c5b9;
+  --taupe-bg: #e8ddd4;
+  --sand: #f5ede4;
+  --white: #ffffff;
+  --black: #1a1a1a;
+  --text: #2d2d2d;
+  --text-light: #6b6b6b;
+  --accent-blue: #7a9fb5;
+  --gold: #c4a35a;
+  --red: #d94f4f;
+  --pink: #e8919e;
+  --yellow: #e8c84f;
+  --purple: #9b7ec4;
+  --green: #7eaa80;
+  --cyan: #6db5c4;
+  --blue: #6b8ec4;
+  --brown: #a0806a;
+  --border: #d9cec4;
+  --radius: 6px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  color: var(--text);
+  background: var(--sand);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #3a2f28 0%, #5a4a3a 40%, #7a6a55 70%, #b89c8a 100%);
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 80%, rgba(196,163,90,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 20%, rgba(122,159,181,0.1) 0%, transparent 50%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 720px; }
+.hero-logo { width: 70px; height: auto; margin-bottom: 32px; opacity: 0.9; }
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.hero h1 span { font-weight: 600; }
+.hero .subtitle {
+  font-size: 1.05rem;
+  color: var(--taupe-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.hero-meta {
+  margin-top: 40px;
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-meta-item {
+  color: var(--white);
+  opacity: 0.8;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+.hero-meta-item strong { display: block; font-size: 1.1rem; font-weight: 500; opacity: 1; }
+
+/* ── NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,237,228,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 24px;
+  display: flex; gap: 8px; overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav a {
+  text-decoration: none; color: var(--text-light);
+  font-size: 0.8rem; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 8px 16px; border-radius: 20px;
+  white-space: nowrap; transition: all 0.2s;
+}
+.nav a:hover, .nav a.active { color: var(--taupe-dark); background: var(--taupe-bg); }
+
+/* ── SECTIONS ── */
+.section {
+  max-width: 1100px; margin: 0 auto; padding: 80px 24px;
+}
+.section-title {
+  font-size: 1.6rem; font-weight: 300;
+  letter-spacing: -0.01em; color: var(--black);
+  margin-bottom: 8px;
+}
+.section-subtitle {
+  font-size: 0.85rem; color: var(--text-light);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+/* ── DAY CARD ── */
+.day-card {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  margin-bottom: 32px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.day-header {
+  padding: 20px 28px;
+  background: var(--taupe-bg);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+  cursor: pointer;
+}
+.day-header h3 {
+  font-size: 1.1rem; font-weight: 500;
+  color: var(--black); letter-spacing: -0.01em;
+}
+.day-badge {
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  background: var(--black); color: var(--white);
+  padding: 4px 12px; border-radius: 20px;
+}
+.day-meta {
+  font-size: 0.8rem; color: var(--text-light);
+  letter-spacing: 0.03em;
+}
+.day-body { padding: 24px 28px; }
+
+/* ── SCENE CARD ── */
+.scene-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.scene-card:hover { box-shadow: var(--shadow-md); }
+.scene-header {
+  padding: 16px 24px;
+  background: #faf7f3;
+  display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap;
+}
+.scene-number {
+  font-size: 1.3rem; font-weight: 600;
+  color: var(--black); min-width: 40px;
+}
+.scene-slugline {
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.03em; text-transform: uppercase;
+  color: var(--taupe-dark);
+}
+.scene-length {
+  margin-left: auto;
+  font-size: 0.78rem; font-weight: 500;
+  color: var(--text-light);
+  background: var(--taupe-bg);
+  padding: 3px 10px; border-radius: 12px;
+}
+.scene-body { padding: 20px 24px; }
+
+/* ── ELEMENT TAGS ── */
+.elements { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.73rem; font-weight: 500;
+  padding: 4px 10px; border-radius: 14px;
+  letter-spacing: 0.02em;
+}
+.tag-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.tag-cast { background: #fde8e8; color: #b03030; }
+.tag-cast .tag-dot { background: #d94f4f; }
+.tag-extras { background: #fdf5dc; color: #8a7a20; }
+.tag-extras .tag-dot { background: #e8c84f; }
+.tag-prop { background: #f0e8f8; color: #6a3d99; }
+.tag-prop .tag-dot { background: #9b7ec4; }
+.tag-set { background: #e4f0e4; color: #3d6b3d; }
+.tag-set .tag-dot { background: #7eaa80; }
+.tag-vehicle { background: #ddf0f4; color: #2d6b7a; }
+.tag-vehicle .tag-dot { background: #6db5c4; }
+.tag-animal { background: #ddf0f4; color: #2d6b7a; }
+.tag-animal .tag-dot { background: #6db5c4; }
+.tag-wardrobe { background: #dee8f4; color: #3d5a99; }
+.tag-wardrobe .tag-dot { background: #6b8ec4; }
+.tag-sfx { background: #dee8f4; color: #3d5a99; }
+.tag-sfx .tag-dot { background: #6b8ec4; }
+.tag-special { background: #f0e8e0; color: #6a4d30; }
+.tag-special .tag-dot { background: #a0806a; }
+.tag-greenery { background: #e4f0e4; color: #3d6b3d; }
+.tag-greenery .tag-dot { background: #7eaa80; }
+
+/* ── NOTES ── */
+.scene-notes {
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: #fffbeb;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.82rem;
+  color: #6d5a20;
+  line-height: 1.5;
+}
+.scene-notes strong { color: #8a6d20; }
+
+/* ── TABLE ── */
+.breakdown-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.82rem; margin-top: 12px;
+}
+.breakdown-table th {
+  text-align: left; font-weight: 500; font-size: 0.72rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text-light); padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.breakdown-table td {
+  padding: 8px 12px; border-bottom: 1px solid #f0ebe4;
+  vertical-align: top;
+}
+.breakdown-table tr:last-child td { border-bottom: none; }
+
+/* ── SUMMARY ── */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.summary-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.summary-card h4 {
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-light); margin-bottom: 16px;
+}
+.summary-stat {
+  font-size: 2rem; font-weight: 600;
+  color: var(--black); letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.summary-stat small {
+  display: block; font-size: 0.8rem; font-weight: 400;
+  color: var(--text-light); margin-top: 4px;
+}
+
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: ''; position: absolute; left: 8px; top: 4px; bottom: 4px;
+  width: 2px; background: var(--border);
+}
+.timeline-item {
+  position: relative; margin-bottom: 28px;
+}
+.timeline-item::before {
+  content: ''; position: absolute;
+  left: -24px; top: 6px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--taupe-dark); border: 2px solid var(--white);
+  box-shadow: var(--shadow);
+}
+.timeline-date {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--taupe-dark);
+  margin-bottom: 4px;
+}
+.timeline-desc { font-size: 0.88rem; color: var(--text); }
+.timeline-desc small { color: var(--text-light); display: block; margin-top: 2px; }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--taupe);
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--white);
+}
+.footer img { width: 50px; margin-bottom: 20px; opacity: 0.85; }
+.footer p { font-size: 0.85rem; opacity: 0.8; letter-spacing: 0.03em; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero { min-height: 50vh; padding: 60px 20px; }
+  .hero-meta { gap: 20px; }
+  .section { padding: 48px 16px; }
+  .day-header { padding: 16px 20px; }
+  .day-body { padding: 16px 20px; }
+  .scene-header { padding: 12px 16px; gap: 8px; }
+  .scene-body { padding: 14px 16px; }
+  .summary-grid { grid-template-columns: 1fr; }
+}
+
+/* ── PRINT ── */
+@media print {
+  .nav { display: none; }
+  .hero { min-height: auto; padding: 40px 24px; background: var(--taupe) !important; }
+  .hero-logo { width: 40px; }
+  .day-card, .scene-card { break-inside: avoid; box-shadow: none; }
+  body { background: white; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <div class="hero-content">
+    <img class="hero-logo" src="assets/beyond-logo.svg" alt="Beyond Luxury Retreat">
+    <h1>Script <span>Breakdown</span></h1>
+    <p class="subtitle">«Το Πρωτόκολλο της Παλαιόχωρας»</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><strong>8</strong> σελίδες</div>
+      <div class="hero-meta-item"><strong>15</strong> σκηνές</div>
+      <div class="hero-meta-item"><strong>7</strong> ρόλοι</div>
+      <div class="hero-meta-item"><strong>5</strong> ημέρες</div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#schedule">Πρόγραμμα</a>
+    <a href="#summary">Σύνοψη</a>
+    <a href="#day1">Ημέρα 1</a>
+    <a href="#day2">Ημέρα 2</a>
+    <a href="#day3">Ημέρα 3</a>
+    <a href="#day4">Ημέρα 4</a>
+    <a href="#day5">Ημέρα 5</a>
+    <a href="#broll">B-Roll</a>
+  </div>
+</nav>
+
+<!-- ═══════════ ΠΡΟΓΡΑΜΜΑ ΓΥΡΙΣΜΑΤΩΝ ═══════════ -->
+<section class="section" id="schedule">
+  <h2 class="section-title">Πρόγραμμα Γυρισμάτων</h2>
+  <p class="section-subtitle">27 – 31 Ιουλίου · Παλαιόχωρα, Κρήτη</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">Κυριακή 27 Ιουλίου</div>
+      <div class="timeline-desc">
+        <strong>Πρωί:</strong> Σκηνές 3, 3α, 6α, 7 — Beyond Luxury Retreat (lobby, σουίτα, βεράντα)<br>
+        <strong>Απόγευμα:</strong> Σκηνή 10 — Εστιατόριο Beyond (νύχτα)
+        <small>Cast: Σοφία, Σερβιτόρος · Εξοπλισμός: Drone (εναέριες)</small>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Δευτέρα 28 Ιουλίου</div>
+      <div class="timeline-desc">
+        <strong>Πρωί:</strong> Σκηνές 1α, 2, 4 — Transfer, Καφενείο «Νίκος», Είσοδος Beyond<br>
+        <small>Cast: Σοφία, Νίκος, Μάρκος (Σκ.4) · Extras: Θαμώνες καφενείου (εθελοντές)</small>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Τρίτη 29 Ιουλίου</div>
+      <div class="timeline-desc">
+        <strong>Πρωί:</strong> Σκηνή 5 — Θάλασσα: σπήλαια, κόκκινη άμμος (σκάφος)<br>
+        <strong>Απόγευμα:</strong> Σκηνή 5α — B-Roll παραλίες (drone + GoPro)
+        <small>Cast: Σοφία, Μάρκος · Εξοπλισμός: Ταχύπλοο, GoPro υποβρύχια, Drone, Σκάφος ασφαλείας</small>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Τετάρτη 30 Ιουλίου</div>
+      <div class="timeline-desc">
+        <strong>Πρωί:</strong> Σκηνή 8 — Δρόμος προς Ανύδρους (ποδήλατα, αγριοκάτσικα)<br>
+        <strong>Απόγευμα:</strong> Σκηνή 6 — Σοκάκια Παλαιόχωρας (απόγευμα → ηλιοβασίλεμα)
+        <small>Cast: Σοφία, Μάρκος, Κυρία 1, Κυρία 2, Μιχάλης · Extras: Οικογένεια, γειτονιά (εθελοντές)</small>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Πέμπτη 31 Ιουλίου</div>
+      <div class="timeline-desc">
+        <strong>Πρωί:</strong> Σκηνή 8α + 9 — Άλογα, διαδρομή προς παραλία, σούρουπο στην παραλία<br>
+        <small>Cast: Σοφία, Μάρκος · Ζώα: 2 άλογα · Εξοπλισμός: GoPro, Drone, Gimbal</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ΣΥΝΟΨΗ ═══════════ -->
+<section id="summary" style="background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section" style="padding-top: 60px; padding-bottom: 60px;">
+    <h2 class="section-title">Σύνοψη Παραγωγής</h2>
+    <p class="section-subtitle">Τα νούμερα με μια ματιά</p>
+
+    <div class="summary-grid">
+      <div class="summary-card">
+        <h4>Cast</h4>
+        <div class="summary-stat">7<small>ρόλοι</small></div>
+        <table class="breakdown-table" style="margin-top: 16px;">
+          <tr><td><span class="tag tag-cast"><span class="tag-dot"></span> Lead</span></td><td>Σοφία (19), Μάρκος (22)</td></tr>
+          <tr><td><span class="tag tag-cast"><span class="tag-dot"></span> Supporting</span></td><td>Νίκος, Κυρία 1, Κυρία 2, Μιχάλης</td></tr>
+          <tr><td><span class="tag tag-cast"><span class="tag-dot"></span> Day Player</span></td><td>Σερβιτόρος Beyond</td></tr>
+        </table>
+      </div>
+
+      <div class="summary-card">
+        <h4>Extras</h4>
+        <div class="summary-stat">25–40<small>εθελοντές κάτοικοι</small></div>
+        <p style="font-size: 0.82rem; color: var(--text-light); margin-top: 12px;">
+          Όλοι οι κομπάρσοι είναι πραγματικοί κάτοικοι της Παλαιόχωρας — εθελοντική συμμετοχή.
+          Θαμώνες καφενείου, οικογένεια σε αυλή, γειτονιά στα σοκάκια.
+        </p>
+      </div>
+
+      <div class="summary-card">
+        <h4>Τοποθεσίες</h4>
+        <div class="summary-stat">7<small>στην Παλαιόχωρα</small></div>
+        <p style="font-size: 0.82rem; color: var(--text-light); margin-top: 12px;">
+          Όλα τα γυρίσματα γίνονται στην Παλαιόχωρα και γύρω περιοχή.
+          Δεν υπάρχει γύρισμα στην Αγγλία — η Σκηνή 1 γυρίζεται σε δωμάτιο/studio.
+        </p>
+      </div>
+
+      <div class="summary-card">
+        <h4>Οχήματα &amp; Ζώα</h4>
+        <table class="breakdown-table" style="margin-top: 8px;">
+          <tr><td><span class="tag tag-vehicle"><span class="tag-dot"></span> Transfer</span></td><td>Luxury van/SUV με branding Beyond</td></tr>
+          <tr><td><span class="tag tag-vehicle"><span class="tag-dot"></span> Σκάφος</span></td><td>Ταχύπλοο + σκάφος ασφαλείας</td></tr>
+          <tr><td><span class="tag tag-animal"><span class="tag-dot"></span> Άλογα</span></td><td>2 εκπαιδευμένα άλογα</td></tr>
+          <tr><td><span class="tag tag-animal"><span class="tag-dot"></span> Κατσίκια</span></td><td>Κοπάδι (ή VFX)</td></tr>
+        </table>
+      </div>
+
+      <div class="summary-card">
+        <h4>Ειδικός Εξοπλισμός</h4>
+        <table class="breakdown-table" style="margin-top: 8px;">
+          <tr><td>🎥 Drone</td><td>Εναέριες λήψεις</td></tr>
+          <tr><td>📷 GoPro</td><td>Υποβρύχια (νέο μοντέλο)</td></tr>
+          <tr><td>🎬 Gimbal</td><td>Tracking / κίνηση</td></tr>
+          <tr><td>📸 Slow-mo</td><td>Σκηνές 8α, 9</td></tr>
+          <tr><td>🚫 Crane</td><td><em>Δεν θα χρησιμοποιηθεί</em></td></tr>
+        </table>
+      </div>
+
+      <div class="summary-card">
+        <h4>B-Roll</h4>
+        <p style="font-size: 0.82rem; color: var(--text-light); margin-top: 8px;">
+          Ξεχωριστό B-roll unit για τοπία, παραλίες, drone, GoPro υποβρύχια.
+          Μπορεί να γυριστεί παράλληλα ή σε flex ημέρες.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ΗΜΕΡΑ 1 ═══════════ -->
+<section class="section" id="day1">
+  <h2 class="section-title">Ημέρα 1</h2>
+  <p class="section-subtitle">Κυριακή 27 Ιουλίου · Beyond Luxury Retreat</p>
+
+  <!-- ΣΚΗΝΗ 3 -->
+  <div class="day-card">
+    <div class="day-header">
+      <h3>🌅 Πρωί · Σκηνή 3</h3>
+      <span class="day-badge">1 0/8 σελ.</span>
+      <span class="day-meta">INT/EXT · ΑΠΟΓΕΥΜΑ (Golden Hour)</span>
+    </div>
+    <div class="day-body">
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">3</span>
+          <span class="scene-slugline">INT/EXT. BEYOND LUXURY RETREAT — ΑΠΟΓΕΥΜΑ</span>
+          <span class="scene-length">1 0/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Lobby, βεράντα, σουίτα. Εναέριες λήψεις. Η Σοφία απολαμβάνει το latte, διαβάζει το σημείωμα των γονιών της.</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Κινητό</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Latte γάλα βρώμης</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Σημείωμα γονιών</span>
+            <span class="tag tag-set"><span class="tag-dot"></span> Lobby / σουίτα</span>
+            <span class="tag tag-set"><span class="tag-dot"></span> Πισίνες</span>
+          </div>
+          <div class="scene-notes">
+            <strong>⚠️ Golden Hour:</strong> Αυστηρό χρονικό παράθυρο για εξωτερικά πλάνα. Drone εναέριες λήψεις.
+            Το σημείωμα πρέπει να είναι έτοιμο από art department.
+          </div>
+        </div>
+      </div>
+
+      <!-- ΣΚΗΝΗ 3α -->
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">3α</span>
+          <span class="scene-slugline">INT/EXT. BEYOND — ΜΟΝΤΑΖ ΑΠΟΣΥΜΠΙΕΣΗΣ</span>
+          <span class="scene-length">3/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Χέρι σε λευκά σεντόνια, νερό ιδιωτικής πισίνας, Σοφία με κλειστά μάτια στον ήλιο. Μόνο φυσικοί ήχοι.</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-set"><span class="tag-dot"></span> Λευκά σεντόνια</span>
+            <span class="tag tag-set"><span class="tag-dot"></span> Ιδιωτική πισίνα</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Πετσέτες</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ΣΚΗΝΗ 6α -->
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">6α</span>
+          <span class="scene-slugline">INT. ΣΟΥΙΤΑ BEYOND — ΠΡΩΙ</span>
+          <span class="scene-length">1/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Transition. Φως του ήλιου ανάμεσα από κουρτίνες. Η Σοφία ξυπνάει αργά, γαλήνια.</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-set"><span class="tag-dot"></span> Λευκά σεντόνια, κουρτίνες</span>
+            <span class="tag tag-wardrobe"><span class="tag-dot"></span> Πιτζάμες/νυχτικό</span>
+          </div>
+          <div class="scene-notes">
+            <strong>Πρωινό φως:</strong> Μπορεί να γυριστεί ίδια μέρα με πρωινό call time. Γρήγορο 1/8 setup.
+          </div>
+        </div>
+      </div>
+
+      <!-- ΣΚΗΝΗ 7 -->
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">7</span>
+          <span class="scene-slugline">EXT. ΒΕΡΑΝΤΑ ΠΡΩΙΝΟΥ (BEYOND) — ΗΜΕΡΑ</span>
+          <span class="scene-length">4/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Το κινητό δονείται — μήνυμα από την παρέα για Ίμπιζα. Η Σοφία παραγγέλνει ελληνικό καφέ αντί για latte.</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σερβιτόρος</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Κινητό</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Latte βρώμης</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Ελληνικός καφές</span>
+            <span class="tag tag-wardrobe"><span class="tag-dot"></span> Στολή σερβιτόρου</span>
+          </div>
+          <div class="scene-notes">
+            <strong>Κρίσιμη σκηνή χαρακτήρα:</strong> Η Σοφία αλλάζει από latte σε ελληνικό — σηματοδοτεί την εσωτερική της αλλαγή.
+            Custom UI μήνυμα στο κινητό (post-production).
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ΣΚΗΝΗ 10 (ΑΠΟΓΕΥΜΑ/ΝΥΧΤΑ) -->
+  <div class="day-card">
+    <div class="day-header">
+      <h3>🌙 Απόγευμα → Νύχτα · Σκηνή 10</h3>
+      <span class="day-badge">1 4/8 σελ.</span>
+      <span class="day-meta">EXT · ΝΥΧΤΑ</span>
+    </div>
+    <div class="day-body">
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">10</span>
+          <span class="scene-slugline">EXT. ΕΣΤΙΑΤΟΡΙΟ (BEYOND LUXURY) — ΝΥΧΤΑ</span>
+          <span class="scene-length">1 4/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Ρομαντικό δείπνο. Κεριά, ήχος κύματος. «Στην Παλαιόχωρα δεν λέμε ποτέ αντίο.» Τελική drone απομάκρυνση.</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Μάρκος</span>
+            <span class="tag tag-extras"><span class="tag-dot"></span> Σερβιτόροι (εθελοντές)</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Κεριά (3-5)</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Ποτήρια κρασιού</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Μπουκάλι κρασί</span>
+            <span class="tag tag-wardrobe"><span class="tag-dot"></span> Βραδινό φόρεμα Σοφίας</span>
+            <span class="tag tag-wardrobe"><span class="tag-dot"></span> Βραδινό Μάρκου</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Drone (νυχτερινή λήψη)</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Gimbal</span>
+          </div>
+          <div class="scene-notes">
+            <strong>⚠️ Closing shot:</strong> Το τελικό drone απομάκρυνσης είναι το τελευταίο πλάνο της ταινίας.
+            Νυχτερινό γύρισμα — ειδικός φωτισμός με κεριά. Το εστιατόριο πρέπει να έχει θέα στο Λιβυκό.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ΗΜΕΡΑ 2 ═══════════ -->
+<section class="section" id="day2">
+  <h2 class="section-title">Ημέρα 2</h2>
+  <p class="section-subtitle">Δευτέρα 28 Ιουλίου · Παλαιόχωρα (πόλη)</p>
+
+  <div class="day-card">
+    <div class="day-header">
+      <h3>☀️ Πρωί · Σκηνές 1α, 2, 4</h3>
+      <span class="day-badge">1 4/8 σελ.</span>
+      <span class="day-meta">EXT · ΗΜΕΡΑ</span>
+    </div>
+    <div class="day-body">
+
+      <!-- ΣΚΗΝΗ 1α -->
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">1α</span>
+          <span class="scene-slugline">EXT. ΔΙΑΦΟΡΕΣ ΤΟΠΟΘΕΣΙΕΣ — ΜΟΝΤΑΖ</span>
+          <span class="scene-length">2/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Πλάνα διαδρομής στη φύση, άφιξη transfer, Παλαιόχωρα πανζουρλισμός. Μήνυμα: «Beyond Transfer».</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-vehicle"><span class="tag-dot"></span> Luxury transfer</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Κινητό (μήνυμα)</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Αποσκευές</span>
+          </div>
+          <div class="scene-notes">
+            Το transfer όχημα χρειάζεται branding «Beyond». Custom UI μήνυμα στο κινητό. 
+            B-roll μπορεί να ενσωματωθεί εδώ.
+          </div>
+        </div>
+      </div>
+
+      <!-- ΣΚΗΝΗ 2 -->
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">2</span>
+          <span class="scene-slugline">EXT. ΚΑΦΕΝΕΙΟ «ΝΙΚΟΣ» — ΗΜΕΡΑ</span>
+          <span class="scene-length">7/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Documentary style. Η Σοφία παραγγέλνει ice latte, ο Νίκος της φέρνει ελληνικό. Το transfer φτάνει.</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Νίκος</span>
+            <span class="tag tag-extras"><span class="tag-dot"></span> Θαμώνες (εθελοντές)</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Κινητό</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Δίσκος, καφές, κουλουράκια</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Κατάλογος</span>
+            <span class="tag tag-set"><span class="tag-dot"></span> Καρέκλες, τραπέζια</span>
+            <span class="tag tag-set"><span class="tag-dot"></span> Σήμανση «ΝΙΚΟΣ»</span>
+            <span class="tag tag-vehicle"><span class="tag-dot"></span> Transfer όχημα</span>
+          </div>
+          <div class="scene-notes">
+            <strong>Documentary style:</strong> Πιθανώς handheld camera. Να προετοιμαστεί ο δίσκος με καφέ + κουλουράκια.
+            Εθελοντές κάτοικοι ως θαμώνες. Το transfer φτάνει στο background.
+          </div>
+        </div>
+      </div>
+
+      <!-- ΣΚΗΝΗ 4 -->
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">4</span>
+          <span class="scene-slugline">EXT. ΕΙΣΟΔΟΣ BEYOND LUXURY RETREAT — ΗΜΕΡΑ</span>
+          <span class="scene-length">3/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Ο Μάρκος περιμένει. Πρώτη γνωριμία. «Αυτό λέγεται Paleochora Protocol. Μην αντιστέκεσαι.»</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Μάρκος</span>
+            <span class="tag tag-set"><span class="tag-dot"></span> Είσοδος ξενοδοχείου</span>
+            <span class="tag tag-wardrobe"><span class="tag-dot"></span> Μάρκος casual chic</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ΗΜΕΡΑ 3 ═══════════ -->
+<section class="section" id="day3">
+  <h2 class="section-title">Ημέρα 3</h2>
+  <p class="section-subtitle">Τρίτη 29 Ιουλίου · Θάλασσα &amp; Παραλίες</p>
+
+  <div class="day-card">
+    <div class="day-header">
+      <h3>🌊 Πρωί · Σκηνή 5</h3>
+      <span class="day-badge">5/8 σελ.</span>
+      <span class="day-meta">EXT · ΗΜΕΡΑ</span>
+    </div>
+    <div class="day-body">
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">5</span>
+          <span class="scene-slugline">EXT. ΘΑΛΑΣΣΑ / ΣΠΗΛΙΕΣ &amp; ΚΟΚΚΙΝΗ ΑΜΜΟΣ — ΗΜΕΡΑ</span>
+          <span class="scene-length">5/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Ταχύπλοο στα ηλεκτρίκ μπλε νερά των σπηλιών. Βουτιές. Παραλία με κόκκινη άμμο. «This is better than Ibiza.»</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Μάρκος</span>
+            <span class="tag tag-vehicle"><span class="tag-dot"></span> Ταχύπλοο σκάφος</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Σωσίβια</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Μάσκες, αναπνευστήρες</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> GoPro υποβρύχια</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Drone</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Ναυαγοσώστης</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Σκάφος ασφαλείας</span>
+          </div>
+          <div class="scene-notes">
+            <strong>⚠️ Κρίσιμη ασφάλεια:</strong> Γύρισμα σε νερό και σπήλαια. Υποβρύχια GoPro (νέο μοντέλο).
+            Άδεια Λιμενικού, ναυαγοσώστης, σκάφος ασφαλείας ΑΠΑΡΑΙΤΗΤΑ.
+            Η παραλία με κόκκινη άμμο είναι προσβάσιμη μόνο με σκάφος — logistics.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <h3>🏖️ Απόγευμα · Σκηνή 5α</h3>
+      <span class="day-badge">2/8 σελ.</span>
+      <span class="day-meta">EXT · ΗΜΕΡΑ (B-Roll)</span>
+    </div>
+    <div class="day-body">
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">5α</span>
+          <span class="scene-slugline">EXT. ΠΑΡΑΛΙΕΣ — ΜΟΝΤΑΖ</span>
+          <span class="scene-length">2/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Ωδή στο Λιβυκό: υποβρύχια πλάνα, drone παρθένων παραλιών, εναλλαγές χρωμάτων νερού.</p>
+          <div class="elements">
+            <span class="tag tag-special"><span class="tag-dot"></span> Drone</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> GoPro υποβρύχια</span>
+          </div>
+          <div class="scene-notes">
+            B-roll χωρίς ηθοποιούς. Μπορεί να γυριστεί με 2nd unit.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ΗΜΕΡΑ 4 ═══════════ -->
+<section class="section" id="day4">
+  <h2 class="section-title">Ημέρα 4</h2>
+  <p class="section-subtitle">Τετάρτη 30 Ιουλίου · Βουνό &amp; Σοκάκια</p>
+
+  <div class="day-card">
+    <div class="day-header">
+      <h3>🚵 Πρωί · Σκηνή 8</h3>
+      <span class="day-badge">5/8 σελ.</span>
+      <span class="day-meta">EXT · ΗΜΕΡΑ</span>
+    </div>
+    <div class="day-body">
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">8</span>
+          <span class="scene-slugline">EXT. ΔΡΟΜΟΣ ΠΡΟΣ ΑΝΥΔΡΟΥΣ — ΗΜΕΡΑ</span>
+          <span class="scene-length">5/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Ποδήλατα στην ανηφόρα. Κοπάδι αγριοκάτσικα διασχίζει το δρόμο. Άρωμα θυμαριού, δίκταμου. Voice-over Σοφίας.</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Μάρκος</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Ποδήλατα (2)</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Κράνη</span>
+            <span class="tag tag-animal"><span class="tag-dot"></span> Αγριοκάτσικα/κατσίκια</span>
+            <span class="tag tag-greenery"><span class="tag-dot"></span> Θυμάρι, δίκταμο, φασκόμηλο</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Drone</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Follow vehicle</span>
+          </div>
+          <div class="scene-notes">
+            <strong>⚠️ Ζώα:</strong> Τα αγριοκάτσικα (κρι-κρι) είναι προστατευόμενο είδος. 
+            Εναλλακτική: εκπαιδευμένα κατσίκια ή VFX. Animal handler απαραίτητος.
+            Voice-over ηχογραφείται στο studio.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header">
+      <h3>🏘️ Απόγευμα · Σκηνή 6</h3>
+      <span class="day-badge">7/8 σελ.</span>
+      <span class="day-meta">EXT · ΑΠΟΓΕΥΜΑ → ΗΛΙΟΒΑΣΙΛΕΜΑ</span>
+    </div>
+    <div class="day-body">
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">6</span>
+          <span class="scene-slugline">EXT. ΣΟΚΑΚΙΑ ΠΑΛΑΙΟΧΩΡΑΣ — ΑΠΟΓΕΥΜΑ</span>
+          <span class="scene-length">7/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Βόλτα στα σοκάκια. Νυχτολούλουδο. Οικογένεια σε αυλή. Κυρία 1 & 2. Μιχάλης με βασιλικό. Τσικουδιά και καλιτσούνια. Κάστρο στο ηλιοβασίλεμα.</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Μάρκος</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Κυρία 1</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Κυρία 2</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Μιχάλης</span>
+            <span class="tag tag-extras"><span class="tag-dot"></span> Οικογένεια σε αυλή (εθελοντές)</span>
+            <span class="tag tag-extras"><span class="tag-dot"></span> Γυναίκες με φαγητό (εθελοντές)</span>
+            <span class="tag tag-extras"><span class="tag-dot"></span> Περαστικοί (εθελοντές)</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Κινητό</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Τσικουδιά, καλιτσούνια</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Κλωνάρι βασιλικός</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Ψάθινες καρέκλες</span>
+            <span class="tag tag-greenery"><span class="tag-dot"></span> Νυχτολούλουδο</span>
+            <span class="tag tag-wardrobe"><span class="tag-dot"></span> Παραδοσιακά ρούχα (Κυρίες, Μιχάλης)</span>
+          </div>
+          <div class="scene-notes">
+            <strong>⚠️ Χρονικό παράθυρο:</strong> Η σκηνή ξεκινά απόγευμα και καταλήγει σε ηλιοβασίλεμα στο Κάστρο — ~2 ώρες shooting window.
+            <strong>Εθελοντές:</strong> Πραγματικοί κάτοικοι Παλαιόχωρας για την οικογένεια, τις γυναίκες, τους περαστικούς.
+            Τοπικοί ηθοποιοί ή ντόπιοι για Κυρία 1, 2 και Μιχάλη.
+            <strong>Food styling:</strong> Φρεσκομαγειρεμένο φαγητό. Η τσικουδιά = prop (νερό για safety).
+            <strong>Άδεια Δήμου</strong> για γυρίσματα στα σοκάκια.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ΗΜΕΡΑ 5 ═══════════ -->
+<section class="section" id="day5">
+  <h2 class="section-title">Ημέρα 5</h2>
+  <p class="section-subtitle">Πέμπτη 31 Ιουλίου · Άλογα &amp; Σούρουπο</p>
+
+  <div class="day-card">
+    <div class="day-header">
+      <h3>🐴 Πρωί · Σκηνές 8α &amp; 9</h3>
+      <span class="day-badge">1 1/8 σελ.</span>
+      <span class="day-meta">EXT · ΑΠΟΓΕΥΜΑ → ΣΟΥΡΟΥΠΟ</span>
+    </div>
+    <div class="day-body">
+
+      <!-- ΣΚΗΝΗ 8α -->
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">8α</span>
+          <span class="scene-slugline">EXT. ΔΙΑΔΡΟΜΗ ΠΡΟΣ ΠΑΡΑΛΙΑ — ΜΟΝΤΑΖ</span>
+          <span class="scene-length">2/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Slow-motion. Ήλιος χαμηλώνει. Προετοιμασία αλόγων. Τα χέρια του Μάρκου δένουν τα ηνία. Η Σοφία χαϊδεύει το άλογο.</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Μάρκος</span>
+            <span class="tag tag-animal"><span class="tag-dot"></span> Άλογα (2)</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Ηνία, σέλες</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Slow-motion camera</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Animal handler</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ΣΚΗΝΗ 9 -->
+      <div class="scene-card">
+        <div class="scene-header">
+          <span class="scene-number">9</span>
+          <span class="scene-slugline">EXT. ΠΑΡΑΛΙΑ — ΣΟΥΡΟΥΠΟ</span>
+          <span class="scene-length">7/8</span>
+        </div>
+        <div class="scene-body">
+          <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:12px;">Άλογα στην άκρη της παραλίας, πέταλα στο νερό. Το κινητό δονείται: «100+ Notifications — ΧΑΝΕΙΣ ΤΗΝ ΠΤΗΣΗ ΣΟΥ!». Η Σοφία το απενεργοποιεί. «Μάρκο... σ' ευχαριστώ.»</p>
+          <div class="elements">
+            <span class="tag tag-cast"><span class="tag-dot"></span> Σοφία</span>
+            <span class="tag tag-cast"><span class="tag-dot"></span> Μάρκος</span>
+            <span class="tag tag-animal"><span class="tag-dot"></span> Άλογα (2)</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Κινητό (κρίσιμο)</span>
+            <span class="tag tag-prop"><span class="tag-dot"></span> Ηνία, σέλες</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> GoPro υποβρύχια</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Drone</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Gimbal</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Animal handler</span>
+            <span class="tag tag-special"><span class="tag-dot"></span> Stunt coordinator</span>
+          </div>
+          <div class="scene-notes">
+            <strong>⚠️⚠️ ΚΡΙΣΙΜΗ ΣΚΗΝΗ:</strong> Αυτή είναι η κλιμακωτή σκηνή της ταινίας.
+            <strong>Σούρουπο:</strong> Μόνο 15-20 λεπτά shooting window — προετοιμασία από νωρίς.
+            <strong>Άλογα σε νερό:</strong> Απαιτούνται εκπαιδευμένα άλογα που δεν φοβούνται τη θάλασσα.
+            <strong>Custom UI:</strong> «100+ Notifications» — η οθόνη φωτίζει το πρόσωπό της στο ημίφως (πρακτικό φως).
+            <strong>Ενδεχόμενο:</strong> Γύρισμα σε 2 απογεύματα αν χρειαστεί (γενικά πλάνα + close-ups).
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ B-ROLL ═══════════ -->
+<section class="section" id="broll">
+  <h2 class="section-title">B-Roll</h2>
+  <p class="section-subtitle">Flex ημέρες ή παράλληλα με 2nd unit</p>
+
+  <div class="day-card">
+    <div class="day-body">
+      <table class="breakdown-table">
+        <thead>
+          <tr><th>Τι</th><th>Πού</th><th>Εξοπλισμός</th><th>Σκηνές</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Εναέριες λήψεις Beyond</td>
+            <td>Beyond Luxury Retreat</td>
+            <td>Drone</td>
+            <td>3, 10</td>
+          </tr>
+          <tr>
+            <td>Παραλίες, θάλασσα</td>
+            <td>Παλαιόχωρα, Λιβυκό</td>
+            <td>Drone, GoPro</td>
+            <td>5α</td>
+          </tr>
+          <tr>
+            <td>Σοκάκια, γειτονιά</td>
+            <td>Παλαιόχωρα</td>
+            <td>Gimbal / handheld</td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td>Βουνό, φύση, βότανα</td>
+            <td>Δρόμος Ανύδρων</td>
+            <td>Drone, macro</td>
+            <td>8</td>
+          </tr>
+          <tr>
+            <td>Διαδρομή με άλογα</td>
+            <td>Παραλία, ύπαιθρος</td>
+            <td>Drone, slow-mo</td>
+            <td>8α, 9</td>
+          </tr>
+          <tr>
+            <td>Κάστρο, λιμάνι (νύχτα)</td>
+            <td>Παλαιόχωρα</td>
+            <td>Drone</td>
+            <td>6, 10</td>
+          </tr>
+          <tr>
+            <td>Πτήση / ταξίδι (stock)</td>
+            <td>—</td>
+            <td>Stock footage</td>
+            <td>1α</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CRITICAL CHECKLIST ═══════════ -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">Λίστα Κρίσιμων Αδειών &amp; Απαιτήσεων</h2>
+  <p class="section-subtitle">Προς εξασφάλιση πριν τα γυρίσματα</p>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <h4>🔴 Υψηλή Προτεραιότητα</h4>
+      <table class="breakdown-table">
+        <tr><td>Άδεια Δήμου Καντάνου-Σελίνου</td></tr>
+        <tr><td>Άδεια Beyond Luxury Retreat</td></tr>
+        <tr><td>Άδεια Λιμενικού</td></tr>
+        <tr><td>Άδεια ιδιοκτητών σκαφών</td></tr>
+        <tr><td>Animal handler / άδεια ζώων</td></tr>
+        <tr><td>Ασφάλεια θαλάσσιων γυρισμάτων</td></tr>
+        <tr><td>Ναυαγοσώστης / safety diver</td></tr>
+      </table>
+    </div>
+
+    <div class="summary-card">
+      <h4>🟡 Μεσαία Προτεραιότητα</h4>
+      <table class="breakdown-table">
+        <tr><td>Άδεια Αρχαιολογίας (Κάστρο, σπήλαια)</td></tr>
+        <tr><td>Νυχτερινή άδεια γυρισμάτων</td></tr>
+        <tr><td>Stunt coordinator (άλογα)</td></tr>
+        <tr><td>Συνεννόηση με εθελοντές κατοίκους</td></tr>
+      </table>
+    </div>
+
+    <div class="summary-card">
+      <h4>🎬 Post-Production</h4>
+      <table class="breakdown-table">
+        <tr><td>Custom UI μηνύματα κινητού (4 σκηνές)</td></tr>
+        <tr><td>Voice-over ηχογράφηση</td></tr>
+        <tr><td>Color grading (golden hour, σούρουπο, νύχτα)</td></tr>
+        <tr><td>VFX: αγριοκάτσικα (αν δεν είναι αληθινά)</td></tr>
+        <tr><td>Μοντάζ, sound design</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <img src="assets/beyond-logo.svg" alt="Beyond Luxury Retreat" style="filter: brightness(10);">
+  <p>Script Breakdown · «Το Πρωτόκολλο της Παλαιόχωρας»<br>
+  Γυρίσματα: 27–31 Ιουλίου · Παλαιόχωρα, Κρήτη<br>
+  &copy; 2026 Beyond Luxury Retreat &amp; Atheaton Media</p>
+</footer>
+
+</body>
+</html>
