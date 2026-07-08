@@ -52,12 +52,22 @@ body {
 
 .legend {
   display: flex; gap: 6px; flex-wrap: wrap;
+/* Legend bar (below main nav) */
+.legend-bar {
+  background: rgba(250,247,243,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex; justify-content: center;
 }
+.legend { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 .legend-dot {
-  display: inline-flex; align-items: center; gap: 3px;
-  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.03em;
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.03em;
   color: var(--text-light); cursor: pointer; text-decoration: none;
+  padding: 4px 10px; border-radius: 14px; transition: all 0.15s;
 }
+.legend-dot:hover { background: var(--taupe-bg); }
 .legend-dot::before {
   content: ''; width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
 }
@@ -160,6 +170,12 @@ body {
 
 <div class="topbar">
   <a href="index.html" class="topbar-home">Πρωτόκολλο Παλαιόχωρας</a>
+  <a href="script.html" style="color:var(--black);font-weight:600;">Σενάριο</a>
+  <a href="breakdown.html" class="topbar-breakdown">Breakdown</a>
+  <a href="shotlist.html" style="color:var(--text-light);text-decoration:none;font-size:0.95rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;padding:8px 16px;border-radius:22px;transition:all 0.2s;">Shot List</a>
+</div>
+
+<div class="legend-bar">
   <div class="legend">
     <a href="breakdown.html#cast" class="legend-dot cast">Cast</a>
     <a href="breakdown.html#extras" class="legend-dot extras">Extras</a>
@@ -169,8 +185,6 @@ body {
     <a href="breakdown.html#wardrobe" class="legend-dot wardrobe">Wardrobe</a>
     <a href="breakdown.html#special" class="legend-dot special">Special</a>
   </div>
-  <a href="breakdown.html" class="topbar-breakdown">Breakdown</a>
-  <a href="shotlist.html" style="color:var(--text-light);text-decoration:none;font-size:0.95rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;padding:8px 16px;border-radius:22px;transition:all 0.2s;">Shot List</a>
 </div>
 
 <div class="script-container">
