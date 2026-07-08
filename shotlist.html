@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shot List — Το Πρωτόκολλο της Παλαιόχωρας</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --taupe: #b89c8a; --taupe-dark: #9a7e6e; --taupe-light: #d4c5b9;
+  --taupe-bg: #e8ddd4; --sand: #f5ede4; --white: #ffffff; --black: #1a1a1a;
+  --text: #2d2d2d; --text-light: #6b6b6b; --border: #d9cec4; --gold: #c4a35a;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 1.04rem; font-weight: 300;
+  color: var(--text); background: var(--sand);
+  line-height: 1.6;
+}
+h1,h2,h3 { font-family: 'Outfit','Inter',sans-serif; }
+
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,237,228,0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex; align-items: center; gap: 16px;
+  overflow-x: auto;
+}
+.topbar a {
+  text-decoration: none; font-size: 0.95rem; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 8px 16px; border-radius: 22px;
+  white-space: nowrap; transition: all 0.2s; color: var(--text-light);
+}
+.topbar a:hover, .topbar a.active { color: var(--taupe-dark); background: var(--taupe-bg); }
+.topbar .home { font-weight: 600; color: var(--black); }
+
+.section { max-width: 1200px; margin: 0 auto; padding: 56px 24px; }
+.section-title { font-size: 2.1rem; font-weight: 300; color: var(--black); margin-bottom: 8px; }
+.section-subtitle { font-size: 1.1rem; color: var(--text-light); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 36px; }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 48px; }
+.stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+.stat-card .num { font-family: 'Outfit',sans-serif; font-size: 2.2rem; font-weight: 600; color: var(--black); }
+.stat-card .label { font-size: 0.85rem; color: var(--text-light); letter-spacing: 0.04em; margin-top: 4px; }
+
+/* Scene block */
+.scene-block { margin-bottom: 48px; scroll-margin-top: 100px; }
+.scene-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; background: var(--taupe-bg);
+  border-radius: 8px 8px 0 0; border: 1px solid var(--border);
+  flex-wrap: wrap; gap: 12px;
+}
+.scene-header h3 { font-size: 1.15rem; font-weight: 500; }
+.scene-header .meta { font-size: 0.85rem; color: var(--text-light); letter-spacing: 0.04em; }
+
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-top: none; border-radius: 0 0 8px 8px; }
+.shot-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 900px; background: var(--white); }
+.shot-table th {
+  text-align: left; font-weight: 500; font-size: 0.78rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text-light); padding: 10px 12px;
+  background: #faf7f3; border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.shot-table td { padding: 10px 12px; border-bottom: 1px solid #f0ebe4; vertical-align: top; }
+.shot-table tr:last-child td { border-bottom: none; }
+.shot-table tr:hover { background: #fdfaf7; }
+.shot-table .shot-id { font-weight: 600; font-family: 'Outfit',sans-serif; font-size: 0.95rem; color: var(--black); white-space: nowrap; }
+.shot-table .must { color: #b03030; font-weight: 500; font-size: 0.82rem; }
+.shot-table .nice { color: #8a7a20; font-weight: 500; font-size: 0.82rem; }
+
+/* Summary footer */
+.summary-table { width: 100%; border-collapse: collapse; font-size: 1.0rem; background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); margin-top: 32px; }
+.summary-table th { text-align: left; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-light); padding: 14px 18px; background: var(--taupe-bg); border-bottom: 1px solid var(--border); }
+.summary-table td { padding: 12px 18px; border-bottom: 1px solid #f0ebe4; }
+.summary-table tr:last-child td { border-bottom: none; }
+
+.footer { background: var(--taupe); padding: 56px 24px; text-align: center; color: var(--white); }
+.footer img { width: 48px; margin-bottom: 20px; opacity: 0.85; filter: brightness(10); }
+.footer p { font-size: 1.0rem; opacity: 0.8; }
+
+.back-top { position: fixed; bottom: 28px; right: 28px; background: var(--black); color: var(--white); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; opacity: 0.7; transition: opacity 0.2s; z-index: 50; }
+.back-top:hover { opacity: 1; }
+
+@media (max-width: 768px) {
+  .section { padding: 32px 12px; }
+  .section-title { font-size: 1.5rem; }
+  .topbar { padding: 10px 14px; gap: 6px; }
+  .topbar a { font-size: 0.78rem; padding: 6px 10px; }
+  .shot-table { font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="home">Πρωτόκολλο Παλαιόχωρας</a>
+  <a href="script.html">Σενάριο</a>
+  <a href="breakdown.html">Breakdown</a>
+  <a href="#top" class="active">Shot List</a>
+</div>
+
+<section class="section" id="top">
+  <h2 class="section-title">Shot List</h2>
+  <p class="section-subtitle">15 σκηνές · 68 πλάνα · 5 ημέρες γυρισμάτων</p>
+
+  <div class="stats">
+    <div class="stat-card"><div class="num">68</div><div class="label">Σύνολο πλάνων</div></div>
+    <div class="stat-card"><div class="num">59</div><div class="label">Must-Have (87%)</div></div>
+    <div class="stat-card"><div class="num">9</div><div class="label">Nice-to-Have (13%)</div></div>
+    <div class="stat-card"><div class="num">14</div><div class="label">Drone πλάνα</div></div>
+    <div class="stat-card"><div class="num">6</div><div class="label">GoPro υποβρύχια</div></div>
+    <div class="stat-card"><div class="num">~12h</div><div class="label">Καθαρός χρόνος</div></div>
+  </div>
+
+  <!-- ═══ ΣΚΗΝΗ 1 ═══ -->
+  <div class="scene-block" id="s1">
+    <div class="scene-header">
+      <h3>Σκηνή 1 · INT. Υπνοδωμάτιο Σοφίας (Αγγλία) · Ημέρα</h3>
+      <span class="meta">6/8 · 4 πλάνα · 50min</span>
+    </div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">1A</td><td>1</td><td>CU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Βαλίτσα, χέρια Σοφίας</td><td>Ανοιχτή βαλίτσα, ρούχα. Τα χέρια της τακτοποιούν.</td><td>MOS</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">1B</td><td>1</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Σοφία</td><td>Μονόλογος. «Το σχέδιο ήταν Ibiza...»</td><td>Boom+Lav</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">1C</td><td>2</td><td>ECU</td><td>Eye-level</td><td>Static</td><td>85mm M</td><td>Οθόνη κινητού</td><td>Group chat Ibiza. Πληκτρολογεί: «Αντέχω 2 μέρες...»</td><td>MOS</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">1D</td><td>1</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Σοφία</td><td>Συνέχεια μονολόγου. «Μια ολόκληρη σουίτα...»</td><td>Boom+Lav</td><td class="must">Must</td><td>10m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ΣΚΗΝΗ 1α ═══ -->
+  <div class="scene-block" id="s1a">
+    <div class="scene-header">
+      <h3>Σκηνή 1α · EXT. Διάφορες Τοποθεσίες · Μοντάζ</h3>
+      <span class="meta">2/8 · 4 πλάνα · 50min</span>
+    </div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">1αA</td><td>1</td><td>WS</td><td>Eye-level</td><td>Static</td><td>24mm</td><td>Αεροπλάνο</td><td>Πλάνο πτήσης (stock footage).</td><td>MOS</td><td class="nice">Nice</td><td>5m</td></tr>
+          <tr><td class="shot-id">1αB</td><td>2</td><td>WS</td><td>High (drone)</td><td>Tracking</td><td>24mm D</td><td>Φύση, δρόμος Κρήτης</td><td>Διαδρομή μέσα από βουνά.</td><td>Room</td><td class="must">Must</td><td>20m</td></tr>
+          <tr><td class="shot-id">1αC</td><td>3</td><td>WS</td><td>Eye-level</td><td>Pan</td><td>35mm</td><td>Transfer, Παλαιόχωρα</td><td>Luxury transfer αφήνει Σοφία. Πανζουρλισμός.</td><td>Boom</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">1αD</td><td>4</td><td>ECU</td><td>Eye-level</td><td>Static</td><td>85mm M</td><td>Οθόνη κινητού</td><td>Μήνυμα «Beyond Transfer: Your driver will pick you up...»</td><td>MOS</td><td class="must">Must</td><td>10m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ΣΚΗΝΗ 2 ═══ -->
+  <div class="scene-block" id="s2">
+    <div class="scene-header">
+      <h3>Σκηνή 2 · EXT. Καφενείο «Νίκος» · Ημέρα</h3>
+      <span class="meta">7/8 · 8 πλάνα · 70min</span>
+    </div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">2A</td><td>1</td><td>WS</td><td>Eye-level</td><td>Static</td><td>24mm</td><td>Καφενείο «Νίκος»</td><td>Establishing: εξωτερικό, θαμώνες, ατμόσφαιρα. Documentary style.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">2B</td><td>2</td><td>MS</td><td>Slightly high</td><td>Handheld</td><td>35mm</td><td>Σοφία</td><td>Κάθεται, κοιτάζει γύρω.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">2C</td><td>2</td><td>ECU</td><td>Eye-level</td><td>Static</td><td>85mm</td><td>Κατάλογος</td><td>Ανοίγει, κλείνει τον κατάλογο.</td><td>MOS</td><td class="nice">Nice</td><td>5m</td></tr>
+          <tr><td class="shot-id">2D</td><td>3</td><td>MCU</td><td>Eye-level</td><td>Handheld</td><td>35mm</td><td>Νίκος</td><td>Πλησιάζει με δίσκο. Πριν μιλήσει, η Σοφία παραγγέλνει.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">2E</td><td>3</td><td>CU</td><td>High angle</td><td>Static</td><td>50mm</td><td>Δίσκος</td><td>Ελληνικός καφές + κουλουράκια στο τραπέζι.</td><td>MOS</td><td class="nice">Nice</td><td>5m</td></tr>
+          <tr><td class="shot-id">2F</td><td>3</td><td>MS</td><td>Eye-level</td><td>Handheld</td><td>35mm</td><td>Σοφία, Νίκος</td><td>Διάλογος. «Σε θυμάμαι από 5 χρονών...»</td><td>Boom</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">2G</td><td>4</td><td>WS</td><td>Eye-level</td><td>Pan</td><td>35mm</td><td>Transfer όχημα</td><td>Σταματάει έξω από το καφενείο.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">2H</td><td>4</td><td>MS</td><td>Eye-level</td><td>Handheld</td><td>35mm</td><td>Σοφία</td><td>Επιβιβάζεται άμεσα.</td><td>Boom</td><td class="must">Must</td><td>5m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ΣΚΗΝΗ 3 ═══ -->
+  <div class="scene-block" id="s3">
+    <div class="scene-header">
+      <h3>Σκηνή 3 · INT/EXT. Beyond Luxury Retreat · Απόγευμα</h3>
+      <span class="meta">1 0/8 · 7 πλάνα · 80min</span>
+    </div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">3A</td><td>1</td><td>EWS</td><td>High (drone)</td><td>Tracking</td><td>24mm D</td><td>Beyond Luxury Retreat</td><td>Εναέρια λήψη, χρυσαφένιο φως. Αποκάλυψη κτιρίου.</td><td>MOS</td><td class="must">Must</td><td>20m</td></tr>
+          <tr><td class="shot-id">3B</td><td>2</td><td>WS</td><td>Eye-level</td><td>Slow dolly in</td><td>24mm</td><td>Main lobby</td><td>Ευρυγώνια, θάλασσα αριστερά, minimal σχεδιασμός.</td><td>Room</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">3C</td><td>2</td><td>MS</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Πισίνα, τοίχος</td><td>Αντανακλάσεις νερού στους τοίχους.</td><td>MOS</td><td class="nice">Nice</td><td>10m</td></tr>
+          <tr><td class="shot-id">3D</td><td>3</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Σοφία</td><td>Στη βεράντα, απολαμβάνει latte, κοιτάζει Λιβυκό.</td><td>Boom+Lav</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">3E</td><td>3</td><td>WS</td><td>Eye-level</td><td>Static</td><td>24mm</td><td>Θέα Λιβυκό</td><td>POV Σοφίας — η θάλασσα από τη βεράντα.</td><td>MOS</td><td class="must">Must</td><td>5m</td></tr>
+          <tr><td class="shot-id">3F</td><td>4</td><td>CU</td><td>High angle</td><td>Static</td><td>50mm</td><td>Σημείωμα γονιών</td><td>«Σοφία μας, καλώς όρισες...» Διαβάζει.</td><td>MOS</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">3G</td><td>4</td><td>ECU</td><td>Eye-level</td><td>Static</td><td>85mm M</td><td>Οθόνη κινητού</td><td>Πληκτρολογεί: «Ok, fine. The hotel is 10/10.»</td><td>MOS</td><td class="must">Must</td><td>10m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ΣΚΗΝΗ 3α ═══ -->
+  <div class="scene-block" id="s3a">
+    <div class="scene-header">
+      <h3>Σκηνή 3α · INT/EXT. Beyond Luxury Retreat · Μοντάζ</h3>
+      <span class="meta">3/8 · 3 πλάνα · 30min</span>
+    </div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">3αA</td><td>1</td><td>ECU</td><td>High angle</td><td>Slow pan</td><td>85mm M</td><td>Χέρι, λευκά σεντόνια</td><td>Το χέρι της Σοφίας γλιστράει αργά στα σεντόνια.</td><td>Room</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">3αB</td><td>2</td><td>CU</td><td>Low angle</td><td>Static</td><td>50mm</td><td>Ιδιωτική πισίνα</td><td>Νερό που λαμπιρίζει. Ripples.</td><td>Νερό</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">3αC</td><td>3</td><td>MCU</td><td>Eye-level</td><td>Slow dolly in</td><td>50mm</td><td>Σοφία</td><td>Μάτια κλειστά, ήλιος στο πρόσωπο. Γαλήνη.</td><td>Αέρας</td><td class="must">Must</td><td>10m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ΣΚΗΝΗ 4 ═══ -->
+  <div class="scene-block" id="s4">
+    <div class="scene-header">
+      <h3>Σκηνή 4 · EXT. Είσοδος Beyond Luxury Retreat · Ημέρα</h3>
+      <span class="meta">3/8 · 4 πλάνα · 30min</span>
+    </div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">4A</td><td>1</td><td>WS</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Είσοδος Beyond, Μάρκος</td><td>Ο Μάρκος περιμένει. Casual chic.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">4B</td><td>1</td><td>MCU</td><td>Eye-level</td><td>Handheld</td><td>35mm</td><td>Σοφία</td><td>Πλησιάζει την είσοδο. Εντυπωσιάζεται αλλά δεν το δείχνει.</td><td>Boom</td><td class="must">Must</td><td>5m</td></tr>
+          <tr><td class="shot-id">4C</td><td>1</td><td>MS</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Σοφία, Μάρκος</td><td>«Λοιπόν; Εσύ πρέπει να είσαι η Σοφία...»</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">4D</td><td>1</td><td>CU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Μάρκος</td><td>«Αυτό λέγεται Paleochora Protocol.»</td><td>Boom</td><td class="must">Must</td><td>5m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ΣΚΗΝΗ 5 ═══ -->
+  <div class="scene-block" id="s5">
+    <div class="scene-header">
+      <h3>Σκηνή 5 · EXT. Θάλασσα / Σπηλιές & Κόκκινη Άμμος · Ημέρα</h3>
+      <span class="meta">5/8 · 7 πλάνα · 85min</span>
+    </div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">5A</td><td>1</td><td>WS</td><td>High (drone)</td><td>Tracking</td><td>24mm D</td><td>Ταχύπλοο, θάλασσα</td><td>Το σκάφος σκίζει τα νερά.</td><td>MOS</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">5B</td><td>1</td><td>WS</td><td>Low (POV)</td><td>Static</td><td>24mm G</td><td>Πλώρη, νερά</td><td>POV από το σκάφος — ταχύτητα, αφρός.</td><td>Φυσικός</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">5C</td><td>2</td><td>WS</td><td>Eye-level</td><td>Slow pan</td><td>24mm G</td><td>Σπηλιές</td><td>Μπαίνουν στις σπηλιές. Ηλεκτρίκ μπλε νερά.</td><td>Φυσικός</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">5D</td><td>3</td><td>WS</td><td>POV (υποβρ.)</td><td>Tracking</td><td>24mm G</td><td>Υποβρύχιο</td><td>Βουτιές, φυσαλίδες, ηλιαχτίδες στο νερό.</td><td>Φυσικός</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">5E</td><td>4</td><td>EWS</td><td>High (drone)</td><td>Reveal</td><td>24mm D</td><td>Παραλία κόκκινη άμμος</td><td>Αποκάλυψη απομονωμένης παραλίας.</td><td>MOS</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">5F</td><td>5</td><td>MS</td><td>Eye-level</td><td>Handheld</td><td>35mm</td><td>Σοφία, Μάρκος</td><td>Στην παραλία. Αντίθεση κόκκινου/μπλε.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">5G</td><td>5</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Σοφία</td><td>«This is better than my Ibiza plans.»</td><td>Lav</td><td class="must">Must</td><td>5m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ΣΚΗΝΗ 5α ═══ -->
+  <div class="scene-block" id="s5a">
+    <div class="scene-header">
+      <h3>Σκηνή 5α · EXT. Παραλίες · Μοντάζ</h3>
+      <span class="meta">2/8 · 2 πλάνα · 45min</span>
+    </div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">5αA</td><td>1</td><td>CU-WS</td><td>POV (υποβρ.)</td><td>Slow pan</td><td>24mm G</td><td>Νερό, βυθός</td><td>Εναλλαγές χρωμάτων — τυρκουάζ, βαθύ μπλε, χρυσό.</td><td>MOS</td><td class="must">Must</td><td>20m</td></tr>
+          <tr><td class="shot-id">5αB</td><td>2</td><td>EWS</td><td>High (drone)</td><td>Tracking</td><td>24mm D</td><td>Παρθένες παραλίες</td><td>Σειρά από εναέριες λήψεις κατά μήκος της ακτής.</td><td>MOS</td><td class="must">Must</td><td>25m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ΣΚΗΝΗ 6 ═══ -->
+  <div class="scene-block" id="s6">
+    <div class="scene-header">
+      <h3>Σκηνή 6 · EXT. Σοκάκια Παλαιόχωρας · Απόγευμα</h3>
+      <span class="meta">7/8 · 10 πλάνα · 115min</span>
+    </div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">6A</td><td>1</td><td>MS</td><td>Eye-level</td><td>Tracking</td><td>35mm</td><td>Σοφία, Μάρκος</td><td>Βόλτα στα σοκάκια. Από πίσω, βλέπουμε τη γειτονιά.</td><td>Boom</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">6B</td><td>1</td><td>CU</td><td>Eye-level</td><td>Static</td><td>85mm</td><td>Νυχτολούλουδο</td><td>Η Σοφία σκύβει, το μυρίζει.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">6C</td><td>2</td><td>MS</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Οικογένεια σε αυλή</td><td>Βραδινό, γυναίκες φέρνουν φαγητό. Αυθεντική στιγμή.</td><td>Boom</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">6D</td><td>3</td><td>MS</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Κυρία 1, Κυρία 2</td><td>Σε ψάθινες καρέκλες έξω από σπίτι.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">6E</td><td>3</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Κυρία 1, Μάρκος</td><td>«Μάρκο! Ποιανού είναι η κοπελιά;»</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">6F</td><td>4</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Μιχάλης</td><td>Πετάγεται από την ταβέρνα. Στρίβει μουστάκι, βάζει βασιλικό.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">6G</td><td>5</td><td>CU</td><td>High angle</td><td>Static</td><td>85mm</td><td>Τσικουδιά, καλιτσούνια</td><td>Το κέρασμα στο τραπέζι.</td><td>MOS</td><td class="nice">Nice</td><td>5m</td></tr>
+          <tr><td class="shot-id">6H</td><td>5</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Σοφία</td><td>Πίνει τσικουδιά μονορούφι. Γίνεται κατακόκκινη.</td><td>Lav</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">6I</td><td>6</td><td>WS</td><td>Eye-level</td><td>Slow dolly</td><td>35mm</td><td>Σοφία, Μάρκος, Κάστρο</td><td>Συνεχίζουν προς Κάστρο. Ο ήλιος πέφτει.</td><td>Boom</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">6J</td><td>7</td><td>EWS</td><td>High (drone)</td><td>Orbit</td><td>24mm D</td><td>Κάστρο, ηλιοβασίλεμα</td><td>Το Κάστρο στη χρυσή ώρα. Οι δυο τους μικροί στο κάδρο.</td><td>MOS</td><td class="must">Must</td><td>15m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ΣΚΗΝΕΣ 6α–10 με συντομία λόγω μήκους ═══ -->
+  <div class="scene-block" id="s6a">
+    <div class="scene-header"><h3>Σκηνή 6α · INT. Σουίτα Beyond · Πρωί</h3><span class="meta">1/8 · 2 πλάνα · 20min</span></div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">6αA</td><td>1</td><td>WS</td><td>Eye-level</td><td>Slow dolly in</td><td>35mm</td><td>Κρεβάτι, κουρτίνες</td><td>Φως τρυπώνει ανάμεσα από κουρτίνες. Σεντόνια.</td><td>Room</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">6αB</td><td>1</td><td>MCU</td><td>High angle</td><td>Slow dolly in</td><td>50mm</td><td>Σοφία</td><td>Ξυπνάει αργά. Γαλήνη.</td><td>Φυσικός</td><td class="must">Must</td><td>10m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="scene-block" id="s7">
+    <div class="scene-header"><h3>Σκηνή 7 · EXT. Βεράντα Πρωινού (Beyond) · Ημέρα</h3><span class="meta">4/8 · 5 πλάνα · 40min</span></div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">7A</td><td>1</td><td>MS</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Σοφία</td><td>Κάθεται στο τραπέζι, πρωινό φως.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">7B</td><td>1</td><td>ECU</td><td>Eye-level</td><td>Static</td><td>85mm M</td><td>Οθόνη κινητού</td><td>Δονείται. «Babe, η πτήση σου για Ίμπιζα είναι αύριο!»</td><td>MOS</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">7C</td><td>2</td><td>MS</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Σερβιτόρος</td><td>Πλησιάζει με δίσκο.</td><td>Boom</td><td class="must">Must</td><td>5m</td></tr>
+          <tr><td class="shot-id">7D</td><td>2</td><td>CU</td><td>High angle</td><td>Static</td><td>50mm</td><td>Δίσκος, latte</td><td>«Το latte σας με γάλα βρώμης.»</td><td>Boom</td><td class="must">Must</td><td>5m</td></tr>
+          <tr><td class="shot-id">7E</td><td>1</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Σοφία</td><td>Γυρνάει κινητό μπρούμυτα. «Όχι... σήμερα θα ήθελα έναν ελληνικό.»</td><td>Lav</td><td class="must">Must</td><td>10m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="scene-block" id="s8">
+    <div class="scene-header"><h3>Σκηνή 8 · EXT. Δρόμος προς Ανύδρους · Ημέρα</h3><span class="meta">5/8 · 7 πλάνα · 80min</span></div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">8A</td><td>1</td><td>WS</td><td>High (drone)</td><td>Tracking</td><td>24mm D</td><td>Σοφία, Μάρκος, ποδήλατα</td><td>Ποδήλατα στην ανηφόρα. Τοπίο, βράχια.</td><td>MOS</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">8B</td><td>2</td><td>MS</td><td>Eye-level</td><td>Tracking (vehicle)</td><td>35mm</td><td>Σοφία, Μάρκος</td><td>Παράλληλο tracking. Ιδρώτας, προσπάθεια.</td><td>Boom</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">8C</td><td>3</td><td>WS</td><td>Eye-level</td><td>Pan</td><td>50mm</td><td>Αγριοκάτσικα</td><td>Κοπάδι διασχίζει δρόμο. Κουδούνια.</td><td>Boom</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">8D</td><td>3</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Σοφία</td><td>Σταματάει ποδήλατο. Εντυπωσιασμένη.</td><td>Boom</td><td class="must">Must</td><td>5m</td></tr>
+          <tr><td class="shot-id">8E</td><td>4</td><td>CU</td><td>High angle</td><td>Static</td><td>85mm M</td><td>Θυμάρι, δίκταμο, φασκόμηλο</td><td>Κοντινά στα βότανα. Χρώμα, υφή.</td><td>MOS</td><td class="nice">Nice</td><td>10m</td></tr>
+          <tr><td class="shot-id">8F</td><td>4</td><td>CU</td><td>Eye-level</td><td>Static</td><td>85mm</td><td>Σοφία</td><td>Κλείνει μάτια. Εισπνέει. «Αυτή η μυρωδιά...»</td><td>Lav</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">8G</td><td>5</td><td>EWS</td><td>High (drone)</td><td>Slow orbit</td><td>24mm D</td><td>Θέα Λιβυκό</td><td>Το μπλε της θάλασσας απλώνεται κάτω από τα πόδια τους.</td><td>MOS</td><td class="must">Must</td><td>10m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="scene-block" id="s8a">
+    <div class="scene-header"><h3>Σκηνή 8α · EXT. Διαδρομή προς Παραλία · Μοντάζ</h3><span class="meta">2/8 · 3 πλάνα · 30min</span></div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">8αA</td><td>1</td><td>WS</td><td>Eye-level</td><td>Static (slow-mo)</td><td>50mm</td><td>Τοπίο, ήλιος</td><td>Ο ήλιος χαμηλώνει.</td><td>MOS</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">8αB</td><td>2</td><td>CU</td><td>Eye-level</td><td>Static (slow-mo)</td><td>85mm</td><td>Χέρια Μάρκου</td><td>Δένουν τα ηνία. Λεπτομέρεια δέρματος/σχοινιού.</td><td>MOS</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">8αC</td><td>2</td><td>CU</td><td>Eye-level</td><td>Static (slow-mo)</td><td>85mm</td><td>Σοφία, άλογο</td><td>Χαϊδεύει τον λαιμό του αλόγου. Τρυφερότητα.</td><td>Άλογο</td><td class="must">Must</td><td>10m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="scene-block" id="s9">
+    <div class="scene-header"><h3>Σκηνή 9 · EXT. Παραλία · Σούρουπο ⚡</h3><span class="meta">7/8 · 10 πλάνα · 95min · 15-20min window!</span></div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">9A</td><td>1</td><td>EWS</td><td>High (drone)</td><td>Slow tracking</td><td>24mm D</td><td>Άλογα, παραλία, σούρουπο</td><td>Χρώματα φωτιάς στον ορίζοντα.</td><td>MOS</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">9B</td><td>2</td><td>Low</td><td>Low (νερό)</td><td>Static (slow-mo)</td><td>24mm G</td><td>Πέταλα αλόγων</td><td>Πλατσουρίζουν στο νερό.</td><td>Νερό</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">9C</td><td>3</td><td>MS</td><td>Eye-level</td><td>Tracking (gimbal)</td><td>35mm</td><td>Σοφία, Μάρκος</td><td>Πάνω στα άλογα, παράλληλα.</td><td>Boom+Lav</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">9D</td><td>3</td><td>CU</td><td>Eye-level</td><td>Static</td><td>85mm</td><td>Κινητό στην τσάντα</td><td>Δονείται επίμονα.</td><td>MOS</td><td class="must">Must</td><td>5m</td></tr>
+          <tr><td class="shot-id">9E</td><td>3</td><td>ECU</td><td>Eye-level</td><td>Static</td><td>85mm M</td><td>Οθόνη κινητού</td><td>«100+ Notifications», «ΧΑΝΕΙΣ ΤΗΝ ΠΤΗΣΗ!»</td><td>MOS</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">9F</td><td>3</td><td>CU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Σοφία</td><td>Πρόσωπο φωτίζεται από οθόνη στο ημίφως. Κοιτάζει οθόνη, μετά ορίζοντα.</td><td>Lav</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">9G</td><td>3</td><td>ECU</td><td>Eye-level</td><td>Static</td><td>85mm M</td><td>Δάχτυλο, κουμπί</td><td>Πατάει power off. Οθόνη μαυρίζει.</td><td>MOS</td><td class="must">Must</td><td>5m</td></tr>
+          <tr><td class="shot-id">9H</td><td>4</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Σοφία</td><td>«Μάρκο... σ' ευχαριστώ. Για όλα.»</td><td>Lav</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">9I</td><td>4</td><td>MS</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Σοφία, Μάρκος</td><td>Διάλογος. «Σου χρωστάω τραπέζι...»</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">9J</td><td>5</td><td>EWS</td><td>High (drone)</td><td>Slow pull-back</td><td>24mm D</td><td>Άλογα, παραλία, σούρουπο</td><td>Ευρυγώνιο κλείσιμο σκηνής.</td><td>MOS</td><td class="nice">Nice</td><td>10m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="scene-block" id="s10">
+    <div class="scene-header"><h3>Σκηνή 10 · EXT. Εστιατόριο (Beyond Luxury) · Νύχτα</h3><span class="meta">1 4/8 · 8 πλάνα · 85min</span></div>
+    <div class="table-wrap">
+      <table class="shot-table">
+        <thead><tr><th>Shot</th><th>Setup</th><th>Framing</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Subject</th><th>Description</th><th>Audio</th><th>Prio</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td class="shot-id">10A</td><td>1</td><td>WS</td><td>Eye-level</td><td>Slow dolly in</td><td>24mm</td><td>Εστιατόριο, κεριά, θέα</td><td>Establishing. Μόνο κεριά, θάλασσα, φώτα λιμανιού.</td><td>Boom</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">10B</td><td>2</td><td>MS (OTS)</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Σοφία, Μάρκος</td><td>POV πάνω από ώμο Μάρκου προς Σοφία.</td><td>Boom</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">10C</td><td>2</td><td>CU</td><td>Eye-level</td><td>Static</td><td>85mm</td><td>Κεριά</td><td>Φλόγα που τρεμοπαίζει.</td><td>MOS</td><td class="nice">Nice</td><td>5m</td></tr>
+          <tr><td class="shot-id">10D</td><td>2</td><td>CU</td><td>Eye-level</td><td>Static</td><td>85mm</td><td>Ποτήρια κρασιού</td><td>Τσουγκρίζουν.</td><td>Boom</td><td class="nice">Nice</td><td>5m</td></tr>
+          <tr><td class="shot-id">10E</td><td>2</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>35mm</td><td>Σοφία, Μάρκος</td><td>Διάλογος. «Πώς άντεξες δύο μέρες εδώ;»</td><td>Boom</td><td class="must">Must</td><td>15m</td></tr>
+          <tr><td class="shot-id">10F</td><td>2</td><td>CU</td><td>High angle</td><td>Static</td><td>85mm</td><td>Χέρι Μάρκου, χέρι Σοφίας</td><td>Πιάνει το χέρι της. Σιωπή.</td><td>MOS</td><td class="must">Must</td><td>5m</td></tr>
+          <tr><td class="shot-id">10G</td><td>3</td><td>MCU</td><td>Eye-level</td><td>Static</td><td>50mm</td><td>Σοφία</td><td>«Ναι... ακριβώς τώρα ξέρω πού είναι.»</td><td>Lav</td><td class="must">Must</td><td>10m</td></tr>
+          <tr><td class="shot-id">10H</td><td>4</td><td>EWS</td><td>High (drone)</td><td>Slow pull-back</td><td>24mm D</td><td>Beyond, Παλαιόχωρα, ουρανός</td><td>CLOSING SHOT. Αργή απομάκρυνση.</td><td>MOS</td><td class="must">Must</td><td>20m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══ ΣΥΝΟΨΗ ═══ -->
+<section class="section" style="padding-top: 0;">
+  <h2 class="section-title">Ανάλυση ανά Framing & Εξοπλισμό</h2>
+  <p class="section-subtitle">68 πλάνα συνολικά</p>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+    <div>
+      <table class="summary-table">
+        <thead><tr><th>Framing</th><th>Πλάνα</th></tr></thead>
+        <tbody>
+          <tr><td>EWS (Extreme Wide)</td><td>7</td></tr>
+          <tr><td>WS (Wide)</td><td>14</td></tr>
+          <tr><td>MS (Medium)</td><td>14</td></tr>
+          <tr><td>MCU (Medium Close-Up)</td><td>13</td></tr>
+          <tr><td>CU (Close-Up)</td><td>12</td></tr>
+          <tr><td>ECU (Extreme Close-Up)</td><td>8</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table class="summary-table">
+        <thead><tr><th>Εξοπλισμός</th><th>Πλάνα</th></tr></thead>
+        <tbody>
+          <tr><td>Drone</td><td>14</td></tr>
+          <tr><td>GoPro υποβρύχια</td><td>6</td></tr>
+          <tr><td>Slow-motion</td><td>4</td></tr>
+          <tr><td>Handheld (documentary)</td><td>5</td></tr>
+          <tr><td>Gimbal / Steadicam</td><td>7</td></tr>
+          <tr><td>Static (tripod)</td><td>32</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <table class="summary-table">
+      <thead><tr><th>Σκηνή</th><th>Πλάνα</th><th>Χρόνος</th><th>Κρίσιμη σημείωση</th></tr></thead>
+      <tbody>
+        <tr><td>1 — Υπνοδωμάτιο (INT)</td><td>4</td><td>50m</td><td>Μονόλογος, ECU κινητό</td></tr>
+        <tr><td>1α — Μοντάζ άφιξης</td><td>4</td><td>50m</td><td>Stock + drone</td></tr>
+        <tr><td>2 — Καφενείο «Νίκος»</td><td>8</td><td>70m</td><td>Documentary handheld</td></tr>
+        <tr><td>3 — Beyond (απόγευμα)</td><td>7</td><td>80m</td><td>Golden hour drone</td></tr>
+        <tr><td>3α — Μοντάζ αποσυμπίεσης</td><td>3</td><td>30m</td><td>Μόνο φυσικοί ήχοι</td></tr>
+        <tr><td>4 — Είσοδος Beyond</td><td>4</td><td>30m</td><td>Γνωριμία Μάρκου</td></tr>
+        <tr><td>5 — Θάλασσα / Σπηλιές</td><td>7</td><td>85m</td><td>⏳ Καιρός, logistics σκάφους</td></tr>
+        <tr><td>5α — Παραλίες B-Roll</td><td>2</td><td>45m</td><td>2nd unit</td></tr>
+        <tr><td>6 — Σοκάκια (απόγευμα)</td><td>10</td><td>115m</td><td>⏳ Ηλιοβασίλεμα στο Κάστρο</td></tr>
+        <tr><td>6α — Σουίτα (πρωί)</td><td>2</td><td>20m</td><td>Transition</td></tr>
+        <tr><td>7 — Βεράντα πρωινού</td><td>5</td><td>40m</td><td>Κρίσιμη: ελληνικός vs latte</td></tr>
+        <tr><td>8 — Δρόμος Ανύδρων</td><td>7</td><td>80m</td><td>Follow vehicle, κατσίκια</td></tr>
+        <tr><td>8α — Διαδρομή άλογα</td><td>3</td><td>30m</td><td>Slow-mo</td></tr>
+        <tr><td>9 — Παραλία (σούρουπο)</td><td>10</td><td>95m</td><td>⚡ 15-20min WINDOW</td></tr>
+        <tr><td>10 — Εστιατόριο (νύχτα)</td><td>8</td><td>85m</td><td>Closing drone shot</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="footer">
+  <img src="assets/beyond-logo.svg" alt="Beyond Luxury Retreat">
+  <p>Shot List · «Το Πρωτόκολλο της Παλαιόχωρας»<br>
+  Γυρίσματα: 27–31 Ιουλίου · Παλαιόχωρα, Κρήτη<br>
+  &copy; 2026 Beyond Luxury Retreat &amp; Atheaton Media</p>
+</footer>
+
+<a href="#top" class="back-top" title="Top">↑</a>
+
+</body>
+</html>
