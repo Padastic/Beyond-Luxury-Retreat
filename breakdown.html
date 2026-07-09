@@ -27,25 +27,78 @@ body {
 }
 h1,h2,h3,h4 { font-family: 'Outfit','Inter',sans-serif; }
 
+
+/* ═══ MODERN NAVIGATION — Glassmorphism ═══ */
 .topbar {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(245,237,228,0.94);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 24px;
-  display: flex; align-items: center; gap: 16px;
-  overflow-x: auto;
+  background: rgba(245, 237, 228, 0.82);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid rgba(184, 156, 138, 0.15);
+  padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; overflow-x: auto;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
 }
-.topbar a {
-  text-decoration: none; font-size: 0.95rem; font-weight: 500;
-  letter-spacing: 0.05em; text-transform: uppercase;
-  padding: 8px 16px; border-radius: 22px;
-  white-space: nowrap; transition: all 0.2s; color: var(--text-light);
+.topbar-brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; white-space: nowrap;
+  flex-shrink: 0;
 }
-.topbar a:hover, .topbar a.active { color: var(--taupe-dark); background: var(--taupe-bg); }
-.topbar .home { font-weight: 600; color: var(--black); }
-
-.section { max-width: 1100px; margin: 0 auto; padding: 72px 24px; }
+.topbar-brand .icon { font-size: 1.3rem; }
+.topbar-brand .title {
+  font-family: 'Outfit', sans-serif; font-size: 1.05rem;
+  font-weight: 500; color: var(--black);
+  letter-spacing: -0.01em;
+}
+.topbar-nav {
+  display: flex; align-items: center; gap: 4px;
+  flex-wrap: nowrap;
+}
+.topbar-nav a {
+  text-decoration: none; font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 10px 14px; border-radius: 8px;
+  white-space: nowrap; transition: all 0.22s ease;
+  color: var(--text-light); position: relative;
+  display: flex; align-items: center; gap: 6px;
+}
+.topbar-nav a .dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--text-light); opacity: 0;
+  transition: opacity 0.2s, background 0.2s;
+}
+.topbar-nav a:hover { color: var(--black); background: rgba(184,156,138,0.10); }
+.topbar-nav a:hover .dot { opacity: 0.5; }
+.topbar-nav a.active {
+  color: var(--taupe-dark); background: var(--taupe-bg);
+  font-weight: 600;
+}
+.topbar-nav a.active .dot { opacity: 1; background: var(--taupe-dark); }
+.topbar-nav a::after {
+  content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 0; height: 2px; background: var(--taupe-dark);
+  border-radius: 2px; transition: width 0.22s ease;
+}
+.topbar-nav a.active::after { width: 60%; }
+.topbar-nav a:hover::after { width: 40%; }
+.topbar-actions {
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+.topbar-actions .dept-hint {
+  font-size: 0.68rem; color: var(--text-light);
+  letter-spacing: 0.05em; opacity: 0.6;
+  white-space: nowrap;
+}
+/* Mobile */
+@media (max-width: 768px) {
+  .topbar { padding: 10px 14px; gap: 6px; }
+  .topbar-brand .title { font-size: 0.9rem; }
+  .topbar-nav a { font-size: 0.7rem; padding: 8px 10px; gap: 3px; }
+  .topbar-actions { display: none; }
+  .topbar-nav a .dot { display: none; }
+}.section { max-width: 1100px; margin: 0 auto; padding: 72px 24px; }
 .section-title { font-size: 2.1rem; font-weight: 300; color: var(--black); margin-bottom: 8px; }
 .section-subtitle { font-size: 1.1rem; color: var(--text-light); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 44px; }
 
@@ -122,20 +175,20 @@ h1,h2,h3,h4 { font-family: 'Outfit','Inter',sans-serif; }
 <body>
 
 <div class="topbar">
-  <a href="index.html" class="home">Πρωτόκολλο Παλαιόχωρας</a>
-  <a href="script.html">Σενάριο</a>
-  <a href="breakdown.html">Breakdown</a>
-  <a href="shotlist.html">Shot List</a>
-  <a href="#summary">Σύνοψη</a>
-  <a href="locations.html">Locations</a>
-  <a href="#schedule">Πρόγραμμα</a>
-  <a href="#cast">Cast</a>
-  <a href="#extras">Extras</a>
-  <a href="#props">Props</a>
-  <a href="#set">Set</a>
-  <a href="#vehicles">Vehicles</a>
-  <a href="#wardrobe">Wardrobe</a>
-  <a href="#special">Special</a>
+  <a href="index.html" class="topbar-brand">
+    <span class="icon">🎬</span>
+    <span class="title">Πρωτόκολλο Παλαιόχωρας</span>
+  </a>
+  <nav class="topbar-nav">
+    <a href="script.html"><span class="dot"></span>📜 Σενάριο</a>
+    <a href="shotlist.html"><span class="dot"></span>🎯 Shot List</a>
+    <a href="breakdown.html" class="active"><span class="dot"></span>📋 Breakdown</a>
+    <a href="storyboard.html"><span class="dot"></span>🎬 Storyboard</a>
+    <a href="locations.html"><span class="dot"></span>📍 Locations</a>
+  </nav>
+  <div class="topbar-actions">
+    <span class="dept-hint">Production Bible</span>
+  </div>
 </div>
 
 <!-- ═══ ΣΥΝΟΨΗ ═══ -->

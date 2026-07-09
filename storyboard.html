@@ -30,18 +30,26 @@
 30|.footer{background:var(--taupe);padding:56px 24px;text-align:center;color:var(--white)}
 31|.footer img{width:48px;margin-bottom:20px;opacity:0.85;filter:brightness(10)}
 32|.footer p{font-size:1.0rem;opacity:0.8}
-33|@media(max-width:768px){.section{padding:32px 14px}.topbar{padding:10px 14px;gap:6px}.topbar a{font-size:0.78rem;padding:6px 10px}.shot-grid{grid-template-columns:1fr}}
+33|@media(max-width:768px){.section{padding:32px 14px}.shot-grid{grid-template-columns:1fr}}
 34|</style>
 35|</head>
 36|<body>
 37|<div class="topbar">
-38|  <a href="index.html" class="home">Πρωτόκολλο Παλαιόχωρας</a>
-39|  <a href="script.html">Σενάριο</a>
-40|  <a href="breakdown.html">Breakdown</a>
-41|  <a href="shotlist.html">Shot List</a>
-42|  <a href="locations.html">Locations</a>
-43|  <a href="storyboard.html" class="active">Storyboard</a>
-44|</div>
+  <a href="index.html" class="topbar-brand">
+    <span class="icon">🎬</span>
+    <span class="title">Πρωτόκολλο Παλαιόχωρας</span>
+  </a>
+  <nav class="topbar-nav">
+    <a href="script.html"><span class="dot"></span>📜 Σενάριο</a>
+    <a href="shotlist.html"><span class="dot"></span>🎯 Shot List</a>
+    <a href="breakdown.html"><span class="dot"></span>📋 Breakdown</a>
+    <a href="storyboard.html" class="active"><span class="dot"></span>🎬 Storyboard</a>
+    <a href="locations.html"><span class="dot"></span>📍 Locations</a>
+  </nav>
+  <div class="topbar-actions">
+    <span class="dept-hint">Production Bible</span>
+  </div>
+</div>
 45|<section class="section"><div class="scene-group">
   <div class="scene-title">Σκηνή 1 — Υπνοδωμάτιο Σοφίας, Αγγλία <span class="scene-count">4 πλάνα</span></div>
   <div class="shot-grid">
