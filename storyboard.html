@@ -5,6 +5,7 @@
 5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
 6|<title>Storyboard — Το Πρωτόκολλο της Παλαιόχωρας</title>
 7|<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/phosphor-icons@1.4.2/src/css/phosphor.min.css">
 8|<style>
 9|:root { --taupe:#b89c8a; --taupe-dark:#9a7e6e; --taupe-bg:#e8ddd4; --sand:#f5ede4; --white:#fff; --black:#1a1a1a; --text:#2d2d2d; --text-light:#6b6b6b; --border:#d9cec4; }
 10|*{margin:0;padding:0;box-sizing:border-box}
@@ -30,21 +31,21 @@
 30|.footer{background:var(--taupe);padding:56px 24px;text-align:center;color:var(--white)}
 31|.footer img{width:48px;margin-bottom:20px;opacity:0.85;filter:brightness(10)}
 32|.footer p{font-size:1.0rem;opacity:0.8}
-33|@media(max-width:768px){.section{padding:32px 14px}.shot-grid{grid-template-columns:1fr}}
+33|@media(max-width:768px){.section{padding:32px 14px}.topbar{padding:10px 14px;gap:6px}.topbar-brand .title{font-size:0.9rem}.topbar-nav a{font-size:0.7rem;padding:8px 10px}.topbar-actions{display:none}.shot-grid{grid-template-columns:1fr}}
 34|</style>
 35|</head>
 36|<body>
 37|<div class="topbar">
   <a href="index.html" class="topbar-brand">
-    <span class="icon">🎬</span>
+    <i class="ph ph-clapperboard icon"></i>
     <span class="title">Πρωτόκολλο Παλαιόχωρας</span>
   </a>
   <nav class="topbar-nav">
-    <a href="script.html"><span class="dot"></span>📜 Σενάριο</a>
-    <a href="shotlist.html"><span class="dot"></span>🎯 Shot List</a>
-    <a href="breakdown.html"><span class="dot"></span>📋 Breakdown</a>
-    <a href="storyboard.html" class="active"><span class="dot"></span>🎬 Storyboard</a>
-    <a href="locations.html"><span class="dot"></span>📍 Locations</a>
+    <a href="script.html"><i class="ph ph-article"></i> Σενάριο</a>
+    <a href="shotlist.html"><i class="ph ph-list-numbers"></i> Shot List</a>
+    <a href="breakdown.html"><i class="ph ph-list-checks"></i> Breakdown</a>
+    <a href="storyboard.html" class="active"><i class="ph ph-film-strip"></i> Storyboard</a>
+    <a href="locations.html"><i class="ph ph-map-pin"></i> Locations</a>
   </nav>
   <div class="topbar-actions">
     <span class="dept-hint">Production Bible</span>
