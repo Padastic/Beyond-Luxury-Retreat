@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palaiochora Protocol — MJ Moodboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0d0d0d;color:#ccc;padding:20px}
+h1{text-align:center;font-size:1.5rem;font-weight:300;margin:20px 0 10px;color:#b89c8a;letter-spacing:0.04em}
+.stats{text-align:center;margin-bottom:30px;font-size:0.85rem;color:#666}
+.shot-row{margin-bottom:40px;border-bottom:1px solid #1a1a1a;padding-bottom:20px}
+.shot-label{font-size:0.75rem;color:#b89c8a;letter-spacing:0.06em;margin-bottom:10px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.grid img{width:100%;height:auto;border-radius:4px;transition:transform 0.2s;cursor:pointer}
+.grid img:hover{transform:scale(1.02)}
+.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:999;justify-content:center;align-items:center}
+.lightbox.active{display:flex}
+.lightbox img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:4px}
+.lightbox .close{position:absolute;top:20px;right:30px;color:#fff;font-size:2rem;cursor:pointer;z-index:1000}
+.lightbox .counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#888;font-size:0.8rem}
+@media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr)}h1{font-size:1.1rem}}
+</style>
+</head>
+<body>
+<h1>Πρωτόκολλο Παλαιόχωρας — MJ Moodboard</h1>
+<div class="stats" id="stats"></div>
+<div id="shots"></div>
+<div class="lightbox" id="lb" onclick="closeLB()">
+  <span class="close">&times;</span>
+  <img id="lbImg" src="" alt="">
+  <div class="counter" id="lbCounter"></div>
+</div>
+<script>
+const SHOTS = [{"num": 1, "id": "S1_Master", "scene": "S1", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 2, "id": "S1_Hands", "scene": "S1", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 3, "id": "S1_Phone", "scene": "S1", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 4, "id": "S1_Face", "scene": "S1", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 5, "id": "S1a_Airplane", "scene": "S1a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 6, "id": "S1a_CreteRoad", "scene": "S1a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 7, "id": "S1a_Van", "scene": "S1a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 8, "id": "S1a_Phone", "scene": "S1a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 9, "id": "S2_Master", "scene": "S2", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 10, "id": "S2_SofiaCU", "scene": "S2", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 11, "id": "S2_FaceCU", "scene": "S2", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 12, "id": "S2_Nikos", "scene": "S2", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 13, "id": "S2_Coffee", "scene": "S2", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 14, "id": "S2_Van", "scene": "S2", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 15, "id": "S3_Drone", "scene": "S3", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 16, "id": "S3_Lobby", "scene": "S3", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 17, "id": "S3_Veranda", "scene": "S3", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 18, "id": "S3_Note", "scene": "S3", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 19, "id": "S3_Phone", "scene": "S3", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 20, "id": "S3a_Pool", "scene": "S3a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 21, "id": "S3a_Sheets", "scene": "S3a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 22, "id": "S3a_Face", "scene": "S3a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 23, "id": "S4_Master", "scene": "S4", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 24, "id": "S4_MarkosCU", "scene": "S4", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 25, "id": "S4_SofiaCU", "scene": "S4", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 26, "id": "S4_Boat", "scene": "S4", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 27, "id": "S5_RIB", "scene": "S5", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 28, "id": "S5_Caves", "scene": "S5", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 29, "id": "S5_Dive", "scene": "S5", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 30, "id": "S5_RedSand", "scene": "S5", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 31, "id": "S5a_Underwater", "scene": "S5a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 32, "id": "S5a_Drone", "scene": "S5a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 33, "id": "S5a_Beach", "scene": "S5a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 34, "id": "S5a_Float", "scene": "S5a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 35, "id": "S6_Evangel", "scene": "S6", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 36, "id": "S6_Sofia", "scene": "S6", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 37, "id": "S6_Markos", "scene": "S6", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 38, "id": "S6_Kyries", "scene": "S6", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 39, "id": "S6_Mihalis", "scene": "S6", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 40, "id": "S6_Tsikoudia", "scene": "S6", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 41, "id": "S6_Castle", "scene": "S6", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 42, "id": "S6a_Waking", "scene": "S6a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 43, "id": "S7_Master", "scene": "S7", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 44, "id": "S7_Phone", "scene": "S7", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 45, "id": "S7_Coffee", "scene": "S7", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 46, "id": "S7_SofiaOTS", "scene": "S7", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 47, "id": "S8_Road", "scene": "S8", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 48, "id": "S8_Goats", "scene": "S8", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 49, "id": "S8_Herbs", "scene": "S8", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 50, "id": "S8_Panorama", "scene": "S8", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 51, "id": "S8a_Horses", "scene": "S8a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 52, "id": "S8a_Reins", "scene": "S8a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 53, "id": "S8a_Stroke", "scene": "S8a", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 54, "id": "S9_Master", "scene": "S9", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 55, "id": "S9_Face", "scene": "S9", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 56, "id": "S9_Breath", "scene": "S9", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 57, "id": "S9_Markos", "scene": "S9", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 58, "id": "S9_Phone", "scene": "S9", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 59, "id": "S9_PowerOff", "scene": "S9", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 60, "id": "S9_Hooves", "scene": "S9", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 61, "id": "S10_Master", "scene": "S10", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 62, "id": "S10_Glasses", "scene": "S10", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 63, "id": "S10_Hands", "scene": "S10", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 64, "id": "S10_Sofia", "scene": "S10", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 65, "id": "S10_Markos", "scene": "S10", "variants": ["U1", "U2", "U3", "U4"], "count": 4}, {"num": 66, "id": "S10_Drone", "scene": "S10", "variants": ["U1", "U2", "U3", "U4"], "count": 4}];
+let totalCrops = 0;
+let html = '';
+SHOTS.forEach((s,i) => {
+  totalCrops += s.count;
+  if (s.variants.length === 0) return;
+  html += `<div class="shot-row">
+    <div class="shot-label">${s.num}. ${s.id.replace(/_/g,' ')} (${s.scene}) — ${s.count} crops</div>
+    <div class="grid">`;
+  s.variants.forEach(v => {
+    html += `<img src="./${s.id}_${v}.webp" alt="${s.id}_${v}" onclick="event.stopPropagation();openLB(this.src,'${s.id}_${v}')" loading="lazy">`;
+  });
+  html += '</div></div>';
+});
+document.getElementById('shots').innerHTML = html;
+document.getElementById('stats').textContent = `${SHOTS.length} shots · ${totalCrops} crops · MJ V8.1 · --style raw --stylize 50`;
+function openLB(src,label) {
+  document.getElementById('lbImg').src = src;
+  document.getElementById('lbCounter').textContent = label;
+  document.getElementById('lb').classList.add('active');
+}
+function closeLB() { document.getElementById('lb').classList.remove('active'); }
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();});
+</script>
+</body>
+</html>
