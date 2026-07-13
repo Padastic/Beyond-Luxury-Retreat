@@ -434,17 +434,24 @@ h1,h2,h3{font-family:'Outfit','Inter',sans-serif}
   </div>
 </div>
 <script>
-let lbImages=[],lbIndex=0;
-document.querySelectorAll('.shot-card').forEach(card=>{
+const lbImages=[];
+document.querySelectorAll('.shot-card').forEach((card,i)=>{
   const img=card.querySelector('img');
   const label=card.querySelector('.label');
   const desc=card.querySelector('.desc');
   if(img&&label){
     lbImages.push({src:img.src,label:label.textContent,desc:desc?desc.textContent:''});
-    img.addEventListener('click',()=>openLightbox(lbImages.length-1));
+    img.setAttribute('data-lb',i);
   }
 });
-function openLightbox(i){lbIndex=i;updateLightbox();document.getElementById('lightbox').classList.add('active')}
+let lbIndex=0;
+document.querySelectorAll('.shot-card img').forEach(img=>{
+  img.addEventListener('click',function(){
+    lbIndex=parseInt(this.getAttribute('data-lb'));
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('active');
+  });
+});
 function closeLightbox(){document.getElementById('lightbox').classList.remove('active')}
 function navLightbox(d){lbIndex=(lbIndex+d+lbImages.length)%lbImages.length;updateLightbox()}
 function updateLightbox(){
