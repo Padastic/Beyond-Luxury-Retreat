@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Meeting — Beyond Luxury Retreat</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--taupe:#b89c8a;--taupe-dark:#9a7e6e;--taupe-bg:#e8ddd4;--sand:#f5ede4;--white:#fff;--black:#1a1a1a;--text:#2d2d2d;--text-light:#6b6b6b;--border:#d9cec4}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;font-weight:300;color:var(--text);background:var(--sand);line-height:1.7}
+.container{max-width:800px;margin:0 auto;padding:40px 24px}
+h1{font-family:'Outfit',sans-serif;font-size:1.6rem;color:var(--black);margin-bottom:8px}
+h2{font-family:'Outfit',sans-serif;font-size:1.2rem;color:var(--taupe-dark);margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-family:'Outfit',sans-serif;font-size:1rem;color:var(--black);margin:20px 0 8px}
+.meta{color:var(--taupe-dark);font-size:0.85rem;margin-bottom:24px}
+ul{margin:8px 0 16px 20px}
+li{margin-bottom:6px}
+strong{font-weight:500}
+del{color:var(--text-light)}
+hr{border:none;border-top:1px solid var(--border);margin:24px 0}
+.footer{color:var(--text-light);font-size:0.75rem;margin-top:40px}
+
+/* Password gate */
+#gate{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh}
+#gate form{background:var(--white);padding:40px;border-radius:12px;border:1px solid var(--border);text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.05)}
+#gate input{font-family:'Inter',sans-serif;font-size:1rem;padding:12px 16px;border:1px solid var(--border);border-radius:8px;width:240px;text-align:center;outline:none;transition:border 0.2s}
+#gate input:focus{border-color:var(--taupe)}
+#gate button{font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:500;padding:10px 32px;margin-top:12px;background:var(--taupe-dark);color:var(--white);border:none;border-radius:8px;cursor:pointer;transition:background 0.2s}
+#gate button:hover{background:var(--taupe)}
+#gate .error{color:#d94f4f;font-size:0.82rem;margin-top:8px;display:none}
+#content{display:none}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <form onsubmit="return checkPassword()">
+    <h2 style="border:none;margin:0 0 6px">Beyond Luxury Retreat</h2>
+    <div class="meta" style="margin-bottom:16px">Meeting Summary</div>
+    <input type="password" id="pw" placeholder="Password" autofocus>
+    <br>
+    <button type="submit">Enter</button>
+    <div class="error" id="error">Wrong password</div>
+  </form>
+</div>
+
+<div id="content" class="container">
+<h1>Meeting Summary</h1>
+<div class="meta">13 Ιουλίου 2026 · Beyond Luxury Retreat · Παλαιόχωρα</div>
+<hr>
+
+<h2>1. Τι Ειπώθηκε</h2>
+
+<h3>Α. Σενάριο & Storytelling</h3>
+
+<ul>
+<li><strong>Σκηνή Δωματίου (Location):</strong> Συμφωνήθηκε ότι η σκηνή στο δωμάτιο της ηρωίδας (Γερμανία) θα γυριστεί σε ουδέτερο χώρο στην Παλιόχωρα. Ο Γιώργος Π. θα επισκεφθεί την Τετάρτη το σπίτι της Μαρίας για να δει τα δωμάτια των κορών της.</li>
+<li><strong>Σκηνή Καφενείου (Βότσαλο):</strong> Αποφασίστηκε να μην εμπλακεί το ξενοδοχείο, αλλά να είναι προσωπική επιλογή της ηρωίδας, ενισχύοντας τον ατίθασο χαρακτήρα της.</li>
+<li><strong>Χαρακτήρας Ηρωίδας:</strong> Ατίθαση νεαρή από Γερμανία. Εξέλιξη από άρνηση και επιθυμία για Ίμπιζα, στο να ανακαλύπτει ότι της αρέσει η Παλιόχωρα.</li>
+<li><strong>Απουσία Ξενοδοχείου (Λόμπι):</strong> Ομόφωνη απόφαση να μην χρησιμοποιηθούν AI-generated πλάνα για το λόμπι.</li>
+<li><strong>Room Service:</strong> Η σκηνή του καφέ θα γίνει μέσα στο δωμάτιο. Επικοινωνία με concierge μέσω WhatsApp, ο καφές θα την περιμένει ήδη εκεί.</li>
+<li><strong>Πλάνα δωματίου:</strong> Selfies/FaceTime με σταδιακή αποκάλυψη του χώρου.</li>
+<li><strong>Σκηνή Βόλτας (Vespa):</strong> Μεταφορά ξενοδοχείο → λιμάνι με Vespa, ρομαντική μεσογειακή ατμόσφαιρα.</li>
+<li><strong>Σκηνή Δείπνου:</strong> Στη σπηλιά του ξενοδοχείου αντί για βεράντα. Δυνατό χαρτί της ταινίας.</li>
+<li><strong>Σκηνή Άφιξης (Montage):</strong> 15-30 sec με drone, Cayenne, τοπία. Πρώτη επαφή με τη θάλασσα.</li>
+</ul>
+
+<h3>Β. Παραγωγή & Logistics</h3>
+
+<ul>
+<li><strong>Όχημα:</strong> Porsche Cayenne Coupe Turbo E-Hybrid (Cashmere Beige Metallic) του Λυκούργου. Θα γίνει photoshop με λογότυπο «Beyond».</li>
+<li><strong>Λογότυπο στο όχημα:</strong> Μικρό, διακριτικό, αφαιρούμενο.</li>
+<li><strong>Σκάφη:</strong> «Ποσειδών» (πρωταγωνιστές) + «Κουρσάρος» (συνεργείο) από Παλαιόχωρα Boat Trip.</li>
+<li><strong>Υποβρύχιες λήψεις:</strong> DJI/GoPro, όχι ειδικός δύτης.</li>
+<li><strong>Drone:</strong> Κινηματογραφικό, ο χειριστής θα κάνει και υποβρύχιες.</li>
+<li><strong>Πρόγραμμα:</strong> 5ήμερο 27-31 Ιουλίου. Πρωί + απόγευμα με μεσημεριανό διάλειμμα.</li>
+<li><strong>Άδεια Κάστρου:</strong> Αρχαιολογία. Λίστα αδειών στον Λυκούργο.</li>
+</ul>
+
+<h3>Γ. Κάστινγκ & Συντελεστές</h3>
+
+<ul>
+<li><strong>Ηθοποιοί:</strong> Β' ρόλοι (ντόπιοι, γιαγιάδες) έτοιμοι. Γνωριμία Τετάρτη.</li>
+<li><strong>Μιχάλης:</strong> Σερβιτόρος ταβέρνας «Οινόχος».</li>
+<li><strong>Μουσικός:</strong> Σαξοφωνίστας στο background του δείπνου.</li>
+<li><strong>Art Director:</strong> Μικέλα + στυλίστρια. Θα γίνει call για συντονισμό.</li>
+</ul>
+
+<hr>
+
+<h2>2. Action Items</h2>
+
+<ol>
+<li><del>Προγραμμάτισε την επίσκεψη της Τετάρτης</del> <strong>ΕΠΙΒΕΒΑΙΩΜΕΝΟ:</strong> Συνάντηση Γιώργου Π. με Μαρία — δωμάτια, σκάφη, locations, ηθοποιοί.</li>
+<li><strong>Σύστησε την Art Director:</strong> Μικέλα με Γιώργο Χ. και Μαρία για locations, props, tone. <em>(Γιώργος Π.)</em></li>
+<li><strong>Call με Διευθυντή Παραγωγής:</strong> Σπύρος, Μικέλα, στυλίστρια — props & budget. <em>(Γιώργος Π.)</em></li>
+<li><del>Επίλεξε το όχημα</del> <strong>ΑΠΟΦΑΣΙΣΜΕΝΟ:</strong> Cayenne (Λυκούργου). Εκκρεμεί photoshop λογότυπου. <em>(Γιώργος Π.)</em></li>
+<li><strong>Άδεια Κάστρου:</strong> Λίστα αδειών στον Λυκούργο. <em>(Γιώργος Π.)</em></li>
+<li><strong>Βαρκάδα-scout:</strong> Τετάρτη με Μανώλη, παραλίες & σημεία. <em>(Γιώργος Π.)</em></li>
+<li><strong>Ενημέρωσε ηθοποιούς:</strong> Τηλέφωνα για γνωριμία Τετάρτη. <em>(Γιώργος Π.)</em></li>
+<li><strong>Release Forms:</strong> Σπύρος να έχει μαζί του. <em>(Σπύρος)</em></li>
+<li><strong>Σαξοφωνίστας:</strong> Επιβεβαίωση διαθεσιμότητας. <em>(Γιώργος Π.)</em></li>
+<li><strong>Next meeting:</strong> Τρίτη 10:00 π.μ. — η Ράνια ορίζει, ο Γιώργος Π. συμμετέχει. <em>(Ράνια)</em></li>
+</ol>
+
+<div class="footer">Generated by DeepSeek from ElevenLabs Scribe v2 transcript (17,881 words)</div>
+</div>
+
+<script>
+async function sha256(m){const e=new TextEncoder().encode(m);const h=await crypto.subtle.digest('SHA-256',e);return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')}
+async function checkPassword(){
+  const pw=document.getElementById('pw').value;
+  const hash=await sha256(pw);
+  if(hash==='eb666cfe0f9e8f054b0481dadcfe0f4c5cd9e0b9358f77fe68eb80aed8769df4'){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('content').style.display='block';
+    sessionStorage.setItem('blr_auth','1');
+  }else{
+    document.getElementById('error').style.display='block';
+  }
+  return false;
+}
+if(sessionStorage.getItem('blr_auth')==='1'){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('content').style.display='block';
+}
+</script>
+</body>
+</html>
