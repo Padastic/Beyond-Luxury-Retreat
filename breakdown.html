@@ -3,129 +3,255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Breakdown ,  Το Πρωτόκολλο της Παλαιόχωρας</title>
+<title>Script Breakdown — Το Πρωτόκολλο της Παλαιόχωρας</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --taupe: #b89c8a; --taupe-dark: #9a7e6e; --taupe-light: #d4c5b9;
-  --taupe-bg: #e8ddd4; --sand: #f5ede4; --white: #ffffff; --black: #1a1a1a;
-  --text: #2d2d2d; --text-light: #6b6b6b; --gold: #c4a35a; --border: #d9cec4;
-  --red: #d94f4f; --yellow: #e8c84f; --purple: #9b7ec4;
-  --green: #7eaa80; --cyan: #6db5c4; --blue: #6b8ec4; --brown: #a0806a;
-  --shadow: 0 1px 3px rgba(0,0,0,0.06);
+  --taupe: #b89c8a;
+  --taupe-bg: #e8ddd4;
+  --sand: #f5ede4;
+  --border: #d9cec4;
+  --gold: #c4a35a;
+  --black: #1a1a1a;
+  --text: #2d2d2d;
+  --text-light: #6b6b6b;
+  --cast: #d94f4f;
+  --cast-bg: #fde8e8;
+  --extras: #e8c84f;
+  --extras-bg: #fdf5dc;
+  --prop: #9b7ec4;
+  --prop-bg: #f0e8f8;
+  --set: #7eaa80;
+  --set-bg: #e4f0e4;
+  --vehicle: #6db5c4;
+  --vehicle-bg: #ddf0f4;
+  --wardrobe: #6b8ec4;
+  --wardrobe-bg: #dee8f4;
+  --special: #a0806a;
+  --special-bg: #f0e8e0;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 1.04rem; font-weight: 300;
-  color: var(--text); background: var(--sand);
-  line-height: 1.6;
+  background: #faf7f3;
+  color: var(--text);
 }
-h1,h2,h3,h4 { font-family: 'Outfit','Inter',sans-serif; }
 
+/* Top bar */
 .topbar{position:sticky;top:0;z-index:100;background:rgba(245,237,228,0.82);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(184,156,138,0.15);padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:8px;overflow-x:auto;box-shadow:0 1px 8px rgba(0,0,0,0.04)}
 .topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;white-space:nowrap;flex-shrink:0}
 .topbar-brand .title{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:500;color:var(--black);letter-spacing:-0.01em}
 .topbar-nav{display:flex;align-items:center;gap:4px;flex-wrap:nowrap}
-.topbar-nav a{text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;padding:10px 14px;border-radius:8px;white-space:nowrap;transition:all 0.22s ease;color:var(--text-light);display:flex;align-items:center;gap:6px}
-.topbar-nav a:hover{color:var(--black);background:rgba(184,156,138,0.10)}
-.topbar-nav a.active{color:var(--taupe-dark);background:var(--taupe-bg);font-weight:600}
-.topbar-nav a::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--taupe-dark);border-radius:2px;transition:width 0.22s ease}
-.topbar-nav a.active::after{width:60%}
-.topbar-nav a:hover::after{width:40%}
-.topbar-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.topbar-actions .dept-hint{font-size:0.68rem;color:var(--text-light);letter-spacing:0.05em;opacity:0.6;white-space:nowrap}.section { max-width: 1100px; margin: 0 auto; padding: 72px 24px; }
-.section-title { font-size: 2.1rem; font-weight: 300; color: var(--black); margin-bottom: 8px; }
-.section-subtitle { font-size: 1.1rem; color: var(--text-light); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 44px; }
-
-/* Summary grid */
-.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.summary-card {
-  display: block; text-decoration: none;
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: 8px; padding: 24px;
-  transition: all 0.2s; color: var(--text);
-}
-.summary-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-2px); }
-.summary-card h4 { font-size: 1.0rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; }
-.summary-stat { font-size: 2.4rem; font-weight: 600; color: var(--black); }
-.summary-stat small { display: block; font-size: 0.95rem; font-weight: 400; color: var(--text-light); margin-top: 4px; }
-.summary-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
-.dot-cast { background: var(--red); } .dot-extras { background: var(--yellow); }
-.dot-prop { background: var(--purple); } .dot-set { background: var(--green); }
-.dot-vehicle { background: var(--cyan); } .dot-wardrobe { background: var(--blue); }
-.dot-special { background: var(--brown); }
-
-/* Master table */
-.master-section { scroll-margin-top: 100px; margin-bottom: 60px; }
-.master-header {
-  display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
-  padding-bottom: 14px; border-bottom: 2px solid var(--border);
-}
-.master-dot { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; }
-.master-table { width: 100%; border-collapse: collapse; font-size: 1.0rem; background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); }
-.master-table th {
-  text-align: left; font-weight: 500; font-size: 0.85rem;
-  letter-spacing: 0.04em; text-transform: uppercase;
-  color: var(--text-light); padding: 14px 18px;
-  background: var(--taupe-bg); border-bottom: 1px solid var(--border);
-}
-.master-table td { padding: 12px 18px; border-bottom: 1px solid #f0ebe4; vertical-align: top; }
-.master-table tr:last-child td { border-bottom: none; }
-.master-table tr:hover { background: #fdfaf7; }
-
-/* Day card (compact) */
-.day-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 24px; overflow: hidden; }
-.day-header { padding: 18px 24px; background: var(--taupe-bg); font-weight: 500; }
-.day-body { padding: 20px 24px; }
-.scene-mini { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0ebe4; }
-.scene-mini:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-.scene-mini strong { font-size: 1.05rem; }
-.scene-mini .slug { font-size: 0.85rem; color: var(--taupe-dark); text-transform: uppercase; letter-spacing: 0.02em; }
-
-.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 0.82rem; font-weight: 500; padding: 3px 8px; border-radius: 12px; letter-spacing: 0.02em; margin: 2px; }
-.tag-dot { width: 8px; height: 8px; border-radius: 50%; }
-.tag-cast { background: #fde8e8; color: #b03030; } .tag-cast .tag-dot { background: var(--red); }
-.tag-extras { background: #fdf5dc; color: #8a7a20; } .tag-extras .tag-dot { background: var(--yellow); }
-.tag-prop { background: #f0e8f8; color: #6a3d99; } .tag-prop .tag-dot { background: var(--purple); }
-.tag-set { background: #e4f0e4; color: #3d6b3d; } .tag-set .tag-dot { background: var(--green); }
-.tag-vehicle { background: #ddf0f4; color: #2d6b7a; } .tag-vehicle .tag-dot { background: var(--cyan); }
-.tag-wardrobe { background: #dee8f4; color: #3d5a99; } .tag-wardrobe .tag-dot { background: var(--blue); }
-.tag-special { background: #f0e8e0; color: #6a4d30; } .tag-special .tag-dot { background: var(--brown); }
-
-.footer { background: var(--taupe); padding: 56px 24px; text-align: center; color: var(--white); }
-.footer img { width: 48px; margin-bottom: 20px; opacity: 0.85; filter: brightness(10); }
-.footer p { font-size: 1.0rem; opacity: 0.8; }
-
-.back-top { position: fixed; bottom: 28px; right: 28px; background: var(--black); color: var(--white); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; opacity: 0.7; transition: opacity 0.2s; z-index: 50; }
-.back-top:hover { opacity: 1; }
-
-@media (max-width: 768px) {
-  .section { padding: 40px 16px; }
-  .section-title { font-size: 1.6rem; }
-  .topbar{position:sticky;top:0;z-index:100;background:rgba(245,237,228,0.82);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(184,156,138,0.15);padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:8px;overflow-x:auto;box-shadow:0 1px 8px rgba(0,0,0,0.04)}
-.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;white-space:nowrap;flex-shrink:0}
-.topbar-brand .icon-svg{width:22px;height:22px;opacity:0.7;flex-shrink:0;display:flex;align-items:center}
-.topbar-brand .title{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:500;color:var(--black);letter-spacing:-0.01em}
-.topbar-nav{display:flex;align-items:center;gap:4px;flex-wrap:nowrap}
 .topbar-nav a{text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;padding:10px 14px;border-radius:8px;white-space:nowrap;transition:all 0.22s ease;color:var(--text-light);display:flex;align-items:center;gap:6px;position:relative}
-.topbar-nav a .nav-icon{width:16px;height:16px;opacity:0.4;flex-shrink:0;display:flex;align-items:center;transition:opacity 0.22s}
 .topbar-nav a:hover{color:var(--black);background:rgba(184,156,138,0.10)}
-.topbar-nav a:hover .nav-icon{opacity:0.75}
 .topbar-nav a.active{color:var(--taupe-dark);background:var(--taupe-bg);font-weight:600}
-.topbar-nav a.active .nav-icon{opacity:1;color:var(--taupe-dark)}
 .topbar-nav a::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--taupe-dark);border-radius:2px;transition:width 0.22s ease}
 .topbar-nav a.active::after{width:60%}
 .topbar-nav a:hover::after{width:40%}
 .topbar-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .topbar-actions .dept-hint{font-size:0.68rem;color:var(--text-light);letter-spacing:0.05em;opacity:0.6;white-space:nowrap}
-.topbar-nav a .nav-icon{width:16px;height:16px;opacity:0.4;flex-shrink:0;display:flex;align-items:center;transition:opacity 0.22s}
-.topbar-nav a:hover .nav-icon{opacity:0.75}
-.topbar-nav a.active .nav-icon{opacity:1;color:var(--taupe-dark)}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+h1 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 1.8rem;
+  color: var(--black);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 40px;
+}
+
+/* Legend inline */
+.legend-bar {
+  background: rgba(250,247,243,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex; justify-content: center;
+}
+.legend { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.legend-dot {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.03em;
+  color: var(--text-light); cursor: pointer; text-decoration: none;
+  padding: 4px 10px; border-radius: 14px; transition: all 0.15s;
+}
+.legend-dot:hover { background: var(--taupe-bg); }
+.legend-dot::before {
+  content: ''; width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+}
+.legend-dot.cast::before { background: var(--cast); }
+.legend-dot.extras::before { background: var(--extras); }
+.legend-dot.prop::before { background: var(--prop); }
+.legend-dot.set::before { background: var(--set); }
+.legend-dot.vehicle::before { background: var(--vehicle); }
+.legend-dot.wardrobe::before { background: var(--wardrobe); }
+.legend-dot.special::before { background: var(--special); }
+
+/* Scene cards */
+.scene-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.scene-header {
+  background: var(--taupe-bg);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.scene-num {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--black);
+}
+
+.slugline {
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.scene-meta {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  font-size: 0.75rem; color: var(--text-light);
+}
+
+.scene-body { padding: 16px 20px; }
+
+.element-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.element-table th {
+  text-align: left;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-light);
+  padding: 8px 10px;
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+}
+
+.element-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.element-table tr:last-child td { border-bottom: none; }
+
+/* Category badges */
+.badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.badge-cast { background: var(--cast-bg); color: var(--cast); }
+.badge-extras { background: var(--extras-bg); color: #8a7a20; }
+.badge-prop { background: var(--prop-bg); color: var(--prop); }
+.badge-set { background: var(--set-bg); color: #3d6b3d; }
+.badge-vehicle { background: var(--vehicle-bg); color: #2d6b7a; }
+.badge-wardrobe { background: var(--wardrobe-bg); color: #3d5a99; }
+.badge-special { background: var(--special-bg); color: var(--special); }
+
+/* Section anchors */
+.section-anchor { display: block; position: relative; top: -80px; visibility: hidden; }
+
+/* Summary tables */
+.summary-section {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.summary-section h2 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.summary-table th {
+  text-align: left;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-light);
+  padding: 8px 10px;
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+}
+.summary-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.summary-table tr:last-child td { border-bottom: none; }
+
+/* Notes */
+.notes {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: #fef9e7;
+  border-left: 3px solid var(--extras);
+  font-size: 0.8rem;
+  color: #5a4a15;
+  border-radius: 0 6px 6px 0;
+}
+.notes-critical {
+  background: #fde8e8;
+  border-left-color: var(--cast);
+  color: #7a2020;
+}
+
+@media (max-width: 768px) {
+  .content { padding: 16px 12px 60px; }
+  .scene-body { padding: 12px; }
+  .element-table { font-size: 0.75rem; }
+  .element-table th, .element-table td { padding: 6px 6px; }
+}
 </style>
 </head>
 <body>
@@ -147,362 +273,584 @@ h1,h2,h3,h4 { font-family: 'Outfit','Inter',sans-serif; }
   </div>
 </div>
 
-<!-- ═══ ΣΥΝΟΨΗ ═══ -->
-<section class="section" id="summary">
-  <h2 class="section-title">Σύνοψη Παραγωγής</h2>
-  <p class="section-subtitle">Κλικάρετε για αναλυτικούς πίνακες</p>
-
-  <div class="summary-grid">
-    <a href="#cast" class="summary-card">
-      <h4><span class="summary-dot dot-cast"></span> Cast</h4>
-      <div class="summary-stat">7<small>ηθοποιοί</small></div>
-      <p style="font-size:0.9rem;color:var(--text-light);margin-top:8px;">2 lead, 4 supporting, 1 day player</p>
-    </a>
-    <a href="#extras" class="summary-card">
-      <h4><span class="summary-dot dot-extras"></span> Extras</h4>
-      <div class="summary-stat">25–40<small>εθελοντές κάτοικοι</small></div>
-      <p style="font-size:0.9rem;color:var(--text-light);margin-top:8px;">Καφενείο, σοκάκια, εστιατόριο</p>
-    </a>
-    <a href="#props" class="summary-card">
-      <h4><span class="summary-dot dot-prop"></span> Props</h4>
-      <div class="summary-stat">18<small>αντικείμενα</small></div>
-      <p style="font-size:0.9rem;color:var(--text-light);margin-top:8px;">Κινητό, καφές, ποδήλατα, κεριά...</p>
-    </a>
-    <a href="#set" class="summary-card">
-      <h4><span class="summary-dot dot-set"></span> Set Dressing</h4>
-      <div class="summary-stat">14<small>ντεκόρ / greenery</small></div>
-      <p style="font-size:0.9rem;color:var(--text-light);margin-top:8px;">Σεντόνια, πισίνες, βότανα...</p>
-    </a>
-    <a href="#vehicles" class="summary-card">
-      <h4><span class="summary-dot dot-vehicle"></span> Vehicles</h4>
-      <div class="summary-stat">3<small>οχήματα</small></div>
-      <p style="font-size:0.9rem;color:var(--text-light);margin-top:8px;">Transfer, ταχύπλοο, σκάφος ασφαλείας</p>
-    </a>
-    <a href="#wardrobe" class="summary-card">
-      <h4><span class="summary-dot dot-wardrobe"></span> Wardrobe</h4>
-      <div class="summary-stat">5<small>κοστούμια</small></div>
-      <p style="font-size:0.9rem;color:var(--text-light);margin-top:8px;">Casual chic, βραδινά, παραδοσιακά</p>
-    </a>
-    <a href="#special" class="summary-card">
-      <h4><span class="summary-dot dot-special"></span> Special</h4>
-      <div class="summary-stat">8<small>εξοπλισμός / συνεργείο</small></div>
-      <p style="font-size:0.9rem;color:var(--text-light);margin-top:8px;">Drone, GoPro, animal handler...</p>
-    </a>
-  </div>
-</section>
-
-<!-- ═══ CAST MASTER LIST ═══ -->
-<section class="section master-section" id="cast">
-  <div class="master-header">
-    <div class="master-dot dot-cast"></div>
-    <h2 class="section-title" style="margin-bottom:0;">Cast ,  Master List</h2>
-  </div>
-  <table class="master-table">
-    <thead><tr><th>Ρόλος</th><th>Ηθοποιός</th><th>Κατηγορία</th><th>Σκηνές</th><th>Σελίδες</th><th>Σημειώσεις</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Σοφία</strong> (19)</td><td>TBD</td><td>Lead</td><td>1, 1α, 2, 3, 3α, 4, 5, 6, 6α, 7, 8, 8α, 9, 10</td><td>Όλες (8)</td><td>Πρωταγωνίστρια, εμφανίζεται σε κάθε σκηνή</td></tr>
-      <tr><td><strong>Μάρκος</strong> (22)</td><td>TBD</td><td>Lead</td><td>4, 5, 6, 8, 8α, 9, 10</td><td>4–8</td><td>Ψηλός, μελαχρινός, casual chic. Οδηγεί σκάφος, ποδήλατο, άλογο</td></tr>
-      <tr><td><strong>Νίκος</strong></td><td>TBD</td><td>Supporting</td><td>2</td><td>1–2</td><td>Ιδιοκτήτης καφενείου, θυμάται τη Σοφία από παιδί</td></tr>
-      <tr><td><strong>Κυρία 1</strong></td><td>TBD</td><td>Supporting</td><td>6</td><td>4–5</td><td>Ηλικιωμένη, κάθεται σε ψάθινη καρέκλα, παραδοσιακή περιβολή</td></tr>
-      <tr><td><strong>Κυρία 2</strong></td><td>TBD</td><td>Supporting</td><td>6</td><td>4–5</td><td>Ηλικιωμένη, κάθεται σε ψάθινη καρέκλα, παραδοσιακή περιβολή</td></tr>
-      <tr><td><strong>Μιχάλης</strong></td><td>TBD</td><td>Supporting</td><td>6</td><td>4–5</td><td>Ταβερνιάρης με μουστάκι, βάζει βασιλικό στο αυτί</td></tr>
-      <tr><td><strong>Σερβιτόρος</strong> (Beyond)</td><td>TBD</td><td>Day Player</td><td>7</td><td>5</td><td>Μία ατάκα, επαγγελματική στολή</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ═══ EXTRAS MASTER LIST ═══ -->
-<section class="section master-section" id="extras">
-  <div class="master-header">
-    <div class="master-dot dot-extras"></div>
-    <h2 class="section-title" style="margin-bottom:0;">Extras ,  Master List</h2>
-  </div>
-  <p style="color:var(--text-light); margin-bottom:20px;">Όλοι οι κομπάρσοι είναι εθελοντές, πραγματικοί κάτοικοι της Παλαιόχωρας.</p>
-  <table class="master-table">
-    <thead><tr><th>Τι</th><th>Ποσότητα</th><th>Σκηνή</th><th>Σημειώσεις</th></tr></thead>
-    <tbody>
-      <tr><td>Θαμώνες καφενείου</td><td>5–10</td><td>2</td><td>Ατμόσφαιρα, καφενείο «Νίκος»</td></tr>
-      <tr><td>Οικογένεια σε αυλή</td><td>4–5</td><td>6</td><td>Κάθονται για βραδινό, αυθεντική οικογένεια</td></tr>
-      <tr><td>Γυναίκες με φαγητό</td><td>2</td><td>6</td><td>Φέρνουν φρεσκομαγειρεμένο φαγητό</td></tr>
-      <tr><td>Περαστικοί σοκάκια</td><td>5–10</td><td>6</td><td>Γειτονιά, φυσική κίνηση</td></tr>
-      <tr><td>Σερβιτόροι Beyond</td><td>2</td><td>10</td><td>Background, βραδινό εστιατόριο</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ═══ PROPS MASTER LIST ═══ -->
-<section class="section master-section" id="props">
-  <div class="master-header">
-    <div class="master-dot dot-prop"></div>
-    <h2 class="section-title" style="margin-bottom:0;">Props ,  Master List</h2>
-  </div>
-  <table class="master-table">
-    <thead><tr><th>Prop</th><th>Σκηνές</th><th>Ποσότητα</th><th>Continuity</th><th>Σημειώσεις</th></tr></thead>
-    <tbody>
-      <tr><td>Κινητό τηλέφωνο Σοφίας</td><td>1, 1α, 2, 3, 6, 7, 9</td><td>1</td><td>Ακολουθεί τη Σοφία σε όλο το σενάριο</td><td>Custom UI μηνύματα (post-production). Σβήνει στη Σκ. 9.</td></tr>
-      <tr><td>Βαλίτσα Σοφίας</td><td>1, 1α</td><td>1</td><td>Μόνο στην αρχή</td><td>Ανοιχτή, με ρούχα μέσα</td></tr>
-      <tr><td>Ελληνικός καφές (φλιτζάνι/μπρίκι)</td><td>2, 7</td><td>2</td><td>Επανεμφανίζεται ως σύμβολο</td><td>Σκ.2: προσφέρεται από Νίκο. Σκ.7: επιλογή Σοφίας</td></tr>
-      <tr><td>Latte με γάλα βρώμης</td><td>3, 7</td><td>2</td><td>Αντικαθίσταται από ελληνικό</td><td>Σκ.3: απολαμβάνει. Σκ.7: το απορρίπτει</td></tr>
-      <tr><td>Δίσκος σερβιτόρου</td><td>2, 7</td><td>2</td><td>, </td><td>Με καφέ και κουλουράκια (Σκ.2), με latte (Σκ.7)</td></tr>
-      <tr><td>Κουλουράκια</td><td>2</td><td>1 πιατάκι</td><td>, </td><td>Στο δίσκο του Νίκου</td></tr>
-      <tr><td>Κατάλογος καφενείου</td><td>2</td><td>1</td><td>, </td><td>Τον ανοίγει και τον κλείνει</td></tr>
-      <tr><td>Σημείωμα γονιών</td><td>3</td><td>1</td><td>Μόνο στη σουίτα</td><td>Χειρόγραφο ή τυπωμένο, συναισθηματική αξία</td></tr>
-      <tr><td>Πετσέτες πισίνας</td><td>3α</td><td>1–2</td><td>, </td><td>Δίπλα στην πισίνα</td></tr>
-      <tr><td>Σωσίβια</td><td>5</td><td>2</td><td>, </td><td>Ασφάλεια στο σκάφος</td></tr>
-      <tr><td>Μάσκες, αναπνευστήρες</td><td>5</td><td>2 σετ</td><td>, </td><td>Για βουτιές</td></tr>
-      <tr><td>Ψάθινες καρέκλες</td><td>6</td><td>2</td><td>, </td><td>Για Κυρία 1 και 2</td></tr>
-      <tr><td>Κλωνάρι βασιλικός</td><td>6</td><td>1</td><td>, </td><td>Ο Μιχάλης το βάζει στο αυτί του</td></tr>
-      <tr><td>Τσικουδιά (ποτήρι)</td><td>6</td><td>1</td><td>, </td><td>Prop υγρό (νερό για ασφάλεια)</td></tr>
-      <tr><td>Καλιτσούνια (πιατάκι)</td><td>6</td><td>1</td><td>, </td><td>Κέρασμα από Κυρία 1</td></tr>
-      <tr><td>Ποδήλατα</td><td>8</td><td>2</td><td>, </td><td>Mountain bikes, σε ανηφόρα</td></tr>
-      <tr><td>Κράνη ποδηλάτου</td><td>8</td><td>2</td><td>, </td><td>Ασφάλεια</td></tr>
-      <tr><td>Ηνία / χαλινάρια</td><td>8α, 9</td><td>2 σετ</td><td>, </td><td>Ο Μάρκος τα δένει</td></tr>
-      <tr><td>Σέλες αλόγων</td><td>8α, 9</td><td>2</td><td>, </td><td>, </td></tr>
-      <tr><td>Κεριά</td><td>10</td><td>3–5</td><td>, </td><td>Μόνος φωτισμός τραπεζιού</td></tr>
-      <tr><td>Ποτήρια κρασιού</td><td>10</td><td>2</td><td>, </td><td>Τσουγκρίζουν</td></tr>
-      <tr><td>Μπουκάλι κρασί</td><td>10</td><td>1</td><td>, </td><td>Στο τραπέζι</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ═══ SET DRESSING MASTER LIST ═══ -->
-<section class="section master-section" id="set">
-  <div class="master-header">
-    <div class="master-dot dot-set"></div>
-    <h2 class="section-title" style="margin-bottom:0;">Set Dressing &amp; Greenery ,  Master List</h2>
-  </div>
-  <table class="master-table">
-    <thead><tr><th>Στοιχείο</th><th>Τύπος</th><th>Σκηνές</th><th>Σημειώσεις</th></tr></thead>
-    <tbody>
-      <tr><td>Υπνοδωμάτιο Σοφίας (Γερμανία)</td><td>Set</td><td>1</td><td>Εφηβικό, γερμανικό σπίτι. Γυρίζεται σε δωμάτιο/studio.</td></tr>
-      <tr><td>Παλαιόχωρα (πόλη)</td><td>Location</td><td>1α, 2, 6</td><td>Πανζουρλισμός, σοκάκια, καφενείο</td></tr>
-      <tr><td>Καφενείο «Βότσαλο»</td><td>Set</td><td>2</td><td>Παραδοσιακό, τραπέζια, καρέκλες, τέντες, σήμανση</td></tr>
-      <tr><td>Beyond Luxury Retreat</td><td>Location</td><td>3, 3α, 4, 6α, 7, 10</td><td>Lobby, βεράντα, σουίτα, εστιατόριο, είσοδος</td></tr>
-      <tr><td>Πισίνες Beyond</td><td>Set</td><td>3, 3α</td><td>Αντανακλάσεις στους τοίχους</td></tr>
-      <tr><td>Λευκά σεντόνια</td><td>Set</td><td>3α, 6α</td><td>Σουίτα, κρεβάτι, μαξιλάρια</td></tr>
-      <tr><td>Κουρτίνες σουίτας</td><td>Set</td><td>6α</td><td>Το φως τρυπώνει ανάμεσα</td></tr>
-      <tr><td>Θαλάσσιες σπηλιές</td><td>Location</td><td>5</td><td>Ηλεκτρίκ μπλε νερά</td></tr>
-      <tr><td>Παραλία με κόκκινη άμμο</td><td>Location</td><td>5</td><td>Προσβάσιμη μόνο με σκάφος</td></tr>
-      <tr><td>Παρθένες παραλίες</td><td>Location</td><td>5α</td><td>B-roll drone/GoPro</td></tr>
-      <tr><td>Σοκάκια Παλαιόχωρας</td><td>Location</td><td>6</td><td>Αυλή, ταβέρνα, φούρνος</td></tr>
-      <tr><td>Νυχτολούλουδο</td><td>Greenery</td><td>6</td><td>Η Σοφία το μυρίζει, μόλις έχει ανοίξει</td></tr>
-      <tr><td>Κάστρο Παλαιόχωρας</td><td>Location</td><td>6</td><td>Ηλιοβασίλεμα, θέα</td></tr>
-      <tr><td>Βότανα (θυμάρι, δίκταμο, φασκόμηλο)</td><td>Greenery</td><td>8</td><td>Αρώματα στον αέρα, κοντινά πλάνα</td></tr>
-      <tr><td>Ορεινός δρόμος Ανύδρων</td><td>Location</td><td>8</td><td>Τραχύς, γκρίζα βράχια, χαμηλή βλάστηση</td></tr>
-      <tr><td>Παραλία (σούρουπο)</td><td>Location</td><td>9</td><td>Με άλογα στο νερό</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ═══ VEHICLES MASTER LIST ═══ -->
-<section class="section master-section" id="vehicles">
-  <div class="master-header">
-    <div class="master-dot dot-vehicle"></div>
-    <h2 class="section-title" style="margin-bottom:0;">Vehicles &amp; Animals ,  Master List</h2>
-  </div>
-  <table class="master-table">
-    <thead><tr><th>Στοιχείο</th><th>Τύπος</th><th>Σκηνές</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
-    <tbody>
-      <tr><td>Porsche Cayenne Coupe</td><td>Vehicle</td><td>1α, 1β, 2</td><td>1</td><td>Cashmere Beige Metallic. Branding «Beyond». Αφήνει Σοφία στο καφενείο (σκ.1β)</td></tr>
-      <tr><td>Ταχύπλοο σκάφος</td><td>Vehicle</td><td>5</td><td>1</td><td>Με skipper, για σπηλιές και κόκκινη άμμο</td></tr>
-      <tr><td>Σκάφος ασφαλείας</td><td>Vehicle</td><td>5</td><td>1</td><td>Για συνεργείο / safety</td></tr>
-      <tr><td>Follow vehicle (σκ. 8)</td><td>Vehicle</td><td>8</td><td>1</td><td>Για κινηματογράφηση ποδηλάτων</td></tr>
-      <tr><td>Άλογα</td><td>Animal</td><td>8α, 9</td><td>2</td><td>Εκπαιδευμένα, άνετα με νερό. Animal handler</td></tr>
-      <tr><td>Αγριοκάτσικα / κατσίκια</td><td>Animal</td><td>8</td><td>Κοπάδι 5–15</td><td>Προστατευόμενο είδος (κρι-κρι). Εναλλακτική: εκπαιδευμένα κατσίκια ή VFX</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ═══ WARDROBE MASTER LIST ═══ -->
-<section class="section master-section" id="wardrobe">
-  <div class="master-header">
-    <div class="master-dot dot-wardrobe"></div>
-    <h2 class="section-title" style="margin-bottom:0;">Wardrobe &amp; Makeup ,  Master List</h2>
-  </div>
-  <table class="master-table">
-    <thead><tr><th>Στοιχείο</th><th>Χαρακτήρας</th><th>Σκηνές</th><th>Σημειώσεις</th></tr></thead>
-    <tbody>
-      <tr><td>Καλοκαιρινά ρούχα ταξιδιού</td><td>Σοφία</td><td>1, 1α, 2</td><td>Άφιξη από Γερμανία</td></tr>
-      <tr><td>Μαγιό / ελαφριά ρούχα</td><td>Σοφία</td><td>3α, 5</td><td>Πισίνα, θάλασσα</td></tr>
-      <tr><td>Πιτζάμες / νυχτικό</td><td>Σοφία</td><td>6α</td><td>Πρωί, ξύπνημα</td></tr>
-      <tr><td>Ρούχα ημέρας</td><td>Σοφία</td><td>7, 8</td><td>Πρωινό, ποδήλατο</td></tr>
-      <tr><td>Ρούχα ιππασίας / casual</td><td>Σοφία</td><td>8α, 9</td><td>Άλογα, σούρουπο</td></tr>
-      <tr><td>Βραδινό φόρεμα</td><td>Σοφία</td><td>10</td><td>Elegant, δείπνο</td></tr>
-      <tr><td>Casual chic</td><td>Μάρκος</td><td>4, 5, 6, 8, 8α, 9</td><td>Χαλαρό αλλά κομψό, καλοκαιρινό</td></tr>
-      <tr><td>Βραδινό ντύσιμο</td><td>Μάρκος</td><td>10</td><td>Smart casual / elegant</td></tr>
-      <tr><td>Παραδοσιακά κρητικά ρούχα</td><td>Κυρία 1, Κυρία 2</td><td>6</td><td>Μαύρα, ηλικιωμένες χωριανές</td></tr>
-      <tr><td>Κρητική/τοπική περιβολή</td><td>Μιχάλης</td><td>6</td><td>Ταβερνιάρης με μουστάκι</td></tr>
-      <tr><td>Στολή σερβιτόρου (Beyond)</td><td>Σερβιτόρος</td><td>7, 10</td><td>Επαγγελματική, 5 αστέρων</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ═══ SPECIAL EQUIPMENT MASTER LIST ═══ -->
-<section class="section master-section" id="special">
-  <div class="master-header">
-    <div class="master-dot dot-special"></div>
-    <h2 class="section-title" style="margin-bottom:0;">Special Equipment &amp; Crew ,  Master List</h2>
-  </div>
-  <table class="master-table">
-    <thead><tr><th>Στοιχείο</th><th>Τύπος</th><th>Σκηνές</th><th>Σημειώσεις</th></tr></thead>
-    <tbody>
-      <tr><td>Drone</td><td>Equipment</td><td>1α, 3, 5, 5α, 8, 9, 10</td><td>Εναέριες λήψεις, νυχτερινή στο Σκ.10</td></tr>
-      <tr><td>GoPro (νέο μοντέλο)</td><td>Equipment</td><td>5, 5α, 9</td><td>Υποβρύχια πλάνα</td></tr>
-      <tr><td>Gimbal / Steadicam</td><td>Equipment</td><td>5, 6, 8, 9, 10</td><td>Tracking, κίνηση</td></tr>
-      <tr><td>Slow-motion camera</td><td>Equipment</td><td>8α, 9</td><td>Κινηματογραφικά πλάνα</td></tr>
-      <tr><td>Ναυαγοσώστης / safety diver</td><td>Crew</td><td>5, 9</td><td>Απαραίτητος για γυρίσματα σε νερό</td></tr>
-      <tr><td>Animal handler</td><td>Crew</td><td>8, 8α, 9</td><td>Για κατσίκια και άλογα</td></tr>
-      <tr><td>Stunt coordinator</td><td>Crew</td><td>8α, 9</td><td>Για άλογα (αν οι ηθοποιοί δεν ξέρουν ιππασία)</td></tr>
-      <tr><td>Custom UI γραφικά (post)</td><td>Post</td><td>1, 1α, 7, 9</td><td>Οθόνες κινητού: group chat, μηνύματα, notifications</td></tr>
-      <tr><td>Voice-over ηχογράφηση</td><td>Post</td><td>1, 6, 8</td><td>Μονόλογος και internal monologue Σοφίας</td></tr>
-      <tr><td>Color grading</td><td>Post</td><td>Όλες</td><td>Golden hour, σούρουπο, νύχτα με κεριά</td></tr>
-      <tr><td>VFX (αγριοκάτσικα)</td><td>Post</td><td>8</td><td>Αν δεν χρησιμοποιηθούν αληθινά ζώα</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ═══ ΠΡΟΓΡΑΜΜΑ ═══ -->
-<section class="section" id="schedule">
-  <h2 class="section-title">Πρόγραμμα Γυρισμάτων</h2>
-  <p class="section-subtitle">27–31 Ιουλίου · Παλαιόχωρα, Κρήτη</p>
-
-  <div class="day-card">
-    <div class="day-header"><strong>Δευτέρα 27 Ιουλίου</strong> · Beyond Luxury Retreat</div>
-    <div class="day-body">
-      <div class="scene-mini"><strong>Πρωί:</strong> Σκηνές 3, 3α, 6α, 7 <span class="slug">(1 4/8 σελ.)</span><br>Lobby, σουίτα, βεράντα. Cast: Σοφία, Σερβιτόρος. Drone.</div>
-      <div class="scene-mini"><strong>Απόγευμα/Νύχτα:</strong> Σκηνή 10 <span class="slug">(1 4/8 σελ.)</span><br>Εστιατόριο. Cast: Σοφία, Μάρκος. Drone closing shot.</div>
-    </div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-header"><strong>Τρίτη 28 Ιουλίου</strong> · Παλαιόχωρα (πόλη)</div>
-    <div class="day-body">
-      <div class="scene-mini"><strong>Πρωί:</strong> Σκηνές 1α, 2, 4 <span class="slug">(1 4/8 σελ.)</span><br>Transfer, Καφενείο «Βότσαλο», Είσοδος Beyond. Cast: Σοφία, Νίκος, Μάρκος. Extras: θαμώνες.</div>
-    </div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-header"><strong>Τετάρτη 29 Ιουλίου</strong> · Θάλασσα &amp; Παραλίες</div>
-    <div class="day-body">
-      <div class="scene-mini"><strong>Πρωί:</strong> Σκηνή 5 <span class="slug">(5/8 σελ.)</span><br>Σπήλαια, κόκκινη άμμος. Cast: Σοφία, Μάρκος. Ταχύπλοο, GoPro, Drone.</div>
-      <div class="scene-mini"><strong>Απόγευμα:</strong> Σκηνή 5α <span class="slug">(2/8 σελ.)</span><br>B-Roll παραλίες. Drone, GoPro.</div>
-    </div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-header"><strong>Πέμπτη 30 Ιουλίου</strong> · Βουνό &amp; Σοκάκια</div>
-    <div class="day-body">
-      <div class="scene-mini"><strong>Πρωί:</strong> Σκηνή 8 <span class="slug">(5/8 σελ.)</span><br>Δρόμος Ανύδρων, ποδήλατα, αγριοκάτσικα. Cast: Σοφία, Μάρκος.</div>
-      <div class="scene-mini"><strong>Απόγευμα:</strong> Σκηνή 6 <span class="slug">(7/8 σελ.)</span><br>Σοκάκια, απόγευμα ως ηλιοβασίλεμα. Cast: Σοφία, Μάρκος, Κυρία 1, 2, Μιχάλης. Extras: γειτονιά.</div>
-    </div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-header"><strong>Παρασκευή 31 Ιουλίου</strong> · Άλογα &amp; Σούρουπο</div>
-    <div class="day-body">
-      <div class="scene-mini"><strong>Πρωί:</strong> Σκηνές 8α, 9 <span class="slug">(1 1/8 σελ.)</span><br>Διαδρομή προς παραλία, σούρουπο. Cast: Σοφία, Μάρκος. 2 άλογα. GoPro, Drone, Gimbal.</div>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <img src="assets/beyond-logo.svg" alt="Beyond Luxury Retreat">
-  <p>Script Breakdown · «Το Πρωτόκολλο της Παλαιόχωρας»<br>
-  Γυρίσματα: 27–31 Ιουλίου · Παλαιόχωρα, Κρήτη<br>
-  &copy; 2026 Beyond Luxury Retreat &amp; Atheaton Media</p>
-</footer>
-
-<a href="#summary" class="back-top" title="Top">↑</a>
-
-
-<div class="section" id="schedule">
-  <h2>Πρόγραμμα Γυρισμάτων & Χρόνοι</h2>
-  <p class="schedule-note">Εκτιμώμενοι χρόνοι — prep, γύρισμα, location change. Συνολική βάρδια ~10-12 ώρες/ημέρα.</p>
-
-  <div class="day-card">
-    <h3>Δευτέρα 27 Ιουλίου <span>3, 3Α, 6Α, 7, 10</span></h3>
-    <table class="sched-table">
-      <tr><th>Ώρα</th><th>Τι</th><th>Διάρκεια</th></tr>
-      <tr><td>05:30</td><td>Call time — crew setup στη βεράντα Λυκούργου</td><td>60min prep</td></tr>
-      <tr class="shoot"><td>06:30</td><td>Σκ. 7 — Πρωινό, βεράντα. Rec 07:00</td><td>90min</td></tr>
-      <tr><td>08:00</td><td>Wrap βεράντας, μετακίνηση → δωμάτιο πιλότου</td><td>30min</td></tr>
-      <tr class="shoot"><td>08:30</td><td>Prep δωμάτιο πιλότου (Στέλλα, Μαρία)</td><td>60min</td></tr>
-      <tr class="shoot"><td>09:30</td><td>Σκ. 3, 3Α, 6Α — Δωμάτιο. Rec 10:00</td><td>3h</td></tr>
-      <tr><td>12:30</td><td>Wrap δωματίου, μεσημεριανό διάλειμμα</td><td>90min</td></tr>
-      <tr><td>14:00</td><td>Μετακίνηση → Big John, prep σπηλιάς (γεννήτρια, φώτα)</td><td>90min</td></tr>
-      <tr class="shoot"><td>15:30</td><td>Σκ. 10 — Σπηλιά Big John. Rec σούρουπο ~17:30</td><td>3h</td></tr>
-      <tr><td>19:00</td><td>Wrap σπηλιάς, απoσυναρμολόγηση</td><td>60min</td></tr>
-      <tr><td>20:00</td><td>Τέλος βάρδιας</td><td>~12.5h</td></tr>
-    </table>
-  </div>
-
-  <div class="day-card">
-    <h3>Τρίτη 28 Ιουλίου <span>2, 6</span></h3>
-    <table class="sched-table">
-      <tr><th>Ώρα</th><th>Τι</th><th>Διάρκεια</th></tr>
-      <tr><td>05:30</td><td>Call time — setup καφενείο «Βότσαλο» (Χάρης: φυσικό φως)</td><td>60min</td></tr>
-      <tr class="shoot"><td>06:30</td><td>Σκ. 2 — Καφενείο με ανατολή. Rec 07:15</td><td>2.5h</td></tr>
-      <tr><td>09:00</td><td>Wrap καφενείου, διάλειμμα, μετακίνηση → σοκάκια</td><td>90min</td></tr>
-      <tr class="shoot"><td>10:30</td><td>Prep σοκάκια, κομπάρσοι</td><td>60min</td></tr>
-      <tr class="shoot"><td>11:30</td><td>Σκ. 6 — Σοκάκια Παλαιόχωρας (γιαγιάδες, Μιχάλης, τσικουδιά)</td><td>3h</td></tr>
-      <tr><td>15:00</td><td>Wrap</td><td>~9.5h</td></tr>
-    </table>
-  </div>
-
-  <div class="day-card">
-    <h3>Τετάρτη 29 Ιουλίου <span>5, 5Α, 9</span></h3>
-    <table class="sched-table">
-      <tr><th>Ώρα</th><th>Τι</th><th>Διάρκεια</th></tr>
-      <tr><td>06:00</td><td>Call time — φόρτωση σκαφών, prep εξοπλισμού (drone, GoPro)</td><td>60min</td></tr>
-      <tr class="shoot"><td>07:00</td><td>Αναχώρηση σκαφών. Σκ. 5, 5Α — Θάλασσα, σπηλιές, υποβρύχια</td><td>4h</td></tr>
-      <tr><td>11:00</td><td>Επιστροφή, διάλειμμα, φόρτωση αλόγων</td><td>2h</td></tr>
-      <tr><td>13:00</td><td>Μετακίνηση → παραλία αλόγων, prep</td><td>90min</td></tr>
-      <tr class="shoot"><td>14:30</td><td>Prep άλογα, ηθοποιοί, drone (Ντίνος Inspire 3)</td><td>90min</td></tr>
-      <tr class="shoot"><td>16:00</td><td>Σκ. 9 — Άλογα, ηλιοβασίλεμα. Rec ~17:00</td><td>3h</td></tr>
-      <tr><td>19:30</td><td>Wrap, αποσυναρμολόγηση</td><td>60min</td></tr>
-      <tr><td>20:30</td><td>Τέλος βάρδιας</td><td>~14.5h</td></tr>
-    </table>
-  </div>
-
-  <div class="day-card">
-    <h3>Πέμπτη 30 Ιουλίου <span>4, 8</span></h3>
-    <table class="sched-table">
-      <tr><th>Ώρα</th><th>Τι</th><th>Διάρκεια</th></tr>
-      <tr><td>05:30</td><td>Call time — μετακίνηση → δρόμος Ανύδρων</td><td>45min</td></tr>
-      <tr class="shoot"><td>06:15</td><td>Prep κατσίκια, ποδήλατα, ηθοποιοί</td><td>45min</td></tr>
-      <tr class="shoot"><td>07:00</td><td>Σκ. 8 — Δρόμος Ανύδρων, κατσίκια, βότανα, πανόραμα</td><td>3h</td></tr>
-      <tr><td>10:00</td><td>Wrap, διάλειμμα, μετακίνηση → Beyond/λιμάνι</td><td>90min</td></tr>
-      <tr class="shoot"><td>11:30</td><td>Prep είσοδος Beyond, σκάφος</td><td>60min</td></tr>
-      <tr class="shoot"><td>12:30</td><td>Σκ. 4 — Είσοδος Beyond, λιμάνι</td><td>2.5h</td></tr>
-      <tr><td>15:00</td><td>Wrap</td><td>~9.5h</td></tr>
-    </table>
-  </div>
-
-  <div class="day-card">
-    <h3>Παρασκευή 31 Ιουλίου <span>1Α, 1Β, 9</span></h3>
-    <table class="sched-table">
-      <tr><th>Ώρα</th><th>Τι</th><th>Διάρκεια</th></tr>
-      <tr><td>06:30</td><td>Call time — prep Cayenne (rig 3 βεντούζες), ηθοποιοί</td><td>60min</td></tr>
-      <tr class="shoot"><td>07:30</td><td>Σκ. 1Α, 1Β — Διαδρομή, φαράγγι, διάλογος εντός Cayenne</td><td>2.5h</td></tr>
-      <tr><td>10:00</td><td>Wrap Cayenne, μετακίνηση → τοποθεσία Vespa</td><td>45min</td></tr>
-      <tr class="shoot"><td>10:45</td><td>Prep Vespa</td><td>30min</td></tr>
-      <tr class="shoot"><td>11:15</td><td>Σκ. 1Α — Vespa, ρομαντική διαδρομή</td><td>90min</td></tr>
-      <tr><td>12:45</td><td>Διάλειμμα</td><td>2h</td></tr>
-      <tr class="shoot"><td>15:00</td><td>Σκ. 9 (pickups) — Άλογα, παραλία</td><td>2h</td></tr>
-      <tr><td>17:00</td><td>Wrap ταινίας</td><td>~10.5h</td></tr>
-    </table>
+<div class="legend-bar">
+  <div class="legend">
+    <a href="#cast" class="legend-dot cast">Cast</a>
+    <a href="#extras" class="legend-dot extras">Extras</a>
+    <a href="#props" class="legend-dot prop">Props</a>
+    <a href="#set" class="legend-dot set">Set</a>
+    <a href="#vehicles" class="legend-dot vehicle">Vehicles</a>
+    <a href="#wardrobe" class="legend-dot wardrobe">Wardrobe</a>
+    <a href="#special" class="legend-dot special">Special</a>
   </div>
 </div>
 
-<style>
-.schedule-note{color:var(--taupe-dark);font-size:0.85rem;margin-bottom:24px}
-.day-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px}
-.day-card h3{font-family:'Outfit',sans-serif;font-size:1.05rem;margin-bottom:12px;color:var(--black)}
-.day-card h3 span{color:var(--taupe-dark);font-weight:400;font-size:0.85rem;margin-left:8px}
-.sched-table{width:100%;border-collapse:collapse;font-size:0.88rem}
-.sched-table th{text-align:left;padding:8px 10px;color:var(--taupe-dark);font-weight:500;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.04em;border-bottom:1px solid var(--border)}
-.sched-table td{padding:8px 10px;border-bottom:1px solid rgba(217,206,196,0.4);color:var(--text)}
-.sched-table tr.shoot td{background:rgba(184,156,138,0.06);font-weight:500}
-</style>
+<div class="content">
+
+<h1>🎬 Script Breakdown</h1>
+<div class="subtitle">«Το Πρωτόκολλο της Παλαιόχωρας» — Professional 1st AD Breakdown Sheet<br>
+<strong>15 σκηνές</strong> · 8 σελίδες · ~8 λεπτά · 5 ημέρες γυρισμάτων · 07/2026</div>
+
+<!-- ═══ ΣΚΗΝΗ 1 ═══ -->
+<div class="scene-card" id="scene1">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 1</div>
+      <div class="slugline">INT. ΥΠΝΟΔΩΜΑΤΙΟ ΣΟΦΙΑΣ (ΓΕΡΜΑΝΙΑ) — ΗΜΕΡΑ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Υπνοδωμάτιο, Γερμανία</span>
+      <span>📄 6/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ (19)</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Lead — Πρωταγωνίστρια</td></tr>
+        <tr><td>2</td><td>Ανοιχτή βαλίτσα</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Πάνω σε κρεβάτι</td></tr>
+        <tr><td>3</td><td>Κινητό τηλέφωνο Σοφίας</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Οθόνη με group chat Ibiza</td></tr>
+        <tr><td>4</td><td>Ρούχα (μέσα στη βαλίτσα)</td><td><span class="badge badge-wardrobe">Wardrobe</span></td><td>—</td><td>Καλοκαιρινά ρούχα</td></tr>
+        <tr><td>5</td><td>Δωμάτιο νεανικό</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Γερμανικό σπίτι, σύγχρονο</td></tr>
+        <tr><td>6</td><td>Έπιπλα υπνοδωματίου</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Κρεβάτι, κομοδίνο</td></tr>
+      </tbody>
+    </table>
+    <div class="notes">🎬 Μονόλογος straight-to-camera. Το κινητό χρειάζεται custom UI (group chat Ibiza). Γερμανικό/UK location ή studio set.</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 1α ═══ -->
+<div class="scene-card" id="scene1a">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 1α</div>
+      <div class="slugline">EXT. ΔΙΑΦΟΡΕΣ ΤΟΠΟΘΕΣΙΕΣ — ΜΟΝΤΑΖ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Αεροπλάνο / Δρόμος Κρήτης / Παλαιόχωρα</span>
+      <span>📄 2/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Σε ταξιδιωτική περιβολή</td></tr>
+        <tr><td>2</td><td>Κινητό τηλέφωνο Σοφίας</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Μήνυμα από Concierge Beyond</td></tr>
+        <tr><td>3</td><td>Porsche (transfer)</td><td><span class="badge badge-vehicle">Vehicle</span></td><td>1</td><td>Πολυτελές, σήμανση Beyond</td></tr>
+        <tr><td>4</td><td>Αεροπλάνο</td><td><span class="badge badge-vehicle">Vehicle</span></td><td>1</td><td>Stock ή πραγματικό</td></tr>
+        <tr><td>5</td><td>Αποσκευές Σοφίας</td><td><span class="badge badge-prop">Prop</span></td><td>1-2</td><td>Βαλίτσα + χειραποσκευή</td></tr>
+        <tr><td>6</td><td>Κρητικό τοπίο</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Πλάνα διαδρομής</td></tr>
+        <tr><td>7</td><td>Παλαιόχωρα καλοκαιρινή</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Πανζουρλισμός, κόσμος</td></tr>
+      </tbody>
+    </table>
+    <div class="notes">Montage — stock footage για πτήση. Drone πλάνα διαδρομής. Το transfer όχημα με branding «Beyond».</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 2 ═══ -->
+<div class="scene-card" id="scene2">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 2</div>
+      <div class="slugline">EXT. ΚΑΦΕ «ΤΟ ΒΟΤΣΑΛΟ» — ΗΜΕΡΑ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Παραλιακό καφενείο, Παλαιόχωρα</span>
+      <span>📄 7/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>—</td></tr>
+        <tr><td>2</td><td>ΣΕΡΒΙΤΟΡΟΣ (Νίκος)</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Ιδιοκτήτης, θυμάται τη Σοφία</td></tr>
+        <tr><td>3</td><td>Κινητό τηλέφωνο</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Μήνυμα concierge</td></tr>
+        <tr><td>4</td><td>Καρέκλες καφενείου</td><td><span class="badge badge-set">Set</span></td><td>3-4</td><td>Παραδοσιακές ψάθινες</td></tr>
+        <tr><td>5</td><td>Κατάλογος</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Ανοίγει-κλείνει</td></tr>
+        <tr><td>6</td><td>Δίσκος σερβιτόρου</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>—</td></tr>
+        <tr><td>7</td><td>Ελληνικός καφές</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Σε φλιτζάνι</td></tr>
+        <tr><td>8</td><td>Κουλουράκια</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Στο δίσκο</td></tr>
+        <tr><td>9</td><td>Cayenne Beyond</td><td><span class="badge badge-vehicle">Vehicle</span></td><td>1</td><td>Σταματάει απ' έξω</td></tr>
+        <tr><td>10</td><td>Σήμανση καφενείου</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Ταμπέλα «ΤΟ ΒΟΤΣΑΛΟ»</td></tr>
+        <tr><td>11</td><td>Κομπάρσοι (θαμώνες)</td><td><span class="badge badge-extras">Extras</span></td><td>5-10</td><td>Ατμόσφαιρα</td></tr>
+      </tbody>
+    </table>
+    <div class="notes">🎬 Documentary style (handheld). Ο δίσκος με καφέ και κουλουράκια προετοιμασμένος. Timing συντονισμού για άφιξη Cayenne.</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 3 ═══ -->
+<div class="scene-card" id="scene3">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 3</div>
+      <div class="slugline">INT/EXT. BEYOND LUXURY RETREAT — ΑΠΟΓΕΥΜΑ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Beyond Luxury Retreat, Παλαιόχωρα</span>
+      <span>📄 10/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>—</td></tr>
+        <tr><td>2</td><td>Κινητό τηλέφωνο</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Selfies, μήνυμα στους γονείς</td></tr>
+        <tr><td>3</td><td>Latte με γάλα βρώμης</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Σε ποτήρι</td></tr>
+        <tr><td>4</td><td>Σημείωμα γονιών</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Χειρόγραφο καλωσόρισμα</td></tr>
+        <tr><td>5</td><td>Έπιπλα lobby</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Μινιμαλιστικός σχεδιασμός</td></tr>
+        <tr><td>6</td><td>Πισίνες</td><td><span class="badge badge-set">Set</span></td><td>1-2</td><td>Αντανακλάσεις στους τοίχους</td></tr>
+        <tr><td>7</td><td>Λευκά σεντόνια σουίτας</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>—</td></tr>
+        <tr><td>8</td><td>Θέα Λιβυκό</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Από βεράντα</td></tr>
+      </tbody>
+    </table>
+    <div class="notes notes-critical">⚠️ Κρίσιμο: Golden hour για εξωτερικά πλάνα. Drone εναέριες λήψεις. Πραγματικό 5άστερο ή VFX set extension. Το σημείωμα από art department.</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 3α ═══ -->
+<div class="scene-card" id="scene3a">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 3α</div>
+      <div class="slugline">INT/EXT. BEYOND LUXURY RETREAT — ΜΟΝΤΑΖ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Σουίτα & ιδιωτική πισίνα</span>
+      <span>📄 3/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Αποσυμπίεση, ηρεμία</td></tr>
+        <tr><td>2</td><td>Λευκά σεντόνια</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Χέρι γλιστράει</td></tr>
+        <tr><td>3</td><td>Ιδιωτική πισίνα</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Νερό που λαμπιρίζει</td></tr>
+        <tr><td>4</td><td>Ξαπλώστρα</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Δίπλα στην πισίνα</td></tr>
+        <tr><td>5</td><td>Πετσέτες πισίνας</td><td><span class="badge badge-prop">Prop</span></td><td>1-2</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="notes">Montage χωρίς μουσική — μόνο φυσικοί ήχοι. Macro/close-up λήψεις. Η Σοφία με κλειστά μάτια στον ήλιο.</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 4 ═══ -->
+<div class="scene-card" id="scene4">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 4</div>
+      <div class="slugline">EXT. ΕΙΣΟΔΟΣ BEYOND LUXURY RETREAT — ΗΜΕΡΑ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Είσοδος Beyond</span>
+      <span>📄 3/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>—</td></tr>
+        <tr><td>2</td><td>ΜΑΡΚΟΣ (22)</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Casual, ψηλός, μελαχρινός</td></tr>
+        <tr><td>3</td><td>Παλιά βέσπα</td><td><span class="badge badge-vehicle">Vehicle</span></td><td>1</td><td>Με 2 κράνη στη σέλα</td></tr>
+        <tr><td>4</td><td>Κράνη</td><td><span class="badge badge-prop">Prop</span></td><td>2</td><td>—</td></tr>
+        <tr><td>5</td><td>Είσοδος ξενοδοχείου</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Επιβλητική είσοδος 5*</td></tr>
+        <tr><td>6</td><td>Σήμανση Beyond</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Λογότυπο</td></tr>
+      </tbody>
+    </table>
+    <div class="notes">Casting Μάρκου: ψηλός, μελαχρινός, 22. Casual chic styling. Η βέσπα είναι νέο στοιχείο — όχι πια απευθείας στο λιμάνι.</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 5 ═══ -->
+<div class="scene-card" id="scene5">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 5</div>
+      <div class="slugline">EXT. ΘΑΛΑΣΣΑ / ΣΠΗΛΙΕΣ &amp; ΚΟΚΚΙΝΗ ΑΜΜΟΣ — ΗΜΕΡΑ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Λιβυκό πέλαγος, σπηλιές, παραλία</span>
+      <span>📄 5/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Με μαγιό</td></tr>
+        <tr><td>2</td><td>ΜΑΡΚΟΣ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Με μαγιό</td></tr>
+        <tr><td>3</td><td>Ταχύπλοο σκάφος</td><td><span class="badge badge-vehicle">Vehicle</span></td><td>1</td><td>Χειρίζεται ο Μάρκος</td></tr>
+        <tr><td>4</td><td>Σωσίβια</td><td><span class="badge badge-prop">Prop</span></td><td>2</td><td>Ασφάλεια</td></tr>
+        <tr><td>5</td><td>Εξοπλισμός κολύμβησης</td><td><span class="badge badge-prop">Prop</span></td><td>2</td><td>Μάσκες, αναπνευστήρες</td></tr>
+        <tr><td>6</td><td>Polaroid κάμερα</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Στην τσάντα της Σοφίας</td></tr>
+        <tr><td>7</td><td>Παραλία κόκκινη άμμος</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>ΝΔ της Παλαιόχωρας</td></tr>
+        <tr><td>8</td><td>Θαλάσσιες σπηλιές</td><td><span class="badge badge-set">Set</span></td><td>1-2</td><td>Ηλεκτρίκ μπλε νερά</td></tr>
+      </tbody>
+    </table>
+    <div class="notes notes-critical">⚠️ Κρίσιμο: Γύρισμα σε νερό — άδειες, ασφάλεια, ειδικό συνεργείο. Drone πάνω από θάλασσα. Υποβρύχιες λήψεις. Σκάφος ασφαλείας. Ναυαγοσώστης. Πρόσβαση με σκάφος στην κόκκινη άμμο.</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 5α ═══ -->
+<div class="scene-card" id="scene5a">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 5α</div>
+      <div class="slugline">EXT. ΠΑΡΑΛΙΕΣ — ΜΟΝΤΑΖ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Παραλίες Παλαιόχωρας</span>
+      <span>📄 2/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Παρθένες παραλίες</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Μόνο τοπία</td></tr>
+      </tbody>
+    </table>
+    <div class="notes">B-roll montage — 2nd unit. Drone + υποβρύχιες λήψεις. Κανένας ηθοποιός.</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 6 ═══ -->
+<div class="scene-card" id="scene6">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 6</div>
+      <div class="slugline">EXT. ΣΟΚΑΚΙΑ ΠΑΛΑΙΟΧΩΡΑΣ — ΑΠΟΓΕΥΜΑ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Σοκάκια, αυλή, ταβέρνα, Παλαιόχωρα</span>
+      <span>📄 7/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>—</td></tr>
+        <tr><td>2</td><td>ΜΑΡΚΟΣ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Ξεναγός</td></tr>
+        <tr><td>3</td><td>ΚΥΡΙΑ 1</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Ηλικιωμένη, ψάθινη καρέκλα</td></tr>
+        <tr><td>4</td><td>ΚΥΡΙΑ 2</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Ηλικιωμένη, ψάθινη καρέκλα</td></tr>
+        <tr><td>5</td><td>ΜΙΧΑΛΗΣ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Ταβερνιάρης με μουστάκι</td></tr>
+        <tr><td>6</td><td>Ψάθινες καρέκλες</td><td><span class="badge badge-prop">Prop</span></td><td>2</td><td>Για Κυρίες</td></tr>
+        <tr><td>7</td><td>Κλωνάρι βασιλικός</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Ο Μιχάλης στο αυτί</td></tr>
+        <tr><td>8</td><td>Τσικουδιά + καλιτσούνια</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Κέρασμα</td></tr>
+        <tr><td>9</td><td>Νυχτολούλουδο</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Η Σοφία το μυρίζει</td></tr>
+        <tr><td>10</td><td>Κάστρο Παλαιόχωρας</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Background, ηλιοβασίλεμα</td></tr>
+        <tr><td>11</td><td>Οικογένεια σε αυλή</td><td><span class="badge badge-extras">Extras</span></td><td>4-5</td><td>Βραδινό φαγητό</td></tr>
+        <tr><td>12</td><td>Γυναίκες με φαγητό</td><td><span class="badge badge-extras">Extras</span></td><td>2</td><td>Φρεσκομαγειρεμένο</td></tr>
+        <tr><td>13</td><td>Κομπάρσοι σοκακιών</td><td><span class="badge badge-extras">Extras</span></td><td>5-10</td><td>Περαστικοί</td></tr>
+      </tbody>
+    </table>
+    <div class="notes notes-critical">⚠️ Απόγευμα → ηλιοβασίλεμα: 2ωρο shooting window. Πραγματικά σοκάκια — άδειες δήμου. 3 δευτερεύοντες ρόλοι (Κυρία 1, 2, Μιχάλης). Food styling. Τσικουδιά: prop (νερό/τσάι).</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 6α ═══ -->
+<div class="scene-card" id="scene6a">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 6α</div>
+      <div class="slugline">INT./EXT. ΣΟΥΙΤΑ BEYOND — ΠΡΩΙ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Σουίτα, Beyond Luxury Retreat</span>
+      <span>📄 1/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Ξυπνάει, γαλήνια</td></tr>
+        <tr><td>2</td><td>Λευκά σεντόνια</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>—</td></tr>
+        <tr><td>3</td><td>Κουρτίνες</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Φως τρυπώνει</td></tr>
+        <tr><td>4</td><td>Κινητό τηλέφωνο</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Δονείται, μήνυμα από Ibiza</td></tr>
+      </tbody>
+    </table>
+    <div class="notes">Transition σκηνή. Μπορεί να γυριστεί μαζί με Σκ. 3/3α. Πρωινό φως (6-8 πμ). Το μήνυμα: «Babe, dein Flug nach Ibiza ist heute!»</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 7 ═══ -->
+<div class="scene-card" id="scene7">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 7</div>
+      <div class="slugline">EXT. ΒΕΡΑΝΤΑ ΠΡΩΙΝΟΥ (BEYOND LUXURY) — ΗΜΕΡΑ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Βεράντα πρωινού, Beyond</span>
+      <span>📄 4/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>—</td></tr>
+        <tr><td>2</td><td>ΣΕΡΒΙΤΟΡΟΣ (Beyond)</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Μικρός ρόλος</td></tr>
+        <tr><td>3</td><td>Δίσκος σερβιτόρου</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>—</td></tr>
+        <tr><td>4</td><td>Latte με γάλα βρώμης</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Αρχική παραγγελία</td></tr>
+        <tr><td>5</td><td>Ελληνικός καφές</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Τελική επιλογή</td></tr>
+        <tr><td>6</td><td>Τραπέζι πρωινού</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Στη βεράντα</td></tr>
+        <tr><td>7</td><td>Στολή σερβιτόρου</td><td><span class="badge badge-wardrobe">Wardrobe</span></td><td>1</td><td>Επαγγελματική</td></tr>
+      </tbody>
+    </table>
+    <div class="notes">Κρίσιμη σκηνή χαρακτήρα: η Σοφία επιλέγει ελληνικό καφέ αντί για latte → σηματοδοτεί αλλαγή. Πρωινό φως.</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 8 ═══ -->
+<div class="scene-card" id="scene8">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 8</div>
+      <div class="slugline">EXT. ΔΡΟΜΟΣ ΠΡΟΣ ΑΝΥΔΡΟΥΣ — ΗΜΕΡΑ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Ορεινός δρόμος προς Ανύδρους, Κρήτη</span>
+      <span>📄 5/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Πάνω σε ποδήλατο</td></tr>
+        <tr><td>2</td><td>ΜΑΡΚΟΣ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Πάνω σε ποδήλατο</td></tr>
+        <tr><td>3</td><td>ΒΟΣΚΟΣ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Alternative, περνάει και φεύγει</td></tr>
+        <tr><td>4</td><td>Ποδήλατα</td><td><span class="badge badge-prop">Prop</span></td><td>2</td><td>Mountain bikes</td></tr>
+        <tr><td>5</td><td>Κουδούνια ζώων</td><td><span class="badge badge-prop">Prop</span></td><td>—</td><td>Στα αγριοκάτσικα</td></tr>
+        <tr><td>6</td><td>Αγριοκάτσικα (κρι-κρι)</td><td><span class="badge badge-vehicle">Animals</span></td><td>5-15</td><td>Κοπάδι διασχίζει δρόμο</td></tr>
+        <tr><td>7</td><td>Βότανα (θυμάρι, δίκταμο, φασκόμηλο)</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Αρωματικά φυτά</td></tr>
+        <tr><td>8</td><td>Ορεινός δρόμος</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Τραχύς, γκρίζα βράχια</td></tr>
+        <tr><td>9</td><td>Θέα Λιβυκό</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Από ψηλά</td></tr>
+      </tbody>
+    </table>
+    <div class="notes notes-critical">⚠️ Ζώα στο γύρισμα — animal handler, άδειες. Τα κρι-κρι είναι προστατευόμενο είδος → εκπαιδευμένα κατσίκια ή VFX. Mountain bikes σε ανώμαλο έδαφος. Voice-over Σοφίας. Ο βοσκός νέος ρόλος. Σκηνή φιλιού (αν συμφωνούν ηθοποιοί).</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 8α ═══ -->
+<div class="scene-card" id="scene8a">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 8α</div>
+      <div class="slugline">EXT. ΔΙΑΔΡΟΜΗ ΠΡΟΣ ΠΑΡΑΛΙΑ — ΜΟΝΤΑΖ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Στάβλος/ύπαιθρος → παραλία</span>
+      <span>📄 2/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Με άλογα</td></tr>
+        <tr><td>2</td><td>ΜΑΡΚΟΣ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Δένει ηνία</td></tr>
+        <tr><td>3</td><td>Άλογα</td><td><span class="badge badge-vehicle">Animals</span></td><td>2</td><td>—</td></tr>
+        <tr><td>4</td><td>Ηνία / χαλινάρια</td><td><span class="badge badge-prop">Prop</span></td><td>2</td><td>—</td></tr>
+        <tr><td>5</td><td>Σέλες αλόγων</td><td><span class="badge badge-prop">Prop</span></td><td>2</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="notes notes-critical">⚠️ Άλογα + παραλία = logistics μεταφοράς. Animal handler. Slow-motion κινηματογραφικά πλάνα. Ο Μάρκος πρέπει να δένει ηνία φυσικά.</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 9 ═══ -->
+<div class="scene-card" id="scene9">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 9</div>
+      <div class="slugline">EXT. ΠΑΡΑΛΙΑ — ΣΟΥΡΟΥΠΟ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Παραλία, Παλαιόχωρα</span>
+      <span>📄 7/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Πάνω σε άλογο</td></tr>
+        <tr><td>2</td><td>ΜΑΡΚΟΣ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Πάνω σε άλογο</td></tr>
+        <tr><td>3</td><td>Άλογα</td><td><span class="badge badge-vehicle">Animals</span></td><td>2</td><td>Πλατσουρίζουν στο νερό</td></tr>
+        <tr><td>4</td><td>Κινητό τηλέφωνο</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>100+ notifications, απενεργοποίηση</td></tr>
+        <tr><td>5</td><td>Ηνία / σέλες</td><td><span class="badge badge-prop">Prop</span></td><td>2</td><td>—</td></tr>
+        <tr><td>6</td><td>Παραλία σούρουπο</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Χρώματα φωτιάς</td></tr>
+      </tbody>
+    </table>
+    <div class="notes notes-critical">⚠️ ΚΡΙΣΙΜΟ: Σούρουπο — 15-20 λεπτά shooting window. Άλογα σε νερό — ειδική άδεια, έμπειρα άλογα. Κλιμακωτή σκηνή της ταινίας. Το κινητό με custom UI (100+ Notifications, «Ihr Flug nach Ibiza ist ohne Sie abgeflogen!»).</div>
+  </div>
+</div>
+
+<!-- ═══ ΣΚΗΝΗ 10 ═══ -->
+<div class="scene-card" id="scene10">
+  <div class="scene-header">
+    <div>
+      <div class="scene-num">ΣΚΗΝΗ 10</div>
+      <div class="slugline">EXT. ΕΣΤΙΑΤΟΡΙΟ (BEYOND LUXURY) — ΝΥΧΤΑ</div>
+    </div>
+    <div class="scene-meta">
+      <span>📍 Εστιατόριο Beyond Luxury Retreat</span>
+      <span>📄 14/8</span>
+    </div>
+  </div>
+  <div class="scene-body">
+    <table class="element-table">
+      <thead><tr><th>#</th><th>Στοιχείο</th><th>Κατηγορία</th><th>Ποσότητα</th><th>Σημειώσεις</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>ΣΟΦΙΑ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Βραδινό ντύσιμο</td></tr>
+        <tr><td>2</td><td>ΜΑΡΚΟΣ</td><td><span class="badge badge-cast">Cast</span></td><td>1</td><td>Smart casual</td></tr>
+        <tr><td>3</td><td>Κεριά</td><td><span class="badge badge-prop">Prop</span></td><td>3-5</td><td>Μόνο κεριά για φωτισμό</td></tr>
+        <tr><td>4</td><td>Ποτήρια κρασιού</td><td><span class="badge badge-prop">Prop</span></td><td>2</td><td>Τσουγκρίζουν</td></tr>
+        <tr><td>5</td><td>Μπουκάλι κρασί</td><td><span class="badge badge-prop">Prop</span></td><td>1</td><td>Στο τραπέζι</td></tr>
+        <tr><td>6</td><td>Τραπέζι εστιατορίου</td><td><span class="badge badge-set">Set</span></td><td>1</td><td>Ρομαντικό στήσιμο</td></tr>
+        <tr><td>7</td><td>Λιμάνι Παλαιόχωρας</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>Θέα, φώτα που τρεμοπαίζουν</td></tr>
+        <tr><td>8</td><td>Έναστρος ουρανός</td><td><span class="badge badge-set">Set</span></td><td>—</td><td>—</td></tr>
+        <tr><td>9</td><td>Βραδινό φόρεμα Σοφίας</td><td><span class="badge badge-wardrobe">Wardrobe</span></td><td>1</td><td>Elegant</td></tr>
+        <tr><td>10</td><td>Σερβιτόροι</td><td><span class="badge badge-extras">Extras</span></td><td>2</td><td>Background</td></tr>
+      </tbody>
+    </table>
+    <div class="notes notes-critical">⚠️ Νυχτερινό γύρισμα — ειδικός φωτισμός, άδειες. Drone νύχτα (10H) — closing shot. Πραγματική θέα στο Λιβυκό. VFX enhancement έναστρου ουρανού.</div>
+  </div>
+</div>
+
+<!-- ═══════════════ SUMMARY ═══════════════ -->
+<div class="summary-section" id="cast">
+  <h2>👥 Cast List</h2>
+  <table class="summary-table">
+    <thead><tr><th>#</th><th>Ρόλος</th><th>Κατηγορία</th><th>Σκηνές</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>ΣΟΦΙΑ (19)</strong></td><td>Lead</td><td>1, 1α, 2, 3, 3α, 4, 5, 6, 6α, 7, 8, 8α, 9, 10</td></tr>
+      <tr><td>2</td><td><strong>ΜΑΡΚΟΣ (22)</strong></td><td>Lead</td><td>4, 5, 6, 8, 8α, 9, 10</td></tr>
+      <tr><td>3</td><td><strong>ΣΕΡΒΙΤΟΡΟΣ / ΝΙΚΟΣ</strong></td><td>Supporting</td><td>2</td></tr>
+      <tr><td>4</td><td><strong>ΚΥΡΙΑ 1</strong></td><td>Supporting</td><td>6</td></tr>
+      <tr><td>5</td><td><strong>ΚΥΡΙΑ 2</strong></td><td>Supporting</td><td>6</td></tr>
+      <tr><td>6</td><td><strong>ΜΙΧΑΛΗΣ</strong></td><td>Supporting</td><td>6</td></tr>
+      <tr><td>7</td><td><strong>ΣΕΡΒΙΤΟΡΟΣ (Beyond)</strong></td><td>Day Player</td><td>7</td></tr>
+      <tr><td>8</td><td><strong>ΒΟΣΚΟΣ</strong></td><td>Cameo</td><td>8</td></tr>
+      <tr><td>9</td><td><strong>CONCIERGE (V.O./text)</strong></td><td>Voice/Text</td><td>2, 3</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="summary-section" id="vehicles">
+  <h2>🚗 Vehicles &amp; Animals</h2>
+  <table class="summary-table">
+    <thead><tr><th>Στοιχείο</th><th>Σκηνές</th><th>Σημειώσεις</th></tr></thead>
+    <tbody>
+      <tr><td>Porsche Cayenne (transfer)</td><td>1α, 2</td><td>Με branding Beyond</td></tr>
+      <tr><td>Παλιά βέσπα</td><td>4</td><td>Με 2 κράνη</td></tr>
+      <tr><td>Ταχύπλοο σκάφος</td><td>5</td><td>Με skipper</td></tr>
+      <tr><td>Σκάφος ασφαλείας</td><td>5</td><td>Συνεργείο</td></tr>
+      <tr><td>Follow vehicle</td><td>8</td><td>Γύρισμα ποδηλάτων</td></tr>
+      <tr><td>Άλογα (2)</td><td>8α, 9</td><td>Εκπαιδευμένα, άνετα με νερό</td></tr>
+      <tr><td>Αγριοκάτσικα / κατσίκια</td><td>8</td><td>Εκπαιδευμένα ή VFX</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="summary-section" id="props">
+  <h2>🟣 Props — Master List</h2>
+  <table class="summary-table">
+    <thead><tr><th>Prop</th><th>Σκηνές</th><th>Continuity</th></tr></thead>
+    <tbody>
+      <tr><td>Κινητό Σοφίας</td><td>1, 1α, 2, 3, 5, 6α, 7, 9</td><td>Ακολουθεί σε όλο το σενάριο</td></tr>
+      <tr><td>Βαλίτσα Σοφίας</td><td>1, 1α</td><td>Μόνο στην αρχή</td></tr>
+      <tr><td>Γυαλιά ηλίου</td><td>1α</td><td>—</td></tr>
+      <tr><td>Ελληνικός καφές</td><td>2, 7</td><td>Σύμβολο αλλαγής</td></tr>
+      <tr><td>Latte γάλα βρώμης</td><td>3, 7</td><td>Αντικαθίσταται από ελληνικό</td></tr>
+      <tr><td>Σημείωμα γονιών</td><td>3</td><td>Μόνο στη σουίτα</td></tr>
+      <tr><td>Polaroid κάμερα</td><td>5</td><td>Στην τσάντα Σοφίας</td></tr>
+      <tr><td>Ψάθινες καρέκλες</td><td>6</td><td>—</td></tr>
+      <tr><td>Τσικουδιά + καλιτσούνια</td><td>6</td><td>—</td></tr>
+      <tr><td>Ποδήλατα</td><td>8</td><td>Mountain bikes</td></tr>
+      <tr><td>Ηνία, σέλες</td><td>8α, 9</td><td>—</td></tr>
+      <tr><td>Κεριά</td><td>10</td><td>—</td></tr>
+      <tr><td>Ποτήρια κρασιού</td><td>10</td><td>—</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="summary-section" id="special">
+  <h2>🎬 Special Equipment</h2>
+  <table class="summary-table">
+    <thead><tr><th>Εξοπλισμός</th><th>Σκηνές</th></tr></thead>
+    <tbody>
+      <tr><td>Drone</td><td>1α, 3, 5, 5α, 8, 9, 10</td></tr>
+      <tr><td>Υποβρύχια κάμερα</td><td>5, 5α, 9</td></tr>
+      <tr><td>Gimbal / Steadicam</td><td>5, 6, 8, 9, 10</td></tr>
+      <tr><td>Slow-motion camera</td><td>8α, 9</td></tr>
+      <tr><td>Crane</td><td>10</td></tr>
+      <tr><td>Camera car / follow vehicle</td><td>8</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="summary-section">
+  <h2>📅 Προτεινόμενο Πρόγραμμα Γυρισμάτων</h2>
+  <table class="summary-table">
+    <thead><tr><th>Ημέρα</th><th>Σκηνές</th><th>Τοποθεσίες</th><th>Δυσκολία</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>3, 3α, 6α, 7, 10</td><td>Beyond Luxury Retreat</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td><strong>2</strong></td><td>1α, 2, 4</td><td>Παλαιόχωρα (transfer, καφέ, είσοδος)</td><td>⭐⭐⭐</td></tr>
+      <tr><td><strong>3</strong></td><td>5, 5α</td><td>Θάλασσα, σπηλιές, παραλίες</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td><strong>4</strong></td><td>6, 8, 8α, 9</td><td>Σοκάκια, βουνό, παραλία με άλογα</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td><strong>5</strong></td><td>1</td><td>Γερμανία / Studio set</td><td>⭐⭐</td></tr>
+      <tr><td><strong>B-Roll</strong></td><td>1α, 5α, 8α</td><td>Drone / 2nd unit</td><td>⭐⭐</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="summary-section">
+  <h2>⚠️ Κρίσιμες Άδειες &amp; Απαιτήσεις</h2>
+  <table class="summary-table">
+    <thead><tr><th>Απαίτηση</th><th>Σκηνές</th><th>Προτεραιότητα</th></tr></thead>
+    <tbody>
+      <tr><td>Άδεια Δήμου Καντάνου-Σελίνου</td><td>2, 5, 6, 8, 9</td><td>🔴 ΥΨΗΛΗ</td></tr>
+      <tr><td>Άδεια Λιμενικού</td><td>5, 5α</td><td>🔴 ΥΨΗΛΗ</td></tr>
+      <tr><td>Άδεια Beyond Luxury Retreat</td><td>3, 3α, 4, 6α, 7, 10</td><td>🔴 ΥΨΗΛΗ</td></tr>
+      <tr><td>Άδεια Αρχαιολογίας (Κάστρο, σπήλαια)</td><td>5, 6</td><td>🟡 ΜΕΣΑΙΑ</td></tr>
+      <tr><td>Animal handler / άδεια ζώων</td><td>8, 8α, 9</td><td>🔴 ΥΨΗΛΗ</td></tr>
+      <tr><td>Ασφάλεια θαλάσσιων γυρισμάτων</td><td>5, 5α, 9</td><td>🔴 ΥΨΗΛΗ</td></tr>
+      <tr><td>Νυχτερινή άδεια γυρισμάτων</td><td>10</td><td>🟡 ΜΕΣΑΙΑ</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="summary-section">
+  <h2>🎬 Post-Production Notes</h2>
+  <table class="summary-table">
+    <thead><tr><th>Στοιχείο</th><th>Λεπτομέρειες</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Custom UI/Γραφικά</strong></td><td>Οθόνες κινητού (Σκ. 1, 1α, 6α, 7, 9)</td></tr>
+      <tr><td><strong>Voice-over</strong></td><td>Σκ. 1, 6, 8</td></tr>
+      <tr><td><strong>Drone πλάνα</strong></td><td>1α, 3, 5, 5α, 8α, 9, 10 (14 πλάνα)</td></tr>
+      <tr><td><strong>Color grading</strong></td><td>Χρυσαφένιο (Σκ. 3, 6), Σούρουπο (Σκ. 9), Νύχτα/κεριά (Σκ. 10)</td></tr>
+      <tr><td><strong>VFX</strong></td><td>Αγριοκάτσικα (Σκ. 8), έναστρος ουρανός (Σκ. 10)</td></tr>
+      <tr><td><strong>Ήχος</strong></td><td>Φυσικοί ήχοι (Σκ. 3α, 6, 8, 9, 10), κύματα, κουδούνια, βότανα</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p style="text-align:center;color:var(--text-light);font-size:0.8rem;margin-top:40px;">
+  Breakdown prepared by Hermes Agent — following industry-standard 1st AD methodology.<br>
+  Color coding based on DGA/industry standards. Elements checked for implied &amp; linking.
+</p>
+
+</div>
+
 </body>
 </html>

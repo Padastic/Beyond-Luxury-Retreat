@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Σενάριο ,  Το Πρωτόκολλο της Παλαιόχωρας</title>
+<title>Σενάριο — Το Πρωτόκολλο της Παλαιόχωρας</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
@@ -32,7 +32,7 @@ body {
 .topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;white-space:nowrap;flex-shrink:0}
 .topbar-brand .title{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:500;color:var(--black);letter-spacing:-0.01em}
 .topbar-nav{display:flex;align-items:center;gap:4px;flex-wrap:nowrap}
-.topbar-nav a{text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;padding:10px 14px;border-radius:8px;white-space:nowrap;transition:all 0.22s ease;color:var(--text-light);display:flex;align-items:center;gap:6px}
+.topbar-nav a{text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;padding:10px 14px;border-radius:8px;white-space:nowrap;transition:all 0.22s ease;color:var(--text-light);display:flex;align-items:center;gap:6px;position:relative}
 .topbar-nav a:hover{color:var(--black);background:rgba(184,156,138,0.10)}
 .topbar-nav a.active{color:var(--taupe-dark);background:var(--taupe-bg);font-weight:600}
 .topbar-nav a::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--taupe-dark);border-radius:2px;transition:width 0.22s ease}
@@ -80,6 +80,21 @@ body {
 }
 
 .scene-block { margin-bottom: 44px; }
+
+.shot-tags {
+  display: flex; gap: 4px; flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.shot-tag {
+  background: rgba(0,0,0,0.06);
+  font-family: 'Inter', -apple-system, sans-serif !important;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text-light);
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+}
 
 .slugline {
   font-family: 'Courier New', Courier, monospace;
@@ -149,25 +164,17 @@ body {
 
 /* Mobile */
 @media (max-width: 768px) {
-  .topbar{position:sticky;top:0;z-index:100;background:rgba(245,237,228,0.82);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid rgba(184,156,138,0.15);padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:8px;overflow-x:auto;box-shadow:0 1px 8px rgba(0,0,0,0.04)}
-.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;white-space:nowrap;flex-shrink:0}
-.topbar-brand .icon-svg{width:22px;height:22px;opacity:0.7;flex-shrink:0;display:flex;align-items:center}
-.topbar-brand .title{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:500;color:var(--black);letter-spacing:-0.01em}
-.topbar-nav{display:flex;align-items:center;gap:4px;flex-wrap:nowrap}
-.topbar-nav a{text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;padding:10px 14px;border-radius:8px;white-space:nowrap;transition:all 0.22s ease;color:var(--text-light);display:flex;align-items:center;gap:6px;position:relative}
-.topbar-nav a .nav-icon{width:16px;height:16px;opacity:0.4;flex-shrink:0;display:flex;align-items:center;transition:opacity 0.22s}
-.topbar-nav a:hover{color:var(--black);background:rgba(184,156,138,0.10)}
-.topbar-nav a:hover .nav-icon{opacity:0.75}
-.topbar-nav a.active{color:var(--taupe-dark);background:var(--taupe-bg);font-weight:600}
-.topbar-nav a.active .nav-icon{opacity:1;color:var(--taupe-dark)}
-.topbar-nav a::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--taupe-dark);border-radius:2px;transition:width 0.22s ease}
-.topbar-nav a.active::after{width:60%}
-.topbar-nav a:hover::after{width:40%}
-.topbar-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.topbar-actions .dept-hint{font-size:0.68rem;color:var(--text-light);letter-spacing:0.05em;opacity:0.6;white-space:nowrap}
-.topbar-nav a .nav-icon{width:16px;height:16px;opacity:0.4;flex-shrink:0;display:flex;align-items:center;transition:opacity 0.22s}
-.topbar-nav a:hover .nav-icon{opacity:0.75}
-.topbar-nav a.active .nav-icon{opacity:1;color:var(--taupe-dark)}
+  .topbar{padding:0 16px}
+  .topbar-brand .title{font-size:0.92rem}
+  .topbar-nav a{font-size:0.7rem;padding:8px 10px}
+  .script-container{padding:24px 16px 60px;font-size:0.88rem}
+}
+
+/* Print */
+@media print {
+  .topbar, .legend-bar { display: none; }
+  .script-container { padding: 0; max-width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -206,18 +213,27 @@ body {
 <!-- ═══ ΣΚΗΝΗ 1 ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 1 ,  INT. ΥΠΝΟΔΩΜΑΤΙΟ ΣΟΦΙΑΣ (ΓΕΡΜΑΝΙΑ) ,  ΗΜΕΡΑ</div>
+<div class="shot-tags">
+  <span class="shot-tag">1A</span><span class="shot-tag">1B</span><span class="shot-tag">1C</span><span class="shot-tag">1D</span>
+</div>
 
-<div class="action">Η <a href="breakdown.html#cast" class="hl hl-cast">ΣΟΦΙΑ (19)</a> στο δωµάτιο της στη Γερμανία. Μπροστά της µια ανοιχτή <a href="breakdown.html#props" class="hl hl-prop">βαλίτσα</a>.</div>
+<div class="slugline">ΣΚΗΝΗ 1 — INT. ΥΠΝΟΔΩΜΑΤΙΟ ΣΟΦΙΑΣ (ΓΕΡΜΑΝΙΑ) — ΗΜΕΡΑ</div>
+
+<div class="action">Η <a href="breakdown.html#cast" class="hl hl-cast">ΣΟΦΙΑ (19)</a> στο δωμάτιο της στην Γερμανία. Μπροστά της μια ανοιχτή <a href="breakdown.html#props" class="hl hl-prop">βαλίτσα</a>.</div>
 
 <div class="character">ΣΟΦΙΑ</div>
 <div class="parenthetical">(Μονόλογος)</div>
-<div class="dialogue">Το σχέδιο ήταν Ibiza. Party, vibes, ποτά, µουσικές και influencers. Αλλά οι γονείς µου έχουν το αιώνιο τους κόλληµα που λέγεται <a href="breakdown.html#set" class="hl hl-set">Παλαιόχωρα</a>. «Σοφία», µου είπαν, «δεν µπορείς να πας διακοπές µόνη σου, είσαι ακόµα µικρή. Αν πας όµως στην Παλαιόχωρα, τουλάχιστον θα είσαι µε ανθρώπους που µας ξέρουν αν σου συµβεί κάτι θα σε βοηθήσουν, επιπλέον από εµάς θα έχεις ως δώρο σουίτα στο ολοκαίνουργιο 5άστερο που ανοίγει φέτος εκεί».</div>
+<div class="dialogue">Der Plan war Ibiza. Party, Vibes, Drinks, Musik und Influencer. Aber meine Eltern mit ihren ewigen Fixierung auf Palochora.</div>
 
-<div class="action">Πιάνει το <a href="breakdown.html#props" class="hl hl-prop">κινητό</a> της. Η οθόνη δείχνει το group chat της παρέας της για την Ίµπιζα. Πληκτρολογεί: «Αντέχω 2 µέρες στους γέρους και έρχοµαι Ίµπιζα. Μην κάνετε το µεγάλο πάρτι χωρίς εµένα!».</div>
+<div class="parenthetical">(Ακούγεται το ξυπνητήρι της)</div>
 
 <div class="character">ΣΟΦΙΑ (ΣΥΝΕΧΕΙΑ)</div>
-<div class="dialogue">Μια ολόκληρη σουίτα δική µου σε νέο 5άστερο; Φυσικά και ήταν µια πρόταση που δεν µπορούσα να αρνηθώ! Αλλά µεταξύ µας... η Ibiza θα ήταν καλύτερη. Ή έτσι νόµιζα.</div>
+<div class="dialogue">«Σοφία», μου είπαν, «δεν μπορείς να πας διακοπές μόνη σου, είσαι ακόμα μικρή. Αν πας όμως στην <a href="breakdown.html#set" class="hl hl-set">Παλαιόχωρα</a>, τουλάχιστον θα είσαι με ανθρώπους που μας ξέρουν κι αν χρειαστείς κάτι θα σε βοηθήσουν, επιπλέον από εμάς θα έχεις ως δώρο σουίτα στο ολοκαίνουργιο 5-άστερο που ανοίγει φέτος εκεί».</div>
+
+<div class="action">Πιάνει το <a href="breakdown.html#props" class="hl hl-prop">κινητό</a> της. Η οθόνη δείχνει το group chat της παρέας της για την Ίμπιζα. Πληκτρολογεί: «Zwei Tage halte ich das aus, und dann komme ich nach Ibiza. Fangt bloß die große Party nicht ohne mich an!».</div>
+
+<div class="character">ΣΟΦΙΑ (ΣΥΝΕΧΕΙΑ)</div>
+<div class="dialogue">Eine ganze Suite nur für mich? Da kann ich natürlich nicht Nein sagen! Aber unter uns… Ibiza ist besser. Dachte ich zumindest.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -225,31 +241,26 @@ body {
 <!-- ═══ ΣΚΗΝΗ 1α ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 1α ,  EXT. ΔΙΑΦΟΡΕΣ ΤΟΠΟΘΕΣΙΕΣ ,  ΜΟΝΤΑΖ</div>
-
-<div class="action">Πλάνα από πτήση. Η διαδροµή στη φύση. Η άφιξη. Το πολυτελές <a href="breakdown.html#vehicles" class="hl hl-vehicle">transfer</a> (λεωφορείο/ταξί) που την είχε παραλάβει από το αεροδρόµιο, την αφήνει στη µέση του καλοκαιρινού πανζουρλισµού της <a href="breakdown.html#set" class="hl hl-set">Παλαιόχωρας</a>. Μήνυµα στο <a href="breakdown.html#props" class="hl hl-prop">κινητό</a> της: «Beyond Transfer: Your driver will pick you up in exactly 45 minutes outside of <a href="breakdown.html#set" class="hl hl-set">καφετέρια Βότσαλο</a>».</div>
-
-<div class="character">ΣΟΦΙΑ</div>
-<div class="parenthetical">(Μουρµουρίζει ειρωνικά)</div>
-<div class="dialogue">Τέλεια.</div>
-
-<div class="action">Κοιτώντας το <a href="breakdown.html#props" class="hl hl-prop">κινητό</a> της φτάνει εκεί.</div>
-
-<div class="transition">CUT TO:</div>
+<div class="shot-tags">
+  <span class="shot-tag">1αA</span><span class="shot-tag">1αB</span><span class="shot-tag">1αC</span><span class="shot-tag">1αD</span>
 </div>
 
-<!-- ═══ ΣΚΗΝΗ 1β ═══ -->
-<div class="scene-block">
+<div class="slugline">ΣΚΗΝΗ 1α — EXT. ΔΙΑΦΟΡΕΣ ΤΟΠΟΘΕΣΙΕΣ — ΜΟΝΤΑΖ</div>
 
-<div class="slugline">ΣΚΗΝΗ 1β ,  INT. CAYENNE ,  ΗΜΕΡΑ</div>
+<div class="action">Πλάνα από πτήση. Η διαδρομή στη φύση. Τίποτα δε θυμίζει τα σχέδιά της για Ίμπιζα.</div>
 
-<div class="action">Η ΣΟΦΙΑ μέσα στο Cayenne, κοιτάζει έξω από το παράθυρο.</div>
+<div class="parenthetical">(Φοράει <a href="breakdown.html#props" class="hl hl-prop">γυαλιά ηλίου</a>, το κινητό της στο χέρι παίζει Techno, ξεφυσάει βαριεστημένη)</div>
 
 <div class="character">ΣΟΦΙΑ</div>
+<div class="dialogue">Bevor ich mein Kaffee nicht getrunken habe, gehe ich nirgendwo hin.</div>
 
-<div class="dialogue">Αν δεν πιω τον καφέ μου, δεν πάω στο ξενοδοχείο.</div>
+<div class="action">Η άφιξη. Το πολυτελές <a href="breakdown.html#vehicles" class="hl hl-vehicle">Porsche</a> που την είχε παραλάβει από το αεροδρόμιο, την αφήνει έξω από «<a href="breakdown.html#set" class="hl hl-set">Το Βότσαλο</a>», ένα παραδοσιακό εστιατόριο-καφέ με καλοκαιρινά vibes και instagramικές γωνίες.</div>
 
-<div class="action">Ο οδηγός γελάει. Το αμάξι συνεχίζει προς το <a href="breakdown.html#set" class="hl hl-set">καφενείο</a>.</div>
+<div class="character">ΣΟΦΙΑ</div>
+<div class="parenthetical">(Μουρμουρίζει ειρωνικά μόλις σταματά το αυτοκίνητο)</div>
+<div class="dialogue">Na Super.</div>
+
+<div class="action">Κατεβαίνει από το αμάξι.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -257,34 +268,49 @@ body {
 <!-- ═══ ΣΚΗΝΗ 2 ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 2 ,  EXT. ΚΑΦΕΝΕΙΟ «ΒΟΤΣΑΛΟ» ,  ΗΜΕΡΑ</div>
+<div class="shot-tags">
+  <span class="shot-tag">2A</span><span class="shot-tag">2B</span><span class="shot-tag">2C</span><span class="shot-tag">2D</span><span class="shot-tag">2E</span><span class="shot-tag">2F</span><span class="shot-tag">2G</span><span class="shot-tag">2H</span>
+</div>
 
-<div class="action">Ξεκινάµε τη σκηνή µε πραγµατικό υλικό (documentary style). Κάθεται στη µοναδική άδεια <a href="breakdown.html#props" class="hl hl-prop">καρέκλα</a>. Ανοίγει τον <a href="breakdown.html#props" class="hl hl-prop">κατάλογο</a> µόνο για να τον ξανακλείσει.</div>
+<div class="slugline">ΣΚΗΝΗ 2 — EXT. ΚΑΦΕ «ΤΟ ΒΟΤΣΑΛΟ» — ΗΜΕΡΑ</div>
+
+<div class="action">Ξεκινάμε τη σκηνή με πραγματικό υλικό (documentary style if available). Κάθεται στη μοναδική άδεια <a href="breakdown.html#props" class="hl hl-prop">καρέκλα</a>. Ανοίγει τον <a href="breakdown.html#props" class="hl hl-prop">κατάλογο</a> μόνο για να τον ξανακλείσει.</div>
 
 <div class="character">ΣΟΦΙΑ</div>
-<div class="parenthetical">(Μουρµουρίζει)</div>
-<div class="dialogue">Αυτό δεν είναι Ίµπιζα.</div>
+<div class="parenthetical">(Μουρμουρίζει)</div>
+<div class="dialogue">Das… ist nicht Ibiza.</div>
 
-<div class="action">Εκείνη τη στιγµή καταφθάνει ο σερβιτόρος, ο <a href="breakdown.html#cast" class="hl hl-cast">ΝΙΚΟΣ</a>. Πριν προλάβει να της µιλήσει, του παραγγέλνει:</div>
+<div class="action">Εκείνη τη στιγμή καταφθάνει ο σερβιτόρος. Πριν προλάβει να της μιλήσει, του παραγγέλνει:</div>
 
 <div class="character">ΣΟΦΙΑ (ΣΥΝΕΧΕΙΑ)</div>
-<div class="dialogue">One Ice latte with oatmeal milk, please.</div>
+<div class="dialogue">Έναν Ice latte with oatmeal milk, παρακαλώ.</div>
 
-<div class="action">Ο Νίκος δεν σηµειώνει καν την παραγγελία. Της αφήνει έναν <a href="breakdown.html#props" class="hl hl-prop">ελληνικό καφέ</a> και <a href="breakdown.html#props" class="hl hl-prop">κουλουράκια</a> που ήδη είχε στο <a href="breakdown.html#props" class="hl hl-prop">δίσκο</a> του.</div>
+<div class="action">Ο σερβιτόρος δεν σημειώνει την παραγγελία. Της αφήνει έναν <a href="breakdown.html#props" class="hl hl-prop">ελληνικό καφέ</a> και <a href="breakdown.html#props" class="hl hl-prop">κουλουράκια</a> που ήδη είχε στο <a href="breakdown.html#props" class="hl hl-prop">δίσκο</a> του.</div>
 
-<div class="character">ΝΙΚΟΣ</div>
-<div class="dialogue">Σε θυµάµαι από 5 χρονών που σε κυνηγούσαµε για να φας µια µπουκιά... δεν έχεις αλλάξει καθόλου Σοφία.</div>
+<div class="character">ΣΕΡΒΙΤΟΡΟΣ</div>
+<div class="dialogue">Σε θυμάμαι από 5 χρονών που σε κυνηγούσαμε για να φας μια μπουκιά… δεν έχεις αλλάξει καθόλου Σοφία.</div>
 
-<div class="action">Η Σοφία τον κοιτάζει µε απορία.</div>
+<div class="action">Η Σοφία τον κοιτάζει με απορία.</div>
 
-<div class="character">ΝΙΚΟΣ (ΣΥΝΕΧΕΙΑ)</div>
-<div class="dialogue">Πιες αυτόν τον καφέ να καταλάβεις λίγο ουσία Ελλάδας. Καλώς ήρθες. Αύριο στις 10:00 ο γιος µου ο <a href="breakdown.html#cast" class="hl hl-cast">Μάρκος</a> θα έρθει, σε περιµένει στην προβλήτα µε το <a href="breakdown.html#vehicles" class="hl hl-vehicle">σκάφος</a>.</div>
+<div class="action">Μήνυμα στο κινητό της: Από τον Concierge του Beyond:</div>
+
+<div class="character">CONCIERGE</div>
+<div class="dialogue">Your driver will pick you up in exactly 45 minutes outside of «To Votsalo – Tavern»</div>
+
+<div class="character">ΣΕΡΒΙΤΟΡΟΣ (ΣΥΝΕΧΕΙΑ)</div>
+<div class="dialogue">Πιες αυτόν τον καφέ να καταλάβεις λίγο ουσία Ελλάδας. Καλώς ήρθες. Αύριο στις 10:00 ο γιος μου ο <a href="breakdown.html#cast" class="hl hl-cast">Μάρκος</a> θα έρθει, να σε πάρει από εδώ για να πάτε βόλτα με το <a href="breakdown.html#vehicles" class="hl hl-vehicle">σκάφος</a>.</div>
+
+<div class="action">Ωστόσο η Σοφία απαντάει στον concierge γραπτώς:</div>
+
+<div class="character">ΣΟΦΙΑ</div>
+<div class="parenthetical">(Γραπτό μήνυμα με pop up στην οθόνη)</div>
+<div class="dialogue">Could I have an Iced Oat Latte in my room, please? I'd like to disappear for a couple of days if possible. ☺</div>
 
 <div class="character">ΣΟΦΙΑ</div>
 <div class="parenthetical">(Ψίθυρος)</div>
-<div class="dialogue">Great. Now my vacations are in the hands of my parents' friends! I've got to disappear in the resort.</div>
+<div class="dialogue">Großartig… meine Eltern entscheiden jetzt nicht nur wo ich in den Ferien hin fahre, sondern auch was ich dort machen soll.</div>
 
-<div class="action">Ταυτόχρονα απ' έξω σταµατάει ένα <a href="breakdown.html#vehicles" class="hl hl-vehicle">luxury transfer όχηµα</a>. Η Σοφία δεν χάνει χρόνο, επιβιβάζεται άµεσα.</div>
+<div class="action">Ταυτόχρονα απ' έξω σταματάει το <a href="breakdown.html#vehicles" class="hl hl-vehicle">Cayenne του Beyond</a>. Η Σοφία δεν χάνει χρόνο, επιβιβάζεται άμεσα.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -292,17 +318,28 @@ body {
 <!-- ═══ ΣΚΗΝΗ 3 ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 3 ,  INT/EXT. <a href="breakdown.html#set" class="hl hl-set">BEYOND LUXURY RETREAT</a> ,  ΑΠΟΓΕΥΜΑ</div>
+<div class="shot-tags">
+  <span class="shot-tag">3A</span><span class="shot-tag">3B</span><span class="shot-tag">3C</span><span class="shot-tag">3D</span><span class="shot-tag">3E</span><span class="shot-tag">3F</span><span class="shot-tag">3G</span>
+</div>
 
-<div class="action"><a href="breakdown.html#special" class="hl hl-special">Εναέριες λήψεις</a> στο χρυσαφένιο φως του απογεύµατος. Παλαιόχωρα, <a href="breakdown.html#set" class="hl hl-set">Beyond Luxury Retreat</a>. Ευρυγώνια λήψη στον κεντρικό χώρο του <a href="breakdown.html#set" class="hl hl-set">main lobby</a>. Από αριστερά η θέα, η θάλασσα που λαµπιρίζει υπό τον καλοκαιρινό ήλιο. Εσωτερικά το ζεστό φως σε ρόλο ζωγράφου συµπληρώνει τον καµβά του µινιµαλιστικού σχεδιασµού, µε ευθύγραµµες πινελιές και αντανακλάσεις από τις <a href="breakdown.html#set" class="hl hl-set">πισίνες</a> που τρεµοπαίζουν καθώς προβάλλονται στους τοίχους. Στο lounge της βεράντας, η Σοφία, απολαµβάνει επιτέλους το <a href="breakdown.html#props" class="hl hl-prop">Latte µε γάλα βρώµης</a>, κοιτάζοντας το Λιβυκό.</div>
+<div class="slugline">ΣΚΗΝΗ 3 — INT/EXT. <a href="breakdown.html#set" class="hl hl-set">BEYOND LUXURY RETREAT</a> — ΑΠΟΓΕΥΜΑ</div>
+
+<div class="action">Η Σοφία φτάνει στο Beyond και βγάζει selfies που στέλνει στα κορίτσια στο group chat.</div>
+
+<div class="parenthetical">(Να βρούμε τρόπο να μη φαίνεται το location.)</div>
+
+<div class="action">Τη στιγμή εκείνη έρχεται μήνυμα από τον concierge του ξενοδοχείου.</div>
+
+<div class="character">CONCIERGE</div>
+<div class="dialogue">Your room is ready and your latte has just been served. Enjoy!</div>
 
 <div class="slugline" style="font-size:0.82rem; margin-top:16px;">INT. ΣΟΥΙΤΑ BEYOND</div>
 
-<div class="action">Στο δωµάτιο διαβάζει το <a href="breakdown.html#props" class="hl hl-prop">σηµείωµα των γονιών της</a> που την καλωσορίζουν. Το σηµείωµα γράφει: «Σοφία µας, καλώς όρισες στο δικό µας 'παράδεισο'. Μπορεί να είσαι 19, αλλά εδώ θα νιώσεις την ελευθερία που σου υποσχεθήκαµε. Απόλαυσέ το. Με αγάπη, Μαµά & Μπαµπάς.» Η Σοφία χαµογελάει. Βγάζει το <a href="breakdown.html#props" class="hl hl-prop">κινητό</a> και τους στέλνει µήνυµα.</div>
+<div class="action">Στο δωμάτιο διαβάζει το <a href="breakdown.html#props" class="hl hl-prop">σημείωμα των γονιών της</a> που την καλωσορίζουν. Το σημείωμα γράφει: «Σοφία μας, καλώς όρισες στο δικό μας 'παράδεισο'. Μπορεί να είσαι 19, αλλά εδώ θα νιώσεις την ελευθερία που σου υποσχεθήκαμε. Απόλαυσέ το. Με αγάπη, Μαμά & Μπαμπάς.» Η Σοφία χαμογελάει. Βγάζει το <a href="breakdown.html#props" class="hl hl-prop">κινητό</a> και τους στέλνει μήνυμα.</div>
 
 <div class="character">ΣΟΦΙΑ</div>
 <div class="parenthetical">(Γράφει στο κινητό)</div>
-<div class="dialogue">Ok, fine. The hotel is 10/10. Maybe I can survive this after all.</div>
+<div class="dialogue">Ok gut. Das Hotel ist 10/10. Vielleicht überlebe ich das ja doch.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -310,9 +347,13 @@ body {
 <!-- ═══ ΣΚΗΝΗ 3α ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 3α ,  INT/EXT. BEYOND LUXURY RETREAT ,  ΜΟΝΤΑΖ</div>
+<div class="shot-tags">
+  <span class="shot-tag">3αA</span><span class="shot-tag">3αB</span><span class="shot-tag">3αC</span>
+</div>
 
-<div class="action">Μοντάζ αποσυµπίεσης (χωρίς µουσική, µόνο φυσικοί ήχοι): Το χέρι της Σοφίας γλιστράει στα <a href="breakdown.html#set" class="hl hl-set">λευκά σεντόνια</a>. Το νερό της <a href="breakdown.html#set" class="hl hl-set">ιδιωτικής πισίνας</a>. Η Σοφία µε κλειστά µάτια αφήνει τον ήλιο να τη ζεστάνει. Η ένταση φεύγει από πάνω της.</div>
+<div class="slugline">ΣΚΗΝΗ 3α — INT/EXT. BEYOND LUXURY RETREAT — ΜΟΝΤΑΖ</div>
+
+<div class="action">Μοντάζ αποσυμπίεσης (χωρίς μουσική, μόνο φυσικοί ήχοι): Το χέρι της Σοφίας γλιστράει στα <a href="breakdown.html#set" class="hl hl-set">λευκά σεντόνια</a>. Το νερό της <a href="breakdown.html#set" class="hl hl-set">ιδιωτικής πισίνας</a>. Η Σοφία με κλειστά μάτια αφήνει τον ήλιο να τη ζεστάνει. Η ένταση φεύγει από πάνω της. Η πρώτη ρουφηξιά του καφέ μοιάζει σαν όνειρο.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -320,21 +361,34 @@ body {
 <!-- ═══ ΣΚΗΝΗ 4 ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 4 ,  EXT. ΕΙΣΟΔΟΣ <a href="breakdown.html#set" class="hl hl-set">BEYOND LUXURY RETREAT</a> ,  ΗΜΕΡΑ</div>
+<div class="shot-tags">
+  <span class="shot-tag">4A</span><span class="shot-tag">4B</span><span class="shot-tag">4C</span><span class="shot-tag">4D</span>
+</div>
 
-<div class="action">Ο <a href="breakdown.html#cast" class="hl hl-cast">ΜΑΡΚΟΣ (22)</a> την περιµένει στην είσοδο του Beyond. Είναι <a href="breakdown.html#wardrobe" class="hl hl-wardrobe">casual chic ντυµένος</a>, όµορφος, ψηλός, µελαχρινός. Η Σοφία εντυπωσιάζεται, αλλά δεν το δείχνει.</div>
+<div class="slugline">ΣΚΗΝΗ 4 — EXT. ΕΙΣΟΔΟΣ <a href="breakdown.html#set" class="hl hl-set">BEYOND LUXURY RETREAT</a> — ΗΜΕΡΑ</div>
+
+<div class="action">Ο <a href="breakdown.html#cast" class="hl hl-cast">ΜΑΡΚΟΣ (22)</a> την περιμένει στην είσοδο του Beyond. Είναι <a href="breakdown.html#wardrobe" class="hl hl-wardrobe">casual ντυμένος</a>, όμορφος, ψηλός, μελαχρινός. Η Σοφία εντυπωσιάζεται, αλλά δεν το δείχνει.</div>
 
 <div class="character">ΜΑΡΚΟΣ</div>
-<div class="dialogue">Λοιπόν; Εσύ πρέπει να είσαι η Σοφία αν σωστά σε περιέγραψε ο πατέρας µου.</div>
+<div class="dialogue">Γεια σου Σοφία. Εγώ είμαι ο Μάρκος.</div>
+<div class="parenthetical">(Απλώνει εγκάρδια το χέρι του για χειραψία)</div>
+
+<div class="action">Εκείνη τον προσπερνάει νευρικά.</div>
+
+<div class="character">ΜΑΡΚΟΣ</div>
+<div class="dialogue">Εδώ είμαστε!</div>
+<div class="parenthetical">(Της δείχνει μία παλιά <a href="breakdown.html#vehicles" class="hl hl-vehicle">βέσπα</a> με δυο <a href="breakdown.html#props" class="hl hl-prop">κράνη</a> στη σέλα.)</div>
 
 <div class="character">ΣΟΦΙΑ</div>
-<div class="dialogue">Ναι, είµαι η Σοφία που προσπαθεί να καταλάβει ακόµα πώς µε γνωρίζουν άνθρωποι που εγώ καν δεν θυµάµαι.</div>
+<div class="dialogue">Προσπαθώ να καταλάβω ακόμα πώς με γνωρίζουν άνθρωποι που εγώ καν δεν γνωρίζω.</div>
+
+<div class="action">Φοράει το κράνος που της δίνει ο Μάρκος.</div>
 
 <div class="character">ΜΑΡΚΟΣ</div>
-<div class="parenthetical">(Χαµογελάει ευγενικά)</div>
+<div class="parenthetical">(Χαμογελάει ευγενικά)</div>
 <div class="dialogue">Α! Αυτό λέγεται «Paleochora Protocol». Μην αντιστέκεσαι.</div>
 
-<div class="action">Φτάνουν στο λιµάνι και ξεκινούν µε το <a href="breakdown.html#vehicles" class="hl hl-vehicle">σκάφος</a>.</div>
+<div class="action">Φτάνουν στο λιμάνι και ξεκινούν με το <a href="breakdown.html#vehicles" class="hl hl-vehicle">σκάφος</a>.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -342,15 +396,36 @@ body {
 <!-- ═══ ΣΚΗΝΗ 5 ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 5 ,  EXT. ΘΑΛΑΣΣΑ / <a href="breakdown.html#set" class="hl hl-set">ΣΠΗΛΙΕΣ</a> &amp; <a href="breakdown.html#set" class="hl hl-set">ΚΟΚΚΙΝΗ ΑΜΜΟΣ</a> ,  ΗΜΕΡΑ</div>
+<div class="shot-tags">
+  <span class="shot-tag">5A</span><span class="shot-tag">5B</span><span class="shot-tag">5C</span><span class="shot-tag">5D</span><span class="shot-tag">5E</span><span class="shot-tag">5F</span><span class="shot-tag">5G</span>
+</div>
 
-<div class="action">Το <a href="breakdown.html#vehicles" class="hl hl-vehicle">ταχύπλοο</a> σκίζει τα νερά. Μπαίνουν στις σπηλιές µε τα ηλεκτρίκ µπλε νερά. Βουτούν και οι δύο από το σκάφος. Ο Μάρκος την οδηγεί σε µια αποµονωµένη παραλία µε <a href="breakdown.html#set" class="hl hl-set">κόκκινη άµµο</a>. Η αντίθεση του κόκκινου µε το βαθύ µπλε είναι εξωπραγµατική.</div>
+<div class="slugline">ΣΚΗΝΗ 5 — EXT. ΘΑΛΑΣΣΑ / <a href="breakdown.html#set" class="hl hl-set">ΣΠΗΛΙΕΣ</a> &amp; <a href="breakdown.html#set" class="hl hl-set">ΚΟΚΚΙΝΗ ΑΜΜΟΣ</a> — ΗΜΕΡΑ</div>
 
-<div class="character">ΣΟΦΙΑ</div>
-<div class="dialogue">This definitely better than my ibiza plans.</div>
+<div class="action">Το <a href="breakdown.html#vehicles" class="hl hl-vehicle">ταχύπλοο</a> σκίζει τα νερά. Μπαίνουν στις σπηλιές με τα ηλεκτρίκ μπλε νερά. Σταματούν σε σημείο όπου δεσπόζουν τεράστια επιβλητικά βράχια.</div>
 
 <div class="character">ΜΑΡΚΟΣ</div>
-<div class="dialogue">Εδώ η οµορφιά είναι αληθινή, Σοφία. Δεν χρειάζεται φίλτρα για να τη δεις.</div>
+<div class="dialogue">Σε αυτό το σημείο, τα νερά αλλάζουν χρώμα απότομα. Είναι επειδή ο βυθός έχει έναν γκρεμό 100 μέτρων. Μαγεία! Πώς να είναι η μαγεία από τη δική σου πλευρά άραγε;</div>
+
+<div class="action">Βουτούν και οι δύο από το σκάφος. Ο Μάρκος την οδηγεί σε μια απομονωμένη παραλία με <a href="breakdown.html#set" class="hl hl-set">κόκκινη άμμο</a>.</div>
+
+<div class="action">Η Σοφία βγάζει selfies κάθε λίγο.</div>
+
+<div class="character">ΜΑΡΚΟΣ</div>
+<div class="dialogue">Εδώ η ομορφιά είναι αληθινή, Σοφία. Δεν χρειάζεται φίλτρα για να τη δεις.</div>
+<div class="parenthetical">(Το μάτι του παίρνει την <a href="breakdown.html#props" class="hl hl-prop">polaroid</a> που προεξέχει από την τσάντα της)</div>
+
+<div class="action">Τεντώνει το χέρι του, πιάνει την polaroid. Της την δίνει και της παίρνει το κινητό από το χέρι.</div>
+
+<div class="action"><a href="breakdown.html#special" class="hl hl-special">Υποβρύχια πλάνα</a> και εναλλαγές χρωμάτων στο νερό. <a href="breakdown.html#special" class="hl hl-special">Drone λήψεις</a> από τις παρθένες παραλίες της Παλαιόχωρας.</div>
+
+<div class="slugline" style="font-weight:normal;font-size:0.85rem;text-transform:none;margin-top:12px;">ΔΡΑΣΕΙΣ:</div>
+<div class="action">Scuba, βουτιές, πλατσουρίσματα, ηλιοθεραπεία, διάβασμα βιβλίου, παιχνίδι, οδήγηση σκάφους, βουτιά από βράχια, μάζεμα κοχυλιών.</div>
+
+<div class="action">Στο σκάφος η Σοφία ξαπλωμένη στο πίσω μέρος. Όσο ο Μάρκος ανοίγει την τέντα για να μην τους κάψει ο μεσημεριανός ήλιος, παίρνει το κινητό της και στέλνει μήνυμα στην ομαδική των Ibiza Girls.</div>
+
+<div class="character">ΣΟΦΙΑ</div>
+<div class="dialogue">Ich habe langsam das Gefühl, dass das hier besser ist, als meine Ibiza Pläne.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -358,9 +433,13 @@ body {
 <!-- ═══ ΣΚΗΝΗ 5α ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 5α ,  EXT. ΠΑΡΑΛΙΕΣ ,  ΜΟΝΤΑΖ</div>
+<div class="shot-tags">
+  <span class="shot-tag">5αA</span><span class="shot-tag">5αB</span>
+</div>
 
-<div class="action">Μια οπτική ωδή στο Λιβυκό πέλαγος: <a href="breakdown.html#special" class="hl hl-special">Υποβρύχια πλάνα</a> και εναλλαγές χρωµάτων στο νερό. <a href="breakdown.html#special" class="hl hl-special">Drone λήψεις</a> από τις παρθένες παραλίες της Παλαιόχωρας.</div>
+<div class="slugline">ΣΚΗΝΗ 5α — EXT. ΠΑΡΑΛΙΕΣ — ΜΟΝΤΑΖ</div>
+
+<div class="action">Μια οπτική ωδή στο Λιβυκό πέλαγος: <a href="breakdown.html#special" class="hl hl-special">Υποβρύχια πλάνα</a> και εναλλαγές χρωμάτων στο νερό. <a href="breakdown.html#special" class="hl hl-special">Drone λήψεις</a> από τις παρθένες παραλίες της Παλαιόχωρας.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -368,9 +447,13 @@ body {
 <!-- ═══ ΣΚΗΝΗ 6 ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 6 ,  EXT. <a href="breakdown.html#set" class="hl hl-set">ΣΟΚΑΚΙΑ ΠΑΛΑΙΟΧΩΡΑΣ</a> ,  ΑΠΟΓΕΥΜΑ</div>
+<div class="shot-tags">
+  <span class="shot-tag">6A</span><span class="shot-tag">6B</span><span class="shot-tag">6C</span><span class="shot-tag">6D</span><span class="shot-tag">6E</span><span class="shot-tag">6F</span><span class="shot-tag">6G</span><span class="shot-tag">6H</span><span class="shot-tag">6I</span><span class="shot-tag">6J</span>
+</div>
 
-<div class="action">Απογευµατινή βόλτα στα σοκάκια. Η Σοφία µυρίζει ένα <a href="breakdown.html#set" class="hl hl-set">νυχτολούλουδο</a> που µόλις έχει ανοίξει. Σε µια αυλή µια <a href="breakdown.html#extras" class="hl hl-extras">οικογένεια</a> έχει καθίσει για βραδινό και δυο <a href="breakdown.html#extras" class="hl hl-extras">γυναίκες</a> φέρνουν φρεσκοµαγειρεµένο φαγητό. Δύο ηλικιωµένες <a href="breakdown.html#cast" class="hl hl-cast">ΚΥΡΙΕΣ</a> κάθονται σε <a href="breakdown.html#props" class="hl hl-prop">ψάθινες καρέκλες</a> έξω από ένα σπίτι.</div>
+<div class="slugline">ΣΚΗΝΗ 6 — EXT. <a href="breakdown.html#set" class="hl hl-set">ΣΟΚΑΚΙΑ ΠΑΛΑΙΟΧΩΡΑΣ</a> — ΑΠΟΓΕΥΜΑ</div>
+
+<div class="action">Απογευματινή βόλτα στα σοκάκια. Η Σοφία μυρίζει ένα <a href="breakdown.html#set" class="hl hl-set">λουλούδι</a>. Οι δυο τους περπατούν κοντά ο ένας στον άλλο κι ο Μάρκος έχει πάρει σοβαρά το ρόλο του ως ξεναγός. Μπαίνουν σε μαγαζιά και παίρνουν φαγητό. Βλέπουν έναν τεχνίτη που κατασκευάζει κοσμήματα. Δύο ηλικιωμένες <a href="breakdown.html#cast" class="hl hl-cast">ΚΥΡΙΕΣ</a> κάθονται σε <a href="breakdown.html#props" class="hl hl-prop">ψάθινες καρέκλες</a> έξω από ένα σπίτι.</div>
 
 <div class="character">ΚΥΡΙΑ 1</div>
 <div class="dialogue">Μάρκο! Ποιανού είναι η κοπελιά;</div>
@@ -379,23 +462,23 @@ body {
 <div class="dialogue">Δεν την ξέρετε, θεία, είναι ξένη.</div>
 
 <div class="character">ΚΥΡΙΑ 2</div>
-<div class="dialogue">Μωρέ το ξέρω ότι είναι ξένη, αλλά σαν γνωστή µας φαίνεται.</div>
+<div class="dialogue">Μωρέ το ξέρω ότι είναι ξένη, αλλά σαν γνωστή μας φαίνεται.</div>
 
-<div class="action">Πετιέται ο <a href="breakdown.html#cast" class="hl hl-cast">ΜΙΧΑΛΗΣ</a> από την ταβέρνα απέναντι, στρίβοντας το µουστάκι του και βάζοντας ένα µεγάλο <a href="breakdown.html#props" class="hl hl-prop">κλωνάρι βασιλικό</a> στο αυτί του.</div>
+<div class="action">Πετιέται ο <a href="breakdown.html#cast" class="hl hl-cast">ΜΙΧΑΛΗΣ</a> από την ταβέρνα απέναντι, στρίβοντας το μουστάκι του και βάζοντας ένα μεγάλο <a href="breakdown.html#props" class="hl hl-prop">κλωνάρι βασιλικό</a> στο αυτί του.</div>
 
 <div class="character">ΜΙΧΑΛΗΣ</div>
-<div class="dialogue">Μωρέ θειά, δεν εγνώρισες τη Σοφία; Την κόρη της Elisabeth από την Αγγλία; Μα ήτανε µικιό όντε ξανάρθε!</div>
+<div class="dialogue">Μωρέ θειά, δεν εγνώρισες τη Σοφία; Την κόρη της Claudia από τη Γερμανία; Μα ήτανε μικιό όντε ξανάρθε!</div>
 
-<div class="action">Η Σοφία παρατηρεί µε απορία.</div>
+<div class="action">Η Σοφία παρατηρεί με απορία.</div>
 
 <div class="character">ΚΥΡΙΑ 1</div>
-<div class="dialogue">Α, ναι µωρέ το άκουσα ότι ήρθες το πρωί στον φούρνο. Καλά 'σαι; Έλα να σε κεράσω λίγα <a href="breakdown.html#props" class="hl hl-prop">καλιτσούνια</a> και <a href="breakdown.html#props" class="hl hl-prop">τσικουδιά</a> για το καλό.</div>
+<div class="dialogue">Α, ναι μωρέ το άκουσα ότι ήρθες το πρωί στον φούρνο. Καλά 'σαι; Έλα να σε κεράσω λίγα <a href="breakdown.html#props" class="hl hl-prop">καλιτσούνια</a> και <a href="breakdown.html#props" class="hl hl-prop">τσικουδιά</a> για το καλό.</div>
 
-<div class="action">Η Σοφία πίνει τη τσικουδιά µονορούφι και γίνεται κατακόκκινη, κατευθείαν για να µην φανεί ότι κάηκε βάζει στο στόµα της όλο το κέρασµα (τα καλιτσούνια). Αποχαιρετούν και συνεχίζουν για το <a href="breakdown.html#set" class="hl hl-set">Κάστρο</a> ενώ έχει αρχίσει να πέφτει ο ήλιος. Η θέα είναι µαγική. Η Σοφία βγάζει φωτογραφίες, συζητάει µε τον Μάρκο, γελούν µε την ψυχή τους και προχωρούν.</div>
+<div class="action">Η Σοφία πίνει τη τσικουδιά μονορούφι και γίνεται κατακόκκινη, κατευθείαν για να μην φανεί ότι κάηκε βάζει στο στόμα της όλο το κέρασμα (τα καλιτσούνια). Αποχαιρετούν και συνεχίζουν για το <a href="breakdown.html#set" class="hl hl-set">Κάστρο</a> ενώ έχει αρχίσει να πέφτει ο ήλιος. Η θέα είναι μαγική. Η Σοφία βγάζει φωτογραφίες, συζητάει με τον Μάρκο, γελούν με την ψυχή τους και προχωρούν.</div>
 
 <div class="character">ΣΟΦΙΑ</div>
 <div class="parenthetical">(Internal Monologue)</div>
-<div class="dialogue">Άκουσα το όνοµα µου δέκα φορές σε µια απλή βόλτα. Αλλά... κατά έναν περίεργο τρόπο, δεν µε νοιάζει καθόλου πια.</div>
+<div class="dialogue">Ich wurde jetzt bei einen kurzen Spaziergang 10 mal angesprochen. Komischerweise stört mich das gar nicht mehr so.</div>
 
 <div class="transition">DISSOLVE TO:</div>
 </div>
@@ -403,9 +486,15 @@ body {
 <!-- ═══ ΣΚΗΝΗ 6α ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 6α ,  INT. ΣΟΥΙΤΑ BEYOND ,  ΠΡΩΙ</div>
+<div class="shot-tags">
+  <span class="shot-tag">6αA</span><span class="shot-tag">6αB</span>
+</div>
 
-<div class="action">Transition: Το φως του ήλιου τρυπώνει ανάµεσα από τις <a href="breakdown.html#set" class="hl hl-set">κουρτίνες</a>. Η Σοφία ξυπνάει αργά, νιώθοντας την άνεση των <a href="breakdown.html#set" class="hl hl-set">λευκών σεντονιών</a>, απόλυτα γαλήνια.</div>
+<div class="slugline">ΣΚΗΝΗ 6α — INT./EXT. ΣΟΥΙΤΑ BEYOND — ΠΡΩΙ</div>
+
+<div class="action">Το φως του ήλιου τρυπώνει ανάμεσα από τις <a href="breakdown.html#set" class="hl hl-set">κουρτίνες</a>. Η Σοφία ξυπνάει αργά, νιώθοντας την άνεση των <a href="breakdown.html#set" class="hl hl-set">λευκών σεντονιών</a>, απόλυτα γαλήνια.</div>
+
+<div class="action">Πρωί. Το φως του ήλιου λούζει τη βεράντα. Η Σοφία κάθεται στο τραπέζι. Το <a href="breakdown.html#props" class="hl hl-prop">κινητό</a> της δονείται. Μήνυμα από την παρέα: «Babe, dein Flug nach Ibiza ist heute! Wir warten auf dich!!!». Εκείνη τη στιγμή ο <a href="breakdown.html#cast" class="hl hl-cast">ΣΕΡΒΙΤΟΡΟΣ</a> πλησιάζει με τον <a href="breakdown.html#props" class="hl hl-prop">δίσκο</a>.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -413,18 +502,20 @@ body {
 <!-- ═══ ΣΚΗΝΗ 7 ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 7 ,  EXT. ΒΕΡΑΝΤΑ ΠΡΩΙΝΟΥ (BEYOND LUXURY) ,  ΗΜΕΡΑ</div>
+<div class="shot-tags">
+  <span class="shot-tag">7A</span><span class="shot-tag">7B</span><span class="shot-tag">7C</span><span class="shot-tag">7D</span><span class="shot-tag">7E</span>
+</div>
 
-<div class="action">Πρωί. Το φως του ήλιου λούζει τη βεράντα. Η Σοφία κάθεται στο τραπέζι. Το <a href="breakdown.html#props" class="hl hl-prop">κινητό</a> της δονείται. Μήνυµα από την παρέα: «Babe, η πτήση σου για Ίµπιζα είναι αύριο! Έκανες check in;». Εκείνη τη στιγµή ο <a href="breakdown.html#cast" class="hl hl-cast">ΣΕΡΒΙΤΟΡΟΣ</a> πλησιάζει µε τον <a href="breakdown.html#props" class="hl hl-prop">δίσκο</a>.</div>
+<div class="slugline">ΣΚΗΝΗ 7 — EXT. ΒΕΡΑΝΤΑ ΠΡΩΙΝΟΥ (BEYOND LUXURY) — ΗΜΕΡΑ</div>
 
 <div class="character">ΣΕΡΒΙΤΟΡΟΣ</div>
-<div class="dialogue">Το latte σας µε γάλα βρώµης.</div>
+<div class="dialogue">Το latte σας με γάλα βρώμης.</div>
 
-<div class="action">Η Σοφία κοιτάζει το κινητό της. Το γυρνάει µπρούµυτα στο τραπέζι.</div>
+<div class="action">Η Σοφία κοιτάζει το κινητό της. Το γυρνάει μπρούμυτα στο τραπέζι.</div>
 
 <div class="character">ΣΟΦΙΑ</div>
-<div class="parenthetical">(Με αποφασιστικό χαµόγελο)</div>
-<div class="dialogue">Όχι... Σήµερα θα ήθελα έναν <a href="breakdown.html#props" class="hl hl-prop">ελληνικό</a>. Να ξεκινήσει η µέρα δυναµικά.</div>
+<div class="parenthetical">(Με αποφασιστικό χαμόγελο)</div>
+<div class="dialogue">Όχι… Σήμερα θα ήθελα έναν <a href="breakdown.html#props" class="hl hl-prop">ελληνικό</a>. Να ξεκινήσει η μέρα δυναμικά.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -432,23 +523,35 @@ body {
 <!-- ═══ ΣΚΗΝΗ 8 ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 8 ,  EXT. ΔΡΟΜΟΣ ΠΡΟΣ ΑΝΥΔΡΟΥΣ ,  ΗΜΕΡΑ</div>
+<div class="shot-tags">
+  <span class="shot-tag">8A</span><span class="shot-tag">8B</span><span class="shot-tag">8C</span><span class="shot-tag">8D</span><span class="shot-tag">8E</span><span class="shot-tag">8F</span><span class="shot-tag">8G</span>
+</div>
 
-<div class="action">Η Σοφία και ο Μάρκος µε τα <a href="breakdown.html#props" class="hl hl-prop">ποδήλατα</a> στην ανηφόρα. Ο δρόµος είναι τραχύς, περιτριγυρισµένος από γκρίζα βράχια και χαµηλή βλάστηση. Ξαφνικά, ένα κοπάδι από <a href="breakdown.html#set" class="hl hl-set">αγριοκάτσικα</a> διασχίζει τον δρόµο µε απίστευτη ταχύτητα και ευκινησία, χάνοντας τα ίχνη τους µέσα στα βράχια. Ο ήχος από τα <a href="breakdown.html#props" class="hl hl-prop">κουδούνια</a> τους αντηχεί σε όλη την πλαγιά. Η Σοφία σταµατάει το ποδήλατο, εντυπωσιασµένη.</div>
+<div class="slugline">ΣΚΗΝΗ 8 — EXT. ΔΡΟΜΟΣ ΠΡΟΣ ΑΝΥΔΡΟΥΣ — ΗΜΕΡΑ</div>
+
+<div class="action">Η Σοφία και ο Μάρκος με τα <a href="breakdown.html#props" class="hl hl-prop">ποδήλατα</a> στην ανηφόρα. Ο δρόμος είναι τραχύς, περιτριγυρισμένος από γκρίζα βράχια και χαμηλή βλάστηση. Ξαφνικά, ένα κοπάδι από <a href="breakdown.html#set" class="hl hl-set">αγριοκάτσικα</a> διασχίζει τον δρόμο με απίστευτη ταχύτητα και ευκινησία, χάνοντας τα ίχνη τους μέσα στα βράχια. Ο ήχος από τα <a href="breakdown.html#props" class="hl hl-prop">κουδούνια</a> τους αντηχεί σε όλη την πλαγιά. Η Σοφία σταματάει το ποδήλατο, εντυπωσιασμένη.</div>
 
 <div class="character">ΣΟΦΙΑ</div>
 <div class="parenthetical">(Εισπνέει βαθιά)</div>
-<div class="dialogue">Αυτή η µυρωδιά...</div>
+<div class="dialogue">Αυτή η μυρωδιά…</div>
 
-<div class="action">Κοντινό στη Σοφία καθώς κλείνει τα µάτια. Ο αέρας φέρνει αρώµατα από <a href="breakdown.html#set" class="hl hl-set">θυµάρι</a>, <a href="breakdown.html#set" class="hl hl-set">δίκταµο</a> και <a href="breakdown.html#set" class="hl hl-set">φασκόµηλο</a>.</div>
+<div class="action">Κοντινό στη Σοφία καθώς κλείνει τα μάτια. Ο αέρας φέρνει αρώματα από <a href="breakdown.html#set" class="hl hl-set">θυμάρι</a>, <a href="breakdown.html#set" class="hl hl-set">δίκταμο</a> και <a href="breakdown.html#set" class="hl hl-set">φασκόμηλο</a>.</div>
 
 <div class="character">ΣΟΦΙΑ (V.O.)</div>
-<div class="dialogue">Είναι η µυρωδιά της βαλίτσας της µαµάς µου. Κάθε φορά που γύριζε από την Κρήτη, τα βότανα αυτά ήταν το «φυλαχτό» της. Τα φύλαγε σαν κόρη οφθαλµού στην κουζίνα µας στη Γερμανία. Τώρα καταλαβαίνω γιατί...</div>
+<div class="dialogue">Είναι η μυρωδιά της βαλίτσας της μαμάς μου. Κάθε φορά που γύριζε από την Κρήτη, τα βότανα αυτά ήταν το «φυλαχτό» της. Τα φύλαγε σαν κόρη οφθαλμού στην κουζίνα μας στην Γερμανία. Τώρα καταλαβαίνω γιατί…</div>
+
+<div class="action">Ένας alternative βοσκός περνάει και κοντοστέκεται.</div>
+
+<div class="character">ΒΟΣΚΟΣ</div>
+<div class="dialogue">Εεεελα!</div>
+<div class="parenthetical">(Φωνάζει στις κατσίκες του. Και φεύγει.)</div>
 
 <div class="character">ΜΑΡΚΟΣ</div>
-<div class="dialogue">Πάµε, η θέα από πάνω είναι απίστευτη, θα σου εξηγήσει τα υπόλοιπα.</div>
+<div class="dialogue">Πάμε, η θέα από πάνω είναι απίστευτη, θα σου εξηγήσει τα υπόλοιπα.</div>
 
-<div class="action">Συνεχίζουν την ανάβαση, µε το µπλε του Λιβυκού να απλώνεται κάτω από τα πόδια τους σαν απέραντο χαλί.</div>
+<div class="action">Συνεχίζουν την ανάβαση, μέχρι που φτάνουν σ' ένα σημείο όπου φαίνεται όλη η Παλαιόχωρα, με το μπλε του Λιβυκού να απλώνεται κάτω από τα πόδια τους σαν απέραντο χαλί με φόντο το χρυσαφένιο φως του απογεύματος.</div>
+
+<div class="parenthetical">(Εδώ αν συμφωνούν οι ηθοποιοί, θα πρέπει να φιληθούν. Αν όχι απλά να πιάσουν χέρια και να έρθουν πιο κοντά. Είναι σημαντικό να νιώσει ο θεατής την έλξη μεταξύ τους.)</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -456,9 +559,13 @@ body {
 <!-- ═══ ΣΚΗΝΗ 8α ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 8α ,  EXT. ΔΙΑΔΡΟΜΗ ΠΡΟΣ ΠΑΡΑΛΙΑ ,  ΜΟΝΤΑΖ</div>
+<div class="shot-tags">
+  <span class="shot-tag">8αA</span><span class="shot-tag">8αB</span><span class="shot-tag">8αC</span>
+</div>
 
-<div class="action"><a href="breakdown.html#special" class="hl hl-special">Μοντάζ µετάβασης</a>. Κινηµατογραφικά πλάνα (slow-motion). Ο ήλιος χαµηλώνει. Η προετοιµασία των <a href="breakdown.html#set" class="hl hl-set">αλόγων</a>. Τα χέρια του Μάρκου δένουν τα <a href="breakdown.html#props" class="hl hl-prop">ηνία</a>. Η Σοφία χαϊδεύει τρυφερά τον λαιµό ενός αλόγου.</div>
+<div class="slugline">ΣΚΗΝΗ 8α — EXT. ΔΙΑΔΡΟΜΗ ΠΡΟΣ ΠΑΡΑΛΙΑ — ΜΟΝΤΑΖ</div>
+
+<div class="action"><a href="breakdown.html#special" class="hl hl-special">Μοντάζ μετάβασης</a>. Κινηματογραφικά πλάνα (slow-motion). Ο ήλιος χαμηλώνει. Η προετοιμασία των <a href="breakdown.html#set" class="hl hl-set">αλόγων</a>. Τα χέρια του Μάρκου δένουν τα <a href="breakdown.html#props" class="hl hl-prop">ηνία</a>. Η Σοφία χαϊδεύει τρυφερά τον λαιμό ενός αλόγου.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -466,19 +573,23 @@ body {
 <!-- ═══ ΣΚΗΝΗ 9 ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 9 ,  EXT. ΠΑΡΑΛΙΑ ,  ΣΟΥΡΟΥΠΟ</div>
+<div class="shot-tags">
+  <span class="shot-tag">9A</span><span class="shot-tag">9B</span><span class="shot-tag">9C</span><span class="shot-tag">9D</span><span class="shot-tag">9E</span><span class="shot-tag">9F</span><span class="shot-tag">9G</span><span class="shot-tag">9H</span><span class="shot-tag">9I</span><span class="shot-tag">9J</span>
+</div>
 
-<div class="action">Το σούρουπο έχει βάψει τον ορίζοντα µε τα χρώµατα της φωτιάς. Η Σοφία και ο Μάρκος πάνω στα <a href="breakdown.html#set" class="hl hl-set">άλογα</a>, στην άκρη της παραλίας. Τα πέταλα των αλόγων πλατσουρίζουν στο νερό, δηµιουργώντας µικρούς κύκλους στην επιφάνεια. Η Σοφία αφήνει τα <a href="breakdown.html#props" class="hl hl-prop">ηνία</a> χαλαρά, νιώθοντας την κίνηση του αλόγου να συντονίζεται µε τον ήχο της θάλασσας. Η Σοφία νιώθει το <a href="breakdown.html#props" class="hl hl-prop">κινητό</a> της να δονείται επίµονα στην τσέπη/τσάντα της. Το βγάζει. Η οθόνη φωτίζει το πρόσωπό της µέσα στο ηµίφως: «100+ Notifications», «ΧΑΝΕΙΣ ΤΗΝ ΠΤΗΣΗ ΣΟΥ ΓΙΑ ΙΜΠΙΖΑ!», µηνύµατα, tags, αναπάντητες. Κοντινό στο πρόσωπό της. Κοιτάζει την οθόνη για µια στιγµή, µετά κοιτάζει τον ορίζοντα και τον Μάρκο που προπορεύεται σιωπηλός. Με µια ήρεµη κίνηση, ΠΑΤΑΕΙ το κουµπί απενεργοποίησης. Η οθόνη µαυρίζει. Βάζει το τηλέφωνο βαθιά στην τσάντα της, την κλείνει και παίρνει µια βαθιά ανάσα. Κοιτάζει τον Μάρκο.</div>
+<div class="slugline">ΣΚΗΝΗ 9 — EXT. ΠΑΡΑΛΙΑ — ΣΟΥΡΟΥΠΟ</div>
+
+<div class="action">Το σούρουπο έχει βάψει τον ορίζοντα με τα χρώματα της φωτιάς. Η Σοφία και ο Μάρκος πάνω στα <a href="breakdown.html#set" class="hl hl-set">άλογα</a>, στην άκρη της παραλίας. Τα πέταλα των αλόγων πλατσουρίζουν στο νερό. Η Σοφία αφήνει τα <a href="breakdown.html#props" class="hl hl-prop">ηνία</a> χαλαρά, νιώθοντας την κίνηση του αλόγου να συντονίζεται με τον ήχο της θάλασσας. Η Σοφία νιώθει το <a href="breakdown.html#props" class="hl hl-prop">κινητό</a> της να δονείται επίμονα στην τσέπη/τσάντα της. Το βγάζει. Η οθόνη φωτίζει το πρόσωπό της μέσα στο ημίφως: «100+ Notifications», «Ihr Flug nach Ibiza ist ohne Sie abgeflogen!», μηνύματα, tags, αναπάντητες. Κοιτάζει την οθόνη για μια στιγμή, μετά κοιτάζει τον ορίζοντα και τον Μάρκο που προπορεύεται σιωπηλός. Με μια ήρεμη κίνηση, ΠΑΤΑΕΙ το κουμπί απενεργοποίησης. Η οθόνη μαυρίζει. Βάζει το τηλέφωνο βαθιά στην τσάντα της, την κλείνει και παίρνει μια βαθιά ανάσα. Κοιτάζει τον Μάρκο.</div>
 
 <div class="character">ΣΟΦΙΑ</div>
-<div class="dialogue">Μάρκο... σ' ευχαριστώ. Για όλα. Για τα µέρη που δεν θα έβρισκα ποτέ µόνη µου, αλλά κυρίως για την µαγεία και την ενέργεια αυτού του τόπου.</div>
+<div class="dialogue">Μάρκο… σ' ευχαριστώ. Για όλα. Για τη μαγεία και την ενέργεια αυτού του τόπου. Με έκανες να νιώσω ασφαλής και να καταλάβω επιτέλους το κόλλημα των γονιών μου που λέγεται Παλαιόχωρα.</div>
 
 <div class="character">ΜΑΡΚΟΣ</div>
-<div class="parenthetical">(Την κοιτάζει στα µάτια, χαµογελώντας)</div>
-<div class="dialogue">Σου είπα, το «Paleochora Protocol» έχει και τα καλά του.</div>
+<div class="parenthetical">(Την κοιτάζει στα μάτια, χαμογελώντας)</div>
+<div class="dialogue">Σου είπα, είναι το «Paleochora Protocol».</div>
 
 <div class="character">ΣΟΦΙΑ</div>
-<div class="dialogue">Λοιπόν, µετά από όλα αυτά σου χρωστάω απόψε τραπέζι. Σε περιµένω στο Beyond. Θέλω να σου δείξω πώς είναι η µαγεία και από δική µου πλευρά.</div>
+<div class="dialogue">Λοιπόν, απόψε τραπέζι! Σε περιμένω στο Beyond. Θέλω να σου δείξω πώς είναι η μαγεία και από δική μου πλευρά.</div>
 
 <div class="transition">CUT TO:</div>
 </div>
@@ -486,29 +597,27 @@ body {
 <!-- ═══ ΣΚΗΝΗ 10 ═══ -->
 <div class="scene-block">
 
-<div class="slugline">ΣΚΗΝΗ 10 ,  EXT. <a href="breakdown.html#set" class="hl hl-set">ΕΣΤΙΑΤΟΡΙΟ (BEYOND LUXURY)</a> ,  ΝΥΧΤΑ</div>
+<div class="shot-tags">
+  <span class="shot-tag">10A</span><span class="shot-tag">10B</span><span class="shot-tag">10C</span><span class="shot-tag">10D</span><span class="shot-tag">10E</span><span class="shot-tag">10F</span><span class="shot-tag">10G</span><span class="shot-tag">10H</span>
+</div>
 
-<div class="action">Το εστιατόριο του Beyond Luxury Retreat το βράδυ. Μόνο <a href="breakdown.html#props" class="hl hl-prop">κεριά</a>, ο ήχος του κύµατος που σκάει ακριβώς από κάτω και ο χαµηλός φωτισµός του ξενοδοχείου που µοιάζει να αιωρείται πάνω από το βράχο. Κάθονται οι δυο τους. Η ατµόσφαιρα είναι ροµαντική, αλλά µε µια γλυκιά οικειότητα. Τσουγκρίζουν τα <a href="breakdown.html#props" class="hl hl-prop">ποτήρια</a> τους.</div>
+<div class="slugline">ΣΚΗΝΗ 10 — EXT. <a href="breakdown.html#set" class="hl hl-set">ΕΣΤΙΑΤΟΡΙΟ (BEYOND LUXURY)</a> — ΝΥΧΤΑ</div>
 
-<div class="character">ΜΑΡΚΟΣ</div>
-<div class="dialogue">Τελικά πως άντεξες δύο µέρες εδώ;</div>
-
-<div class="character">ΣΟΦΙΑ</div>
-<div class="parenthetical">(Κοιτάζει το λιµάνι της Παλαιόχωρας που τρεµοπαίζει στο βάθος)</div>
-<div class="dialogue">Το πρόβληµα µου δεν είναι οι δύο µέρες εδώ. Το πρόβληµα είναι πώς θα αντέξω όλα τα υπόλοιπα µετά από αυτό.</div>
-
-<div class="action">Ο Μάρκος πιάνει το χέρι της για µια στιγµή πάνω στο τραπέζι. Δεν χρειάζονται λόγια.</div>
-
-<div class="character">ΣΟΦΙΑ (ΣΥΝΕΧΕΙΑ)</div>
-<div class="dialogue">Δεν λέµε «αντίο», έτσι δεν είναι;</div>
+<div class="action">Το εστιατόριο του Beyond Luxury Retreat το βράδυ. Μόνο <a href="breakdown.html#props" class="hl hl-prop">κεριά</a>, ο ήχος του κύματος που σκάει ακριβώς από κάτω και ο χαμηλός φωτισμός του ξενοδοχείου που μοιάζει να αιωρείται πάνω από το βράχο. Κάθονται οι δυο τους. Η ατμόσφαιρα είναι ρομαντική, αλλά με μια γλυκιά οικειότητα. Τσουγκρίζουν τα <a href="breakdown.html#props" class="hl hl-prop">ποτήρια</a> τους.</div>
 
 <div class="character">ΜΑΡΚΟΣ</div>
-<div class="dialogue">Στην Παλαιόχωρα δεν λέµε ποτέ αντίο. Λέµε στο επανιδείν. Ξέρεις που είναι πια The South Point of view έτσι δεν είναι; Και ξέρεις πού θα το βρεις πάλι όταν το χρειαστείς.</div>
+<div class="dialogue">Τελικά πως άντεξες δύο μέρες εδώ;</div>
 
 <div class="character">ΣΟΦΙΑ</div>
-<div class="dialogue">Ναι... ακριβώς τώρα ξέρω πού είναι.</div>
+<div class="parenthetical">(Κοιτάζει την Παλαιόχωρα που τα φώτα της τρεμοπαίζουν στο βάθος)</div>
+<div class="dialogue">Το πρόβλημα μου δεν είναι οι δύο μέρες εδώ. Το πρόβλημα είναι πώς θα Επιστρέψω στην πραγματικότητα μετά από όλο αυτό.</div>
 
-<div class="action">Ο Μάρκος της χαµογελάει, µια σιωπηλή συµφωνία ανάµεσά τους. Η κάµερα αρχίζει να αποµακρύνεται αργά ,  <a href="breakdown.html#special" class="hl hl-special">DRONE SHOT</a>. Η κάµερα αποµακρύνεται σιγά-σιγά. Βλέπουµε το Beyond να φωτίζεται διακριτικά σαν ένα µικρό κάστρο µέσα στο σκοτάδι, την Παλαιόχωρα να σφύζει από ζωή πιο πέρα, και το Λιβυκό πέλαγος να τους αγκαλιάζει όλους κάτω από τον έναστρο ουρανό.</div>
+<div class="action">Ο Μάρκος πιάνει το χέρι της για μια στιγμή πάνω στο τραπέζι.</div>
+
+<div class="character">ΜΑΡΚΟΣ</div>
+<div class="dialogue">Το πρωτόκολλο λέει «στο επανιδείν» όχι αντίο.</div>
+
+<div class="action">Γελούν. Μια σιωπηλή συμφωνία ανάμεσά τους.</div>
 
 <div class="transition">FADE OUT.</div>
 </div>
